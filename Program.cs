@@ -4,10 +4,17 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using System.Net.NetworkInformation;
 using testBlazor.Areas.Identity;
 using testBlazor.Data;
+using System.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
+var conStrBuilder = new SqlConnectionStringBuilder(
+        builder.Configuration.GetConnectionString("Myconnection"));
+conStrBuilder.ConnectionString = builder.Configuration["housing_db"];
+var connection = conStrBuilder.ConnectionString;
+
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("Myconnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");

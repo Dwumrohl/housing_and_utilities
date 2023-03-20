@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@using Microsoft.EntityFrameworkCore
 
 <PageTitle>Counter</PageTitle>
 
@@ -8,9 +9,32 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Описание</th>
+    </tr>
+    @foreach (var todo in todos)
+    {
+        <tr>
+        <td>@todo.Title</td>
+        <td>@todo.Description</td>
+        </tr>
+    }
+</table>
+<input placeholder="Название" @bind="newTodo" />
+<input placeholder="Описание" @bind="todoDescription" />
+<button @onclick="AddTodo">Add todo</button>
+
+@*<ul>
+    @foreach (var client in clients)
+    {
+        <li>@client.Email</li>
+    }
+</ul>*@
+
 @code {
     private int currentCount = 0;
-
 
     [Parameter]
     public int IncrementAmount { get; set; } = 1;
@@ -19,4 +43,27 @@
     {
         currentCount += IncrementAmount;
     }
+
+    private List<TodoItem> todos = new();
+    private string? newTodo;
+    private string? todoDescription;
+
+    private void AddTodo()
+    {
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Title = newTodo, Description = todoDescription});
+            newTodo = string.Empty;
+        }
+    }
+
+    //List<Data.Client> clients = new List<Data.Client>();
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    await base.OnInitializedAsync();
+
+    //    clients = await context.Clients.ToListAsync();
+
+       
+    //}
 }

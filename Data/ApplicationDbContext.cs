@@ -9,6 +9,5 @@ namespace testBlazor.Data
             : base(options)
         {
         }
-        public DbSet<Client> Clients { get; set; }
     }
 }
