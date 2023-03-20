@@ -1,0 +1,47 @@
+﻿@page "/login"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Авторизация: стартовая страница</title>
+    <link rel="stylesheet" type="text/css" href="Login.css">
+    <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="visibleForm">
+        <div id="logo"></div>
+        <label id="entry">Вход в личный кабинет</label>
+        <form name="sendingEmail">
+            <div class="Contact">
+                <label for="email">Электронная почта</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="Contact">
+                <label for="pswd">Одноразовый пароль</label>
+                <input type="password" name="pswd" required>
+            </div>
+            <div id="buttons_row">
+                <input class="ButtonInput" type="button" name="next" value="Получить пароль">
+                <input class="ButtonInput" type="submit" name="entryButton" value="Войти" required>
+            </div>
+
+            <div id="consent">
+                <input type="checkbox" name="checkbox" required>
+                <label for="checkbox">Вы соглашаетесь с правилами <a href="">Пользовательского соглашения</a> и <a
+                        href="">Политикой обработки персональных данных</a>.</label>
+            </div>
+
+        </form>
+        <a id="support" href="">Служба поддержки</a>
+    </div>
+</body>
+
+</html>
+
+@code {
+
+}
