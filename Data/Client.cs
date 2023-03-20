@@ -1,21 +1,35 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace testBlazor.Data
+namespace testBlazor.Data;
+
+public partial class Client
 {
-    public class Client
-    {
-        [Key]
-        public int client_id { get; set; }
-        public int phone_number { get; set; }
-        public string? name { get; set; }
-        [Required]
-        public string? email { get; set; }
-        public string? surname { get; set;}
-        public string? patronymic { get; set; }
-        public string? password { get; set; }
-        public string? role { get; set; }
-        public DateTime otp_requested_time { get; set; }
+    public long ClientId { get; set; }
 
+    public char? PhoneNumber { get; set; }
 
-    }
+    public string? Email { get; set; }
+
+    public string? Name { get; set; }
+
+    public string? Surname { get; set; }
+
+    public string? Patronymic { get; set; }
+
+    public long? ClientAddressId { get; set; }
+
+    public string? Password { get; set; }
+
+    public string? Role { get; set; }
+
+    public DateTime? OtpRequestedTime { get; set; }
+
+    public virtual ICollection<ClientAddress> ClientAddresses { get; } = new List<ClientAddress>();
+
+    public virtual ICollection<ClientMeterReading> ClientMeterReadings { get; } = new List<ClientMeterReading>();
+
+    public virtual ICollection<HaClient> HaClients { get; } = new List<HaClient>();
+
+    public virtual ICollection<RequestClient> RequestClients { get; } = new List<RequestClient>();
 }
