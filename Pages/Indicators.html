@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Подача показателей</title>
+	<link rel="stylesheet" type="text/css" href="StyleApp.css">
+	<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+	<div id="sidebar">
+		<div id="sidebar_name">История</div>
+		<div class="sidebar_obj">
+			<div class="sidebar_month">Март</div>
+			<div class="sidebar_year">2023</div>
+		</div>
+		<div class="sidebar_obj">
+			<div class="sidebar_month">Февраль</div>
+			<div class="sidebar_year">2023</div>
+		</div>
+	</div>
+	<div id="position_form_menu">
+		<div id="higher_menu">
+			<div class="Tabs" name="this_page">Показания</div>
+			<div class="Tabs">Заявки</div>
+			<div class="Tabs">Услуги</div>
+			<div id="support" href="">Служба поддержки</div>
+			<div id="profile">
+				<div id="name_profile">(здесь почта)</div>
+				<div id="menu_profile">
+					<div>Изменить данные</div>
+					<div>Выйти</div>
+				</div>
+			</div>
+		</div>
+		<div id="form_background">
+			<form>
+				<div id="nameForm">Показания</div>
+				<div id="address">
+					<div><label for="">Улица *</label><br><input name="" class="AddressFirstWidth" type="text" required></div>
+					<div><label for="">Дом *</label><br><input name="" class="AddressThirdWidth" type="text" required></div>
+					<div><label for="">Корпус</label><br><input name="" class="AddressThirdWidth" type="text" required></div>
+					<div><label for="">Квартира *</label><br><input name="" class="AddressThirdWidth" type="text" required></div>
+				</div>
+				
+				<div id="table">
+					<div id="name_column">
+						<div class="Column" name="right_line"><div class="Value_table">Счетчик</div></div>
+						<div class="Column" name="right_line"><div class="Value_table">Предыдущее значение</div></div>
+						<div class="Column"><div class="Value_table">Текущее значение</div></div>
+					</div>
+					<div class="Row">
+						<div class="Column" name="right_line"><div class="Value_table">Горячая вода</div></div>
+						<div class="Column" name="right_line"><div class="Value_table">36 м. куб.</div></div>
+						<div class="Column"><div class="Value_table">58 м. куб.</div></div>
+					</div>
+					<div class="Row">
+						<div class="Column" name="right_line"><div class="Value_table">Газ</div></div>
+						<div class="Column" name="right_line"><div class="Value_table">27 м. куб.</div></div>
+						<div class="Column"><div class="Value_table">61 м. куб.</div></div>
+					</div>
+				</div>
+				<div class="Row" name="meter_row">
+					<div class="Column" name="right_line">
+						<div class="Value_table">
+							<label for="meter_type">Тип счетчика</label>
+							<select name="meter_type">
+							  <option>Горячая вода</option>
+							  <option>Холодная вода</option>
+							  <option>Газ</option>
+							</select>
+						</div>
+					</div>
+					<div class="Column" name="right_line">
+						<div class="Value_table">
+							<label for="meter_past_value">Предыдущее значение</label>
+							<input name="meter_past_value" type="text">
+						</div>
+					</div>
+					<div class="Column">
+						<div class="Value_table">
+							<label for="meter_present_value">Текущее значение</label>
+							<input name="meter_present_value" type="text">
+						</div>
+					</div>
+				</div>
+				<div id="button_row">
+					<input class="Submission" type="button" name="plus" value="+" required><input class="Submission" type="button" name="add_meter" value="Добавить счетчик" required>
+				</div>
+				<input class="Submission" type="submit" name="send" value="Отправить" required>
+				<div id="obligatory_field">* Обязательное поле</div>
+			</form>
+		</div>
+	</div>
+  </body>
+</html>
