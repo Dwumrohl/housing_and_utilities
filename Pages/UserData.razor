@@ -1,5 +1,14 @@
 ﻿@page "/UserData"
 
+@using Microsoft.EntityFrameworkCore
+@using testBlazor.Data;
+@using testBlazor.Data.services
+@using System.Text;
+
+@inject IClientService ClientService
+@inject IClientAddressService AddressService
+@inject NavigationManager nav;
+
 <html>
 
 <head>
@@ -15,25 +24,25 @@
             <div class="innerDiv">
                 <div class="inputDiv">
                     <p>Фамилия</p>
-                    <input type="text" />
+                    <input type="text" @bind="lastName" />
                 </div>
                 <div class="inputDiv">
                     <p>Имя</p>
-                    <input type="text" />
+                    <input type="text" @bind="firstName" />
                 </div>
                 <div class="inputDiv">
                     <p>Отчество</p>
-                    <input type="text" />
+                    <input type="text" @bind="patronymic" />
                 </div>
             </div>
             <div class="innerDiv">
                 <div class="inputDiv">
                     <p>Номер телефона</p>
-                    <input type="text" />
+                    <input type="text" @bind="phoneNumber" />
                 </div>
                 <div class="inputDiv">
                     <p>Электронная почта</p>
-                    <input type="text" />
+                    <input type="text" @bind="email" />
                 </div>
                 <div class="inputDiv">
                     <br />
@@ -45,28 +54,52 @@
         </div>
         <div class="dataContainer">
             <h3>Адрес</h3>
+            <div class="addressList">
+                <ul>
+                    @foreach (var address in addresses)
+                    {
+                        <li>
+                            <label>
+                                @address.City
+                            </label>
+                            <label>
+                                @address.Street
+                            </label>
+                            <label>
+                                @address.Building
+                            </label>
+                            <label>
+                                @address.House
+                            </label>
+                            <label>
+                                @address.Apartment
+                            </label>
+                        </li>
+                    }
+                </ul>
+            </div>
             <div class="innerDiv">
                 <div class="inputDiv">
                     <p>Город</p>
-                    <input type="text" />
+                    <input type="text" @bind="city"/>
                 </div>
                 <div class="inputDiv">
                     <p>Улица</p>
-                    <input type="text" />
+                    <input type="text" @bind="street"/>
                 </div>
                 <div class="inputDiv">
                     <p>Дом</p>
-                    <input type="text" />
+                    <input type="text" @bind="building"/>
                 </div>
             </div>
             <div class="innerDiv">
                 <div class="inputDiv">
                     <p>Подъезд</p>
-                    <input type="text" />
+                    <input type="text" @bind="house"/>
                 </div>
                 <div class="inputDiv">
                     <p>Квартира</p>
-                    <input type="text" />
+                    <input type="text" @bind="apartment"/>
                 </div>
                 <div class="inputDiv">
                     <br />
@@ -82,5 +115,25 @@
 </html>
 
 @code {
+    public string lastName { get; set; } = "";
+    public string firstName { get; set; } = "";
+    public string patronymic { get; set; } = "";
+    public string phoneNumber { get; set; } = "";
+    public string email { get; set; } = "";
+
+    public string city { get; set; } = "";
+    public string street { get; set; } = "";
+    public string house { get; set; } = "";
+    public string building { get; set; } = "";
+    public string apartment { get; set; } = "";
+
+    Client? client = new Client();
+    ClientAddress? address = new ClientAddress();
+    public IEnumerable<ClientAddress> addresses { get; set; }
+
+    protected override void OnInitialized()
+    {
+        client = ClientService.getSingleClientByEmail
+    }
 
 }

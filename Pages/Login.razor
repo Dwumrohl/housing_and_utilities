@@ -7,6 +7,7 @@
 @using testBlazor.Data;
 @using testBlazor.Data.services
 @using System.Text;
+@using MailKit.Security;
 
 @inject IClientService ClientService
 @inject NavigationManager nav;
@@ -37,7 +38,7 @@
             </div>
             <div id="buttons_row">
                 <input class="ButtonInput" type="button" name="next" value="Получить пароль" @onclick="sendEmail" >
-                <input class="ButtonInput" type="button" name="entryButton" value="Войти" @onclick= "tempAuthenticate" required>
+                <input class="ButtonInput" type="button" name="entryButton" value="Войти" @onclick= "tempAuthenticate">
             </div>
 
             <div id="consent">
@@ -107,7 +108,7 @@
 
                 using (SmtpClient smtp = new SmtpClient())
                 {
-                    smtp.Connect("smtp.gmail.com", 587, false);
+                    smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.Auto);
                     smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
                     smtp.Send(mail);
                     smtp.Disconnect(true);
@@ -133,9 +134,9 @@
 
     }
 
-    private async void tempAuthenticate()
+    private void tempAuthenticate()
     {
-        client = await Task.Run(()=> ClientService.SingleClient(myemail));
+        client = ClientService.getSingleClientByEmail(myemail);
         if (client != null)
         {
             if (client.Password == userpassword)
