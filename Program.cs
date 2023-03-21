@@ -8,6 +8,7 @@ using System.Net.NetworkInformation;
 using testBlazor.Areas.Identity;
 using testBlazor.Data;
 using System.Data.SqlClient;
+using testBlazor.Data.services;
 
 var builder = WebApplication.CreateBuilder(args);
 var conStrBuilder = new SqlConnectionStringBuilder(

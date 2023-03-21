@@ -27,7 +27,7 @@
     margin-top: 20px;
     width: 320px;
     height: 210px;
-    background: url(Logo.svg);
+    background: url(../wwwroot/css/Logo.svg);
     background-size: 320px 210px;
     border: none;
 }

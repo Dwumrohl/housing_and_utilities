@@ -3,13 +3,20 @@
 @using MailKit.Net.Smtp;
 @using MailKit;
 @using MimeKit;
+@using Microsoft.EntityFrameworkCore
+@using testBlazor.Data;
+@using testBlazor.Data.services
+@using System.Text;
+
+@inject IClientService ClientService
+@inject NavigationManager nav;
 
 <html>
 
 <head>
     <meta charset="utf-8">
     <title>Авторизация: стартовая страница</title>
-    <link rel="stylesheet" type="text/css" href="Login.css">
+    <link rel="stylesheet" type="text/css" href="Login.razor.css">
     <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 </head>
 
@@ -26,11 +33,11 @@
             </div>
             <div class="Contact">
                 <label for="pswd">Одноразовый пароль</label>
-                <input type="password" name="pswd" required>
+                <input type="password" name="pswd" @bind="userpassword" required>
             </div>
             <div id="buttons_row">
                 <input class="ButtonInput" type="button" name="next" value="Получить пароль" @onclick="sendEmail" >
-                <input class="ButtonInput" type="submit" name="entryButton" value="Войти" required >
+                <input class="ButtonInput" type="button" name="entryButton" value="Войти" @onclick= "tempAuthenticate" required>
             </div>
 
             <div id="consent">
@@ -38,6 +45,7 @@
                 <label for="checkbox">Вы соглашаетесь с правилами <a href="">Пользовательского соглашения</a> и <a
                         href="">Политикой обработки персональных данных</a>.</label>
             </div>
+            <label>@errmessage</label>
 
         </form>
         <a id="support" href="">Служба поддержки</a>
@@ -49,17 +57,40 @@
 @code {
     private string message { get; set; } = "";
 
+    private string errmessage { get; set; } = "";
+
     private string error { get; set; } = "";
 
     private string? myemail { get; set; } = "";
 
-    private string password = "sdicbsduhvbclsaudcnlz";
+    private string? userpassword { get; set; } = "";
+
+    public Client? client = new Client();
+    public Client? cli = new Client();
+
+    private string password = "";
+
+    private bool clientExistFlag = false;
+
+    public string CreatePassword(int length)
+    {
+        const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder res = new StringBuilder();
+        Random rnd = new Random();
+        while (0 < length--)
+        {
+            res.Append(valid[rnd.Next(valid.Length)]);
+        }
+        return res.ToString();
+    }
 
     private void sendEmail()
     {
         try
         {
-
+            password = CreatePassword(10);
+            Console.WriteLine(password);  //Убрать нахуй
+            saveOrUpdateUser();
             using (MimeMessage mail = new MimeMessage())
             {
                 mail.From.Add(new MailboxAddress("ЖКХ", "gptevcat@gmail.com"));
@@ -76,7 +107,7 @@
 
                 using (SmtpClient smtp = new SmtpClient())
                 {
-                    smtp.Connect("smtp.gmail.com", 587, false);
+                    smtp.Connect("smtp.gmail.com", 465, false);
                     smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
                     smtp.Send(mail);
                     smtp.Disconnect(true);
@@ -88,4 +119,34 @@
             error = e.Message.ToString();
         }
     }
+
+    private void saveOrUpdateUser()
+    {
+        //client.ClientId = 1;
+        client.Email = myemail;
+        client.Password = password;
+        //clientExists();
+        if (ClientService.getSingleClientByEmail(myemail) != null)
+           ClientService.updateClientByEmail(myemail, client);
+        else ClientService.insertClient(client);
+         //ClientService.updateClientByEmail(myemail, client);
+
+    }
+
+    private async void tempAuthenticate()
+    {
+        client = await Task.Run(()=> ClientService.SingleClient(myemail));
+        if (client != null)
+        {
+            if (client.Password == userpassword)
+            {
+                nav.NavigateTo("/counter");
+            }
+            else errmessage = "Введенный неправильный код";
+        }
+        else errmessage = "Пользователя с таким email не существует";    
+    }
+
+    
 }
+

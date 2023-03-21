@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace testBlazor.Data
+namespace testBlazor.Data.services
 {
     public class ClientService : IClientService
     {
@@ -54,9 +54,17 @@ namespace testBlazor.Data
             }
         }
 
-        public Client SingleClient(long id)
+        public async Task<Client> SingleClient(string email)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Client client = await _context.Clients.FirstOrDefaultAsync(c => c.Email.Equals(email));
+                return client;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public void updateClient(long id, Client client)
@@ -77,6 +85,50 @@ namespace testBlazor.Data
             {
                 throw;
             }
+        }
+
+		public void updateClientByEmail(string email, Client client)
+		{
+			try
+			{
+				var local = _context.Clients.First(entry => entry.Email.Equals(email));
+				// check if local is not null
+				if (local != null)
+				{
+                    // detach
+                    //_context.Entry(local).State = EntityState.Detached;
+                    local.Password = client.Password;
+                }
+                else { _context.Clients.Add(client); }
+                //local.Password = client.Password;
+                //_context.Clients.Update(client);
+                //_context.Entry(client).State = EntityState.Modified;
+                _context.SaveChanges();
+			}
+			catch
+			{
+				throw;
+			}
+		}
+
+        public Client getSingleClientByEmail(string email)
+        {
+            try
+            {
+                var local = _context.Clients.First(entry => entry.Email.Equals(email));
+                return local;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<bool> UpdateTest(Client client)
+        {
+            _context.Clients.Update(client);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
