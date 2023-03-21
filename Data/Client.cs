@@ -34,4 +34,13 @@ public partial class Client
     public virtual ICollection<HaClient> HaClients { get; } = new List<HaClient>();
 
     public virtual ICollection<RequestClient> RequestClients { get; } = new List<RequestClient>();
+
+    public bool isEmpty()
+    {
+        if(Name == null &&  Surname == null && Patronymic == null)
+        {
+            return true;
+        }
+        return false;
+    }
 }

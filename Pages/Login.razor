@@ -107,7 +107,7 @@
 
                 using (SmtpClient smtp = new SmtpClient())
                 {
-                    smtp.Connect("smtp.gmail.com", 465, false);
+                    smtp.Connect("smtp.gmail.com", 587, false);
                     smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
                     smtp.Send(mail);
                     smtp.Disconnect(true);
@@ -127,9 +127,9 @@
         client.Password = password;
         //clientExists();
         if (ClientService.getSingleClientByEmail(myemail) != null)
-           ClientService.updateClientByEmail(myemail, client);
+            ClientService.updateClientByEmail(myemail, client);
         else ClientService.insertClient(client);
-         //ClientService.updateClientByEmail(myemail, client);
+        //ClientService.updateClientByEmail(myemail, client);
 
     }
 
@@ -140,7 +140,13 @@
         {
             if (client.Password == userpassword)
             {
-                nav.NavigateTo("/counter");
+                if(client.isEmpty()){
+                    nav.NavigateTo("/prergistration");
+                }
+                else{
+                    nav.NavigateTo("/Statement");
+                }
+                
             }
             else errmessage = "Введенный неправильный код";
         }

@@ -1,0 +1,86 @@
+﻿@page "/UserData"
+
+<html>
+
+<head>
+    <title>Пользователь</title>
+    <link rel="stylesheet" href="UserData.razor.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&amp;subset=cyrillic" rel="stylesheet">
+</head>
+
+<body>
+    <div id="mainDiv">
+        <div class="dataContainer">
+            <h3>Личные данные</h3>
+            <div class="innerDiv">
+                <div class="inputDiv">
+                    <p>Фамилия</p>
+                    <input type="text" />
+                </div>
+                <div class="inputDiv">
+                    <p>Имя</p>
+                    <input type="text" />
+                </div>
+                <div class="inputDiv">
+                    <p>Отчество</p>
+                    <input type="text" />
+                </div>
+            </div>
+            <div class="innerDiv">
+                <div class="inputDiv">
+                    <p>Номер телефона</p>
+                    <input type="text" />
+                </div>
+                <div class="inputDiv">
+                    <p>Электронная почта</p>
+                    <input type="text" />
+                </div>
+                <div class="inputDiv">
+                    <br />
+                    <br />
+                    <br />
+                    <button class="saveButton">Сохранить</button>
+                </div>
+            </div>
+        </div>
+        <div class="dataContainer">
+            <h3>Адрес</h3>
+            <div class="innerDiv">
+                <div class="inputDiv">
+                    <p>Город</p>
+                    <input type="text" />
+                </div>
+                <div class="inputDiv">
+                    <p>Улица</p>
+                    <input type="text" />
+                </div>
+                <div class="inputDiv">
+                    <p>Дом</p>
+                    <input type="text" />
+                </div>
+            </div>
+            <div class="innerDiv">
+                <div class="inputDiv">
+                    <p>Подъезд</p>
+                    <input type="text" />
+                </div>
+                <div class="inputDiv">
+                    <p>Квартира</p>
+                    <input type="text" />
+                </div>
+                <div class="inputDiv">
+                    <br />
+                    <br />
+                    <br />
+                    <button class="saveButton">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+@code {
+
+}

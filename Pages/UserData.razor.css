@@ -1,0 +1,61 @@
+﻿
+
+html {
+    font-family: 'Open Sans';
+}
+
+input {
+    font-family: 'Open Sans';
+}
+
+h3 {
+    text-indent: 20px;
+    margin: 0 0 0 6px;
+
+}
+
+p {
+    margin: 0;
+}
+
+#mainDiv {
+    background-color: aqua;
+    text-indent: 10px;
+}
+
+.inputDiv {
+    flex-wrap: wrap;
+    float: left;
+    display: flexbox;
+    margin: 10px;
+}
+
+.headerDiv {
+    flex-wrap: wrap;
+    display: flexbox;
+}
+
+.dataContainer {
+    border: 2px solid black;
+    width: 600px;
+    height: 230px;
+    padding: 0.5%;
+    margin: 1%;
+    text-indent: 6px;
+    border-radius: 5px;
+    flex-wrap: wrap;
+    float: left;
+    display: flexbox;
+}
+
+.innerDiv {
+    flex-wrap: wrap;
+    float: left;
+    display: flexbox;
+    margin: 10px;
+}
+
+.saveButton {
+    margin-left: 80px;
+    font-family: 'Open Sans';
+}

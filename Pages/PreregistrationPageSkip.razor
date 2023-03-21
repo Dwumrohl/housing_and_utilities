@@ -1,0 +1,12 @@
+﻿@page "/prergistration"
+@inject NavigationManager nav;
+
+<UserData />
+
+<button @onclick="tempAuthenticate">Скип</button>
+@code{
+    private async void tempAuthenticate(){
+        nav.NavigateTo("/Statement");
+    }
+    
+}
