@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace testBlazor.Data;
 
 public partial class Client
 {
+    [Key]
     public long ClientId { get; set; }
 
     public char? PhoneNumber { get; set; }
