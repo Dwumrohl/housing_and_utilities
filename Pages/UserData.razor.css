@@ -4,6 +4,7 @@ html {
     font-family: 'Open Sans';
 }
 
+
 input {
     font-family: 'Open Sans';
 }
@@ -19,8 +20,15 @@ p {
 }
 
 #mainDiv {
-    background-color: aqua;
     text-indent: 10px;
+    width: 100%;
+    height: min-content;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, 0);
 }
 
 .inputDiv {
@@ -37,22 +45,23 @@ p {
 
 .dataContainer {
     border: 2px solid black;
-    width: 550px;
-    height: 230px;
+    width: 38vw;
+    height: 25vh;
+    margin-left: 0.5vw;
+    margin-top:0.5vh;
     padding: 0.5%;
-    margin: 1%;
     text-indent: 6px;
     border-radius: 5px;
     flex-wrap: wrap;
-    float: left;
     display: flexbox;
+    float: left;
 }
 
 .innerDiv {
     flex-wrap: wrap;
     float: left;
     display: flexbox;
-    margin: 10px;
+
 }
 
 .saveButton {

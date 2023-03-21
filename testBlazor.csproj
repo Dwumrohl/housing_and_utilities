@@ -8,10 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\PreregistrationPageSkip.razor.css" />
     <None Remove="Pages\UserData.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Pages\PreregistrationPageSkip.razor.css" />
     <Content Include="Pages\UserData.razor.css" />
   </ItemGroup>
 

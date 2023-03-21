@@ -1,0 +1,20 @@
+﻿#label{
+    width:100%;
+    text-align: center;
+    margin-top: 20vh;
+}
+#userPage{
+     width:100%;
+     height:min-content;
+}
+#buttonContainer {
+    width: 100%;
+    margin-top: 10vh;
+}
+#skipButton {
+    position: absolute;
+    left: 50%;
+    top:65%;
+    transform: translate(-50%, 0);
+    font-family: 'Open Sans';
+}
