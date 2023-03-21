@@ -21,6 +21,7 @@ public partial class HousingAndUtilitiesAppContext : DbContext
 
     public virtual DbSet<ClientAddress> ClientAddresses { get; set; }
 
+
     public virtual DbSet<ClientMeterReading> ClientMeterReadings { get; set; }
 
     public virtual DbSet<HaClient> HaClients { get; set; }
@@ -75,14 +76,14 @@ public partial class HousingAndUtilitiesAppContext : DbContext
             entity.Property(e => e.Apartment).HasColumnName("apartment");
             entity.Property(e => e.Building).HasColumnName("building");
             entity.Property(e => e.City)
-                .HasColumnType("char")
+                .HasColumnType("string")
                 .HasColumnName("city");
             entity.Property(e => e.ClientId).HasColumnName("client_id");
             entity.Property(e => e.House)
-                .HasColumnType("char")
+                .HasColumnType("string")
                 .HasColumnName("house");
             entity.Property(e => e.Street)
-                .HasColumnType("char")
+                .HasColumnType("string")
                 .HasColumnName("street");
 
             entity.HasOne(d => d.Client).WithMany(p => p.ClientAddresses)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace testBlazor.Data.services
 {
@@ -25,15 +26,15 @@ namespace testBlazor.Data.services
             }
         }
 
-        public IEnumerable<ClientAddress> GetClientAddress()
+        public List<ClientAddress> GetClientAddress(long id)
         {
             try
             {
-                return _context.ClientAddresses.ToList();
+                return _context.ClientAddresses.Where(p => p.ClientId == id).ToList();
             }
             catch
             {
-                throw;
+                return null;
             }
         }
 

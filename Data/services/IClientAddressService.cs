@@ -2,7 +2,7 @@
 {
     public interface IClientAddressService
     {
-        IEnumerable<ClientAddress> GetClientAddress();
+        List<ClientAddress> GetClientAddress(long id);
         void insertClientAddress(ClientAddress address);
         void deleteClientAddress(long id);
         void updateClientAddress(long id, ClientAddress address);

@@ -4,7 +4,9 @@
 @using testBlazor.Data;
 @using testBlazor.Data.services
 @using System.Text;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
+@inject ProtectedSessionStorage ProtectedSessionStore
 @inject IClientService ClientService
 @inject IClientAddressService AddressService
 @inject NavigationManager nav;
@@ -24,89 +26,97 @@
             <div class="innerDiv">
                 <div class="inputDiv">
                     <p>Фамилия</p>
-                    <input type="text" @bind="lastName" />
+                    <input type="text" @bind="client.Surname" />
                 </div>
                 <div class="inputDiv">
                     <p>Имя</p>
-                    <input type="text" @bind="firstName" />
+                    <input type="text" @bind="client.Name" />
                 </div>
                 <div class="inputDiv">
                     <p>Отчество</p>
-                    <input type="text" @bind="patronymic" />
+                    <input type="text" @bind="client.Patronymic" />
                 </div>
             </div>
             <div class="innerDiv">
                 <div class="inputDiv">
                     <p>Номер телефона</p>
-                    <input type="text" @bind="phoneNumber" />
+                    <input type="text" @bind="client.PhoneNumber" />
                 </div>
                 <div class="inputDiv">
                     <p>Электронная почта</p>
-                    <input type="text" @bind="email" />
+                    <input type="text" @bind="client.Email" />
                 </div>
                 <div class="inputDiv">
                     <br />
                     <br />
                     <br />
-                    <button class="saveButton">Сохранить</button>
+                    <button class="saveButton" @onclick="updateUser">Сохранить</button>
                 </div>
             </div>
         </div>
         <div class="dataContainer">
             <h3>Адрес</h3>
-            <div class="addressList">
-                <ul>
-                    @foreach (var address in addresses)
-                    {
-                        <li>
-                            <label>
-                                @address.City
-                            </label>
-                            <label>
-                                @address.Street
-                            </label>
-                            <label>
-                                @address.Building
-                            </label>
-                            <label>
-                                @address.House
-                            </label>
-                            <label>
-                                @address.Apartment
-                            </label>
-                        </li>
-                    }
-                </ul>
-            </div>
             <div class="innerDiv">
                 <div class="inputDiv">
                     <p>Город</p>
-                    <input type="text" @bind="city"/>
+                    <input type="text" @bind="address.City" />
                 </div>
                 <div class="inputDiv">
                     <p>Улица</p>
-                    <input type="text" @bind="street"/>
+                    <input type="text" @bind="address.Street" />
                 </div>
                 <div class="inputDiv">
                     <p>Дом</p>
-                    <input type="text" @bind="building"/>
+                    <input type="text" @bind="address.Building" />
                 </div>
             </div>
             <div class="innerDiv">
                 <div class="inputDiv">
                     <p>Подъезд</p>
-                    <input type="text" @bind="house"/>
+                    <input type="text" @bind="address.House" />
                 </div>
                 <div class="inputDiv">
                     <p>Квартира</p>
-                    <input type="text" @bind="apartment"/>
+                    <input type="text" @bind="address.Apartment" />
                 </div>
                 <div class="inputDiv">
                     <br />
                     <br />
                     <br />
-                    <button class="saveButton">Добавить</button>
+                    <button class="saveButton" @onclick="addAddress">Добавить</button>
                 </div>
+            </div>
+        </div>
+        <div class="dataContainer" hidden="@hidden">
+            <div class="addressList">
+                <h3>Список адресов:</h3>
+                <ul>
+                    @if(!hidden) @foreach (var adrs in addresses)
+                    {
+                        <li>
+                            <label>
+                                @adrs.City
+                                ,
+                            </label>
+                            <label>
+                                @adrs.Street
+                                ,
+                            </label>
+                            <label>
+                                @adrs.Building
+                                ,
+                            </label>
+                            <label>
+                                @adrs.House
+                                ,
+                            </label>
+                            <label>
+                                @adrs.Apartment
+                                ,
+                            </label>
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
     </div>
@@ -115,25 +125,55 @@
 </html>
 
 @code {
-    public string lastName { get; set; } = "";
-    public string firstName { get; set; } = "";
-    public string patronymic { get; set; } = "";
-    public string phoneNumber { get; set; } = "";
     public string email { get; set; } = "";
+    public bool hidden { get; set; } = true;
 
-    public string city { get; set; } = "";
-    public string street { get; set; } = "";
-    public string house { get; set; } = "";
-    public string building { get; set; } = "";
-    public string apartment { get; set; } = "";
+    //public string city { get; set; } = "";
+    //public string street { get; set; } = "";
+    //public string house { get; set; } = "";
+    //public string building { get; set; } = "";
+    //public string apartment { get; set; } = "";
+
 
     Client? client = new Client();
     ClientAddress? address = new ClientAddress();
-    public IEnumerable<ClientAddress> addresses { get; set; }
+    List<ClientAddress> addresses = new List<ClientAddress>();
 
-    //protected override void OnInitialized()
-    //{
-    //    client = ClientService.getSingleClientByEmail
-    //}
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await ProtectedSessionStore.GetAsync<string>("email");
+        if (result.Success)
+        {
+            hidden = true;
+            email = result.Value;
+            client = ClientService.getSingleClientByEmail(email);
+            if (client != null)
+            {
+                addresses = AddressService.GetClientAddress(client.ClientId);
+
+                if (addresses.GetEnumerator().MoveNext())
+                    hidden = false;
+                //addresses = client.ClientAddresses;
+            }
+            StateHasChanged();
+        }
+
+    }
+
+    public void updateUser()
+    {
+        ClientService.updateClientByEmail(email, client);
+    }
+
+    public void addAddress()
+    {
+        address.ClientId = client.ClientId;
+        address.Client = client;
+        //address.City = city;
+        //address.City = s;
+        AddressService.insertClientAddress(address);
+        hidden = false;
+        nav.NavigateTo(nav.Uri, forceLoad: true);
+    }
 
 }

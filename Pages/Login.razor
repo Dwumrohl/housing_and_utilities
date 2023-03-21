@@ -8,7 +8,9 @@
 @using testBlazor.Data.services
 @using System.Text;
 @using MailKit.Security;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
+@inject ProtectedSessionStorage ProtectedSessionStore
 @inject IClientService ClientService
 @inject NavigationManager nav;
 
@@ -141,6 +143,7 @@
         {
             if (client.Password == userpassword)
             {
+                ProtectedSessionStore.SetAsync("email", client.Email);
                 if(client.isEmpty()){
                     nav.NavigateTo("/prergistration");
                 }

@@ -9,13 +9,13 @@ public partial class ClientAddress
 
     public long? ClientId { get; set; }
 
-    public char? City { get; set; }
+    public string? City { get; set; }
 
-    public char? Street { get; set; }
+    public string? Street { get; set; }
 
-    public char? House { get; set; }
+    public string? House { get; set; }
 
-    public int? Building { get; set; }
+    public int Building { get; set; }
 
     public int? Apartment { get; set; }
 
