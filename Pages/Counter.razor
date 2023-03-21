@@ -1,5 +1,8 @@
 ﻿@page "/counter"
 @using Microsoft.EntityFrameworkCore
+@using testBlazor.Data
+
+@inject IClientService ClientService
 
 <PageTitle>Counter</PageTitle>
 
@@ -26,12 +29,12 @@
 <input placeholder="Описание" @bind="todoDescription" />
 <button @onclick="AddTodo">Add todo</button>
 
-@*<ul>
+<ul>
     @foreach (var client in clients)
     {
         <li>@client.Email</li>
     }
-</ul>*@
+</ul>
 
 @code {
     private int currentCount = 0;
@@ -55,6 +58,12 @@
             todos.Add(new TodoItem { Title = newTodo, Description = todoDescription});
             newTodo = string.Empty;
         }
+    }
+
+    public IEnumerable<Client> clients { get; set; }
+    protected override void OnInitialized()
+    {
+        clients = ClientService.GetClients();
     }
 
     //List<Data.Client> clients = new List<Data.Client>();
