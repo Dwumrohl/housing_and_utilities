@@ -1,234 +1,241 @@
-body{
-	font-family: 'Roboto';
+body {
+	font-family: 'Open Sans';
 	font-style: normal;
 	display: flex;
 }
 
-#sidebar{
+#sidebar {
 	border-style: solid;
 	border-width: 2px;
 }
 
-#position_form_menu{
+#position_form_menu {
 	display: flex;
 	flex-direction: column;
 	width: 100vw;
 }
 
-#higher_menu{
+#higher_menu {
 	position: relative;
 	display: flex;
-	
-	
 	border-style: solid;
 	border-width: 2px;
 }
 
-form{
+.Tabs {
+	margin: auto 50px auto 1%;
+	width: fit-content;
+	padding: 20px 0;
+}
+
+	.Tabs[name=this_page] {
+		border-bottom-color: blue;
+		border-bottom-width: 3px;
+		border-bottom-style: solid;
+	}
+
+form {
 	width: 900px;
 	display: flex;
 	flex-direction: column;
 }
-#form_background{
-	position:relative;
+
+#form_background {
+	position: relative;
 	height: 83vh; /*важный момент*/
 	padding: 3% 0em 0em 6%;
-	
 	background: #EDEAEA;
 }
 
-#nameForm{
+#nameForm {
 	font-weight: 500;
 	font-size: 32px;
 	line-height: 38px;
 }
 
-#address{
+#address {
 	word-wrap: break-word;
 	margin-top: 20px;
 }
 
-#address div{
-	display:inline-block;
-	margin-right: 32px;
-	margin-left: auto;
-}
+	#address div {
+		display: inline-block;
+		margin-right: 32px;
+		margin-left: auto;
+	}
 
-#address label{
-	margin-left: 3px;
-	font-size: 18px;
-	line-height: 21px;
-	color: #000000;
-}
+	#address label {
+		margin-left: 3px;
+		font-size: 18px;
+		line-height: 21px;
+		color: #000000;
+	}
 
-#address input{
-	height: 30px;
-	
-	background: #C4C4C4;
-	border-radius: 5px;
-	border: 0px;
-}
+	#address input {
+		height: 30px;
+		background: #C4C4C4;
+		border-radius: 5px;
+		border: 0px;
+	}
 
-.AddressThirdWidth{
+.AddressThirdWidth {
 	width: 130px;
 }
-.AddressSecondWidth{
+
+.AddressSecondWidth {
 	width: 215px;
 }
-.AddressFirstWidth{
+
+.AddressFirstWidth {
 	width: 350px;
 }
 
-#comment{
+#comment {
 	width: 860px;
 	height: 174px;
-
 	background: #C4C4C4;
 	border-radius: 5px;
 }
 
-#loadFile input{
+#loadFile input {
 	background-color: #EDEAEA;
 }
 
-#loadFile input[value="выбрать файл"]{
-	font-weight: 500;
-	font-size: 18px;
-	text-align: center;
-	color: #000000;
-}
+	#loadFile input[value="выбрать файл"] {
+		font-weight: 500;
+		font-size: 18px;
+		text-align: center;
+		color: #000000;
+	}
 
-.Submission[name=send]{
-	margin-top:10px;
+.Submission[name=send] {
+	margin-top: 10px;
 	margin-left: auto;
 	margin-right: 35px;
 	width: 115px;
 }
 
-.Submission[name=add_meter]{
-	margin-top:10px;
+.Submission[name=add_meter] {
+	margin-top: 10px;
 	margin-left: 0px;
 	margin-right: auto;
 }
 
-.Submission[name=plus]{
-	margin-top:10px;
+.Submission[name=plus] {
+	margin-top: 10px;
 	margin-left: 0px;
 	font-size: 30px;
 	width: 40px;
 }
 
-.Submission{
+.Submission {
 	height: 40px;
-
 	background: #41464E;
 	box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.5);
 	border-radius: 5px;
-	border:0px;
-
+	border: 0px;
 	font-weight: 500;
 	font-size: 18px;
 	color: #FFFFFF;
 }
 
-#button_row{
-	display: flex;
-}
-
-#table{
+#table {
 	display: flex;
 	flex-direction: column;
 	margin-top: 2%;
-	
 }
 
-#name_column{
+#name_column {
 	display: flex;
 	flex-direction: row;
 	font-weight: 500;
 	font-size: 20px;
 	line-height: 33px;
 	width: 96%;
-	
 	border-radius: 5px;
 	color: #000000;
 	background-color: #C4C4C4;
 }
 
-.Column{
+.Column {
 	display: flex;
-	
 	width: 40%;
-	padding-bottom:20px;
+	padding-bottom: 20px;
 	padding-top: 20px;
-	
 }
-.Value_table{
+
+.Value_table {
 	margin: auto;
 }
-.Column[name=right_line]{
+
+.Column[name=right_line] {
 	border-right: #858EA0;
 	border-right-width: 1px;
 	border-right-style: solid;
 }
-.Row{
+
+.Row {
 	display: flex;
 	flex-direction: row;
 	margin-top: 7px;
 	width: 96%;
-	
 	border-radius: 5px;
 	color: #000000;
 	background-color: #FFFFFF;
 }
 
-.Row[name=meter_row]{
-	word-wrap: break-word;
-	
-}
+	.Row[name=meter_row] {
+		word-wrap: break-word;
+	}
 
-.Row[name=meter_row] div.Column div.Value_table{
-	display:inline-block;
-	margin: auto;
-}
+		.Row[name=meter_row] div.Column div.Value_table {
+			display: inline-block;
+			margin: auto;
+		}
 
-.Row[name=meter_row] label{
-	margin-left:3px;
-}
+		.Row[name=meter_row] label {
+			margin-left: 3px;
+		}
 
-.Row[name=meter_row] input{
-	display:block;
-	font-weight: 500;
-	font-size: 18px;
-	
-	border-radius: 5px;
-	border: 0px;
-	background-color: #eaeaea;
-}
-.Row[name=meter_row] select{
-	display:block;
-	font-weight: 500;
-	font-size: 18px;
-	
-	border-radius: 5px;
-	border: 0px;
-	background-color: #eaeaea;
-}
+		.Row[name=meter_row] input {
+			display: block;
+			font-weight: 500;
+			font-size: 18px;
+			border-radius: 5px;
+			border: 0px;
+			background-color: #eaeaea;
+		}
 
-#add_meter_button{
-	display:flex;
+		.Row[name=meter_row] select {
+			display: block;
+			font-weight: 500;
+			font-size: 18px;
+			border-radius: 5px;
+			border: 0px;
+			background-color: #eaeaea;
+		}
+
+#add_meter_button {
+	display: flex;
 	margin: 10px;
 	color: #757A83;
 }
-#add_meter_plus{
+
+#add_meter_plus {
 	padding: 0px 8px 0px 8px;
 	border: 4px solid #858EA0;
 	border-radius: 3px;
 	font-weight: 600;
 	font-size: 18px;
 }
-#add_meter_text{
+
+#add_meter_text {
 	margin: auto 5px;
 	font-weight: 500;
 	font-size: 18px;
+}
+
+#profile{
+	margin-left: auto;
+	margin-right: 100px;
 }
