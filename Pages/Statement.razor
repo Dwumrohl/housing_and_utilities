@@ -1,20 +1,22 @@
-<!DOCTYPE html>
+﻿@page "/Statement"
+
+
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Подача заявки</title>
-		<link rel="stylesheet" type="text/css" href="StyleApp.css">
-		<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-	</head>
-	<body>
-		<div id="sidebar">
+<head>
+	<meta charset="utf-8">
+	<title>Подача заявки</title>
+	<link rel="stylesheet" type="text/css" href="/css/StyleApp.css">
+	<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div id="sidebar">
 		<div id="sidebar_name">История</div>
 		<div class="sidebar_obj">
 			<div class="sidebar_month">Март</div>
 			<div class="sidebar_year">2023</div>
 		</div>
-		</div>
-		<div id="position_form_menu">
+	</div>
+	<div id="position_form_menu">
 		<div id="higher_menu">
 			<div class="Tabs">Показания</div>
 			<div class="Tabs" name="this_page">Заявки</div>
@@ -47,8 +49,11 @@
 				</div>
 				<input class="Submission" type="submit" name="send" value="Отправить" required>
 			</form>
-		<div id="obligatory_field">* Обязательное поле</div>
+			<div id="obligatory_field">* Обязательное поле</div>
 		</div>
-		</div>
-	</body>
+	</div>
+</body>
 </html>
+@code {
+
+}
