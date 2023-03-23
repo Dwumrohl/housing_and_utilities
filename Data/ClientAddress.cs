@@ -45,7 +45,6 @@ public partial class ClientAddress
     /// </summary>
     public int? Apartment { get; set; }
 
-    #warning Что это? Нахуя оно здесь?
     public virtual Client? Client { get; set; }
 
     #endregion

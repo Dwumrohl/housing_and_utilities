@@ -59,7 +59,6 @@ public partial class Client
     public DateTime? OtpRequestedTime { get; set; }
     #endregion
 
-    #warning Что это за хуйня? И нахуя она нужна?
     public virtual ICollection<ClientAddress> ClientAddresses { get; } = new List<ClientAddress>();
 
     public virtual ICollection<ClientMeterReading> ClientMeterReadings { get; } = new List<ClientMeterReading>();

@@ -14,8 +14,6 @@
 
         Task<Client> SingleClient(string email);
 
-        Task<bool> UpdateTest(Client client);
-
         public Client getSingleClientByEmail(string email);
     }
 }

@@ -138,11 +138,8 @@ namespace testBlazor.Data.services
 
 				if (local != null)
 				{
-                    _context.Clients.Update(client);
-                }
-                else 
-                {
-                    _context.Clients.Add(client);
+                    client.ClientId = local.ClientId;
+                    local = null;
                 }
                 _context.SaveChanges();
                 return true;
@@ -171,14 +168,6 @@ namespace testBlazor.Data.services
                 Console.WriteLine($"{ex.Message}");
                 return null;
             }
-        }
-
-        //Блять, что это 
-        public async Task<bool> UpdateTest(Client client)
-        {
-            _context.Clients.Update(client);
-            await _context.SaveChangesAsync();
-            return true;
         }
     }
 }
