@@ -14,48 +14,37 @@
 @inject IClientService ClientService
 @inject NavigationManager nav;
 
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <title>Авторизация: стартовая страница</title>
-    <link rel="stylesheet" type="text/css" href="Login.razor.css">
-    <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-</head>
-
-<body>
-    <h1>@error</h1>
-    <div id="visibleForm">
-        <div id="logo">
-        </div>
-        <label id="entry">Вход в личный кабинет</label>
-        <form name="sendingEmail" >
-            <div class="Contact">
-                <label for="email">Электронная почта</label>
-                <input type="email" name="email" required @bind="myemail">
-            </div>
-            <div class="Contact">
-                <label for="pswd">Одноразовый пароль</label>
-                <input type="password" name="pswd" @bind="userpassword" required>
-            </div>
-            <div id="buttons_row">
-                <input class="ButtonInput" type="button" name="next" value="Получить пароль" @onclick="sendEmail" >
-                <input class="ButtonInput" type="button" name="entryButton" value="Войти" @onclick= "tempAuthenticate">
-            </div>
-
-            <div id="consent">
-                <input type="checkbox" name="checkbox" required>
-                <label for="checkbox">Вы соглашаетесь с правилами <a href="">Пользовательского соглашения</a> и <a
-                        href="">Политикой обработки персональных данных</a>.</label>
-            </div>
-            <label>@errmessage</label>
-
-        </form>
-        <a id="support" href="">Служба поддержки</a>
+<h1>@error</h1>
+<div id="form_Entry">
+    <div id="logo">
     </div>
-</body>
+    <label for="entryButton" id="entryLabel">Вход в личный кабинет</label>
+    <form name="sendingEmail">
+        <div class="Contact">
+            <label for="email">Электронная почта</label>
+            <input type="email" name="email" required @bind="myemail">
+        </div>
+        <div class="Contact">
+            <label for="pswd">Одноразовый пароль</label>
+            <input type="password" name="pswd" @bind="userpassword" required>
+        </div>
+        <div id="buttons_row">
+            <input class="ButtonInput" type="button" name="next" value="Получить пароль" @onclick="sendEmail">
+            <input class="ButtonInput" type="button" name="entryButton" value="Войти" @onclick="tempAuthenticate">
+        </div>
 
-</html>
+        <div id="consent">
+            <input type="checkbox" name="checkbox" required>
+            <label for="checkbox">
+                Вы соглашаетесь с правилами <a href="">Пользовательского соглашения</a> и <a href="">Политикой обработки персональных данных</a>.
+            </label>
+        </div>
+        <label>@errmessage</label>
+
+    </form>
+    <a id="support_on_login" href="">Служба поддержки</a>
+</div>
 
 @code {
     private string message { get; set; } = "";

@@ -4,6 +4,10 @@ body {
 	display: flex;
 }
 
+#main_div {
+	display: flex;
+}
+
 #sidebar {
 	border-style: solid;
 	border-width: 2px;
@@ -12,7 +16,7 @@ body {
 #position_form_menu {
 	display: flex;
 	flex-direction: column;
-	width: 100vw;
+	width: 96vw;
 }
 
 #higher_menu {
@@ -42,7 +46,7 @@ form {
 
 #form_background {
 	position: relative;
-	height: 83vh; /*важный момент*/
+	height: 91vh; /*важный момент*/
 	padding: 3% 0em 0em 6%;
 	background: #EDEAEA;
 }
@@ -239,3 +243,142 @@ form {
 	margin-left: auto;
 	margin-right: 100px;
 }
+
+/*логин - пароль*/
+#form_Entry {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	width: 500px;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	background: #f9f9f9;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 10px;
+	border-color: #aeaeae;
+}
+
+	#form_Entry form{
+		width:fit-content;
+	}
+
+#logo {
+	margin: 0 auto;
+	margin-top: 20px;
+	width: 320px;
+	height: 210px;
+	background: url(../css/Logo.svg);
+	background-size: 320px 210px;
+	border: none;
+}
+
+#entryLabel {
+	margin: 0 auto;
+	margin-top: 20px;
+	font-weight: 400;
+	font-size: 41px;
+	line-height: 68px;
+	color: #000000;
+}
+
+#buttons_row {
+	margin: 0 auto;
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	width: 443px;
+}
+
+.Contact {
+	margin: 0 auto;
+	margin-top: 20px;
+	display: block;
+	width: min-content;
+}
+
+	.Contact label {
+		margin-left: 6px;
+		font-weight: 500;
+		font-size: 17px;
+		line-height: 28px;
+		color: #000000;
+	}
+
+	.Contact input {
+		width: 443px;
+		height: 40px;
+		font-size: 30px;
+		background: #FFFFFF;
+		border-style: solid;
+		border-width: 2px;
+		border-radius: 10px;
+		border-color: #aeaeae;
+	}
+
+.ButtonInput {
+	margin: 0 auto;
+	margin-top: 20px;
+	height: 45px;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+	border-radius: 10px;
+	border: 0px;
+	font-weight: 500;
+	font-size: 23px;
+	line-height: 35px;
+	color: #FFFFFF;
+}
+
+	.ButtonInput[name=next] {
+		margin-left: 0px;
+		margin-right: auto;
+		background: #1E91D6;
+		width: fit-content;
+	}
+
+	.ButtonInput[name=entryButton] {
+		margin-left: auto;
+		margin-right: 0px;
+		background: #8FC93A;
+		width: fit-content;
+	}
+
+
+/* Попробовать деморежим */
+#demo {
+	margin: 0 auto;
+	margin-top: 40px;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 28px;
+	color: #F0F1F3;
+}
+
+#support_on_login {
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 15px;
+	font-weight: 400;
+	font-size: 17px;
+	line-height: 23px;
+	color: #1E91D6;
+}
+
+#consent {
+	margin-left: 30px;
+	margin-top: 30px;
+	display: flex;
+}
+
+	#consent label {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 21px;
+		color: #666666;
+	}
+
+	#consent input {
+		margin-right: 12px;
+	}
