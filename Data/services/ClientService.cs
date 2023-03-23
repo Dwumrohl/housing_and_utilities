@@ -1,59 +1,88 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace testBlazor.Data.services
 {
+    /// <summary>
+    /// Класс для взаимодействия с таблицей Клиент.
+    /// </summary>
     public class ClientService : IClientService
     {
+        /// <summary>
+        /// Контекст БД.
+        /// </summary>
         private HousingAndUtilitiesAppContext _context;
 
+        /// <summary>
+        /// Конструктор класса.
+        /// </summary>
+        /// <param name="context"> Контекст БД.</param>
         public ClientService(HousingAndUtilitiesAppContext context)
         {
             _context = context;
         }
 
-        public void deleteClient(long id)
+        /// <summary>
+        /// Удаление клиента из таблицы.
+        /// </summary>
+        /// <param name="id"> ID клиента.</param>
+        public bool deleteClient(long id)
         {
             try
             {
-                Client ord = _context.Clients.Find(id);
-                _context.Clients.Remove(ord);
+                Client client = _context.Clients.Find(id);
+                _context.Clients.Remove(client);
                 _context.SaveChanges();
+
+                return true;
             }
-            catch
+            catch (Exception ex) 
             {
-                throw;
+                Console.WriteLine($"{ex.Message}");
+                return false;
             }
         }
 
-        public IEnumerable<Client> GetClients()
+        /// <summary>
+        /// Возвращает лист клиентов.
+        /// </summary>
+        /// <returns> Лист клиентов.</returns>
+        public List<Client> GetClients()
         {
             try
             {
                 return _context.Clients.ToList();
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                Console.WriteLine($"{ex.Message}");
+                return new List<Client>();
             }
         }
 
-        public void insertClient(Client client)
+        /// <summary>
+        /// Добавлет клиента в базы данных.
+        /// </summary>
+        /// <param name="client"> Клиент.</param>
+        public bool insertClient(Client client)
         {
             try
             {
                 _context.Clients.Add(client);
                 _context.SaveChanges();
+                return true;
             }
-            catch
+            catch (Exception ex) 
             {
-                throw;
+                Console.WriteLine($"{ex.Message}");
+                return false;
             }
         }
 
+        /// <summary>
+        /// Получает асинхронно клиента по email.
+        /// </summary>
+        /// <param name="email"> Электронная почта.</param>
+        /// <returns>Клиента.</returns>
         public async Task<Client> SingleClient(string email)
         {
             try
@@ -61,56 +90,75 @@ namespace testBlazor.Data.services
                 Client client = await _context.Clients.FirstOrDefaultAsync(c => c.Email.Equals(email));
                 return client;
             }
-            catch
+            catch(Exception ex) 
             {
+                Console.WriteLine($"{ex.Message}");
                 return null;
             }
         }
 
-        public void updateClient(long id, Client client)
+        /// <summary>
+        /// Обновляет клиента.
+        /// </summary>
+        /// <param name="id">ID клиента</param>
+        /// <param name="client">Клиент</param>
+        public bool updateClient(long id, Client client)
         {
             try
             {
                 var local = _context.Set<Client>().Local.FirstOrDefault(entry => entry.ClientId.Equals(client.ClientId));
-                // check if local is not null
+
                 if (local != null)
                 {
-                    // detach
                     _context.Entry(local).State = EntityState.Detached;
                 }
+
                 _context.Entry(client).State = EntityState.Modified;
                 _context.SaveChanges();
+
+                return true;
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                Console.WriteLine($"{ex.Message}");
+                return false;
             }
         }
 
-		public void updateClientByEmail(string email, Client client)
+        /// <summary>
+        /// Обновляет клиента по email.
+        /// </summary>
+        /// <param name="email"> Электронная почта.</param>
+        /// <param name="client">Клиент.</param>
+		public bool updateClientByEmail(string email, Client client)
 		{
 			try
 			{
 				var local = _context.Clients.First(entry => entry.Email.Equals(email));
-				// check if local is not null
+
 				if (local != null)
 				{
-                    // detach
-                    //_context.Entry(local).State = EntityState.Detached;
-                    local.Password = client.Password;
+                    _context.Clients.Update(client);
                 }
-                else { _context.Clients.Add(client); }
-                //local.Password = client.Password;
-                //_context.Clients.Update(client);
-                //_context.Entry(client).State = EntityState.Modified;
+                else 
+                {
+                    _context.Clients.Add(client);
+                }
                 _context.SaveChanges();
+                return true;
 			}
-			catch
+			catch (Exception ex) 
 			{
-				throw;
-			}
+                Console.WriteLine($"{ex.Message}");
+                return false;
+            }
 		}
 
+        /// <summary>
+        /// Получает клиента по email.
+        /// </summary>
+        /// <param name="email">Электронная почта</param>
+        /// <returns> Клиента.</returns>
         public Client getSingleClientByEmail(string email)
         {
             try
@@ -118,12 +166,14 @@ namespace testBlazor.Data.services
                 var local = _context.Clients.First(entry => entry.Email.Equals(email));
                 return local;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine($"{ex.Message}");
                 return null;
             }
         }
 
+        //Блять, что это 
         public async Task<bool> UpdateTest(Client client)
         {
             _context.Clients.Update(client);

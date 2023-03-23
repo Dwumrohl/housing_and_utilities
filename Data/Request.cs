@@ -3,21 +3,52 @@ using System.Collections.Generic;
 
 namespace testBlazor.Data;
 
+/// <summary>
+/// Заявки.
+/// </summary>
 public partial class Request
 {
+    #region Поля
+
+    /// <summary>
+    /// ID заявки.
+    /// </summary>
     public long RequestId { get; set; }
 
+    /// <summary>
+    /// Тип заявки.
+    /// </summary>
     public int? Type { get; set; }
 
+    /// <summary>
+    /// Название заявки.
+    /// </summary>
     public string? Name { get; set; }
 
+    /// <summary>
+    /// Дата заявки.
+    /// </summary>
     public DateOnly? Date { get; set; }
 
+    /// <summary>
+    /// Адрес.
+    /// </summary>
     public string? Address { get; set; }
 
+    /// <summary>
+    /// Комментарий.
+    /// </summary>
     public string? Comment { get; set; }
 
+    /// <summary>
+    /// Статус.
+    /// </summary>
     public int? Status { get; set; }
 
+    /// <summary>
+    /// Колекция записей таблицы Клиент - Заявка.
+    /// </summary>
     public virtual ICollection<RequestClient> RequestClients { get; } = new List<RequestClient>();
+
+    #endregion
 }

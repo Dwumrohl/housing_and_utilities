@@ -11,6 +11,10 @@
       "containerImage": "postgres",
       "type": "postgresql.container",
       "connectionId": "housing_db"
+    },
+    "secrets1": {
+      "type": "secrets.user",
+      "dynamicId": null
     }
   }
 }

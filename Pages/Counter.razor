@@ -21,8 +21,8 @@
     @foreach (var todo in todos)
     {
         <tr>
-        <td>@todo.Title</td>
-        <td>@todo.Description</td>
+        <td>@todo.title</td>
+        <td>@todo.description</td>
         </tr>
     }
 </table>
@@ -56,7 +56,7 @@
     {
         if (!string.IsNullOrWhiteSpace(newTodo))
         {
-            todos.Add(new TodoItem { Title = newTodo, Description = todoDescription});
+            todos.Add(new TodoItem { title = newTodo, description = todoDescription});
             newTodo = string.Empty;
         }
     }

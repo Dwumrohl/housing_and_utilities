@@ -7,6 +7,10 @@
     "postgresql1": {
       "type": "postgresql",
       "connectionId": "housing_db"
+    },
+    "secrets1": {
+      "type": "secrets",
+      "dynamicId": null
     }
   }
 }

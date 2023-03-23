@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace testBlazor.Data;
 
+    #warning нахуя существует?
 public partial class MeterReading
 {
     public long MeterReadingsId { get; set; }

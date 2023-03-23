@@ -2,8 +2,8 @@
 {
     public class TodoItem
     {
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public bool IsDone { get; set; }
+        public string? title { get; set; }
+        public string? description { get; set; }
+        public bool isDone { get; set; }
     }
 }

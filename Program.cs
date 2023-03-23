@@ -11,14 +11,9 @@ using System.Data.SqlClient;
 using testBlazor.Data.services;
 
 var builder = WebApplication.CreateBuilder(args);
-var conStrBuilder = new SqlConnectionStringBuilder(
-        builder.Configuration.GetConnectionString("Myconnection"));
-conStrBuilder.ConnectionString = builder.Configuration["housing_db"];
-var connection = conStrBuilder.ConnectionString;
-
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("Myconnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = builder.Configuration["housing_context"]; 
 builder.Services.AddDbContext<HousingAndUtilitiesAppContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
