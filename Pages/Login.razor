@@ -16,8 +16,6 @@
 @inject AuthenticationStateProvider authenticationStateProvider;
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
 
-
-<h1>@error</h1>
 <div id="form_Entry">
     <div id="logo">
     </div>
@@ -27,14 +25,15 @@
             <label for="email">Электронная почта</label>
             <input type="email" name="email" required @bind="myemail">
         </div>
+
         <div class="Contact">
             <label for="pswd">Одноразовый пароль</label>
             <input type="password" name="pswd" @bind="userpassword" required>
         </div>
-        <div id="error-password">* Неверный пароль</div>
+        <div id="error-password">@errmessage</div>
         <div id="buttons_row">
             <input type="button" name="next" value="Получить пароль" @onclick="sendEmail">
-            <input type="button" name="entryButton" value="Войти">
+            <input type="submit" name="entryButton" value="Войти">
         </div>
 
         <div id="consent">
@@ -43,7 +42,6 @@
                 Вы соглашаетесь с правилами <a href="">Пользовательского соглашения</a> и <a href="">Политикой обработки персональных данных</a>.
             </label>
         </div>
-        <label>@errmessage</label>
 
     </EditForm>
     <a id="support_on_login" href="">Служба поддержки</a>
@@ -53,8 +51,6 @@
     private string message { get; set; } = "";
 
     private string errmessage { get; set; } = "";
-
-    private string error { get; set; } = "";
 
     private string? myemail { get; set; } = "";
 
@@ -99,18 +95,18 @@
 
                     };
 
-                //using (SmtpClient smtp = new SmtpClient())
-                //{
-                //    smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.Auto);
-                //    smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
-                //    smtp.Send(mail);
-                //    smtp.Disconnect(true);
-                //}
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.Auto);
+                    smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
+                    smtp.Send(mail);
+                    smtp.Disconnect(true);
+                }
             }
         }
         catch (Exception e)
         {
-            error = e.Message.ToString();
+            errmessage = e.Message.ToString();
         }
     }
 
@@ -139,9 +135,7 @@
             {
                 ((CustomAuthenticationStateProvider)authenticationStateProvider).userAuthorized(myemail);
 
-                await sessionStorageService.SetItemAsync("email", client.Email);
-
-                //client.Email = await sessionStorageService.GetItemAsync<string>("emal");
+                await sessionStorageService.SetItemAsync<string>("email", client.Email);
 
                 if (DateTime.Now.Subtract(new TimeSpan(0, 5, 0)) < client.OtpRequestedTime)
                 {

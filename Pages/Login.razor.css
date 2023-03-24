@@ -14,3 +14,15 @@ input[name=entryButton] {
     margin-left: 30px;
     color: red;
 }
+input[type=submit] {
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 45px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    border: 0px;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 35px;
+    color: #FFFFFF;
+}
