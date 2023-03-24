@@ -48,7 +48,7 @@
             </div>
         </div>
     </div>
-    <!--<div id="position_form_menu">
+    <div id="position_form_menu">
         <div id="form_background">
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
                 <div id="nameForm">Заявка №(число)</div>
@@ -64,13 +64,12 @@
                     <div><label for="">Электронная почта *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.email"></div>
                     <div><label for="">Тема Обращения *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.subject"></div>
                     <div><label for="comment">Ваше Сообщение *</label><br><textarea id="comment" name="comment" @bind="statementModel.comment"></textarea></div>
-@*                    <div id="loadFile"><label for="file">Файл</label><br><img id="ico"><input type="file" name="file" value="выбрать файл"></div>*@
                 </div>
                 <input class="Submission" type="submit" name="send" value="Отправить" required>
             </EditForm>
             <div id="obligatory_field">* Обязательное поле</div>
         </div>
-        </div>-->
+        </div>
 </div>
 @code {
 
@@ -121,28 +120,4 @@
         request.Comment = statementModel.comment;
         requestService.insertRequest(request);
     }
-
-	public void goToMeterReadings()
-	{
-		nav.NavigateTo("/meter_readings");
-	}
-
-    protected override async Task OnInitializedAsync()
-    {
-        var result = await sessionStorageService.GetItemAsync<string>("email");
-        if (result.Length != 0)
-        {
-            email = result;
-            client = ClientService.getSingleClientByEmail(email);
-            StateHasChanged();
-        }
-
-    }
-
-	public void logout()
-	{
-        ((CustomAuthenticationStateProvider)authenticationStateProvider).userNotAuthorized();
-
-		nav.NavigateTo("/");
-	}
 }
