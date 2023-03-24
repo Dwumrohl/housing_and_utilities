@@ -16,7 +16,5 @@
         public Request getSingleRequestById(Guid id);
 
         public int? getHighestRequestNumber();
-    
-
     }
 }
