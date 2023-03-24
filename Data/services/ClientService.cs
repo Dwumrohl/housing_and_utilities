@@ -25,7 +25,7 @@ namespace testBlazor.Data.services
         /// Удаление клиента из таблицы.
         /// </summary>
         /// <param name="id"> ID клиента.</param>
-        public bool deleteClient(long id)
+        public bool deleteClient(Guid id)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace testBlazor.Data.services
         /// </summary>
         /// <param name="id">ID клиента</param>
         /// <param name="client">Клиент</param>
-        public bool updateClient(long id, Client client)
+        public bool updateClient(Guid id, Client client)
         {
             try
             {

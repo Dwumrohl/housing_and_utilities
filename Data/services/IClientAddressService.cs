@@ -2,14 +2,14 @@
 {
     public interface IClientAddressService
     {
-        List<ClientAddress> GetClientAddress(long id);
+        List<ClientAddress> GetClientAddress(Guid id);
 
         bool insertClientAddress(ClientAddress address);
 
-        bool deleteClientAddress(long id);
+        bool deleteClientAddress(Guid id);
 
-        bool updateClientAddress(long id, ClientAddress address);
+        bool updateClientAddress(Guid id, ClientAddress address);
 
-        public ClientAddress getSingleClientAddressById(long id);
+        public ClientAddress getSingleClientAddressById(Guid id);
     }
 }

@@ -5,6 +5,7 @@
 @using MimeKit;
 @using Microsoft.EntityFrameworkCore
 @using testBlazor.Data;
+@using testBlazor.Data.Models;
 @using testBlazor.Data.security;
 @using testBlazor.Data.services
 @using System.Text;
@@ -21,7 +22,7 @@
     <div id="logo">
     </div>
     <label for="entryButton" id="entryLabel">Вход в личный кабинет</label>
-    <form name="sendingEmail">
+    <EditForm name="sendingEmail" Model="@loginModel" OnSubmit="@handleUserAuthorization">
         <div class="Contact">
             <label for="email">Электронная почта</label>
             <input type="email" name="email" required @bind="myemail">
@@ -32,7 +33,7 @@
         </div>
         <div id="buttons_row">
             <input class="ButtonInput" type="button" name="next" value="Получить пароль" @onclick="sendEmail">
-            <input class="ButtonInput" type="button" name="entryButton" value="Войти" @onclick="tempAuthenticate">
+            <input class="ButtonInput" type="submit" name="entryButton" value="Войти">
         </div>
 
         <div id="consent">
@@ -43,7 +44,7 @@
         </div>
         <label>@errmessage</label>
 
-    </form>
+    </EditForm>
     <a id="support_on_login" href="">Служба поддержки</a>
 </div>
 
@@ -60,6 +61,8 @@
 
     public Client? client = new Client();
     public Client? cli = new Client();
+
+    public LoginModel loginModel = new();
 
     private string password = "";
 
@@ -80,7 +83,7 @@
     private void sendEmail()
     {
         try
-        {
+        {           
             password = CreatePassword(10);
             saveOrUpdateUser();
             using (MimeMessage mail = new MimeMessage())
@@ -126,7 +129,7 @@
         } 
     }
 
-    private async void tempAuthenticate()
+    private async void handleUserAuthorization()
     {
         client = ClientService.getSingleClientByEmail(myemail);
         if (client != null)
@@ -137,7 +140,6 @@
 
                 await sessionStorageService.SetItemAsync("email", client.Email);
 
-                //client.Email = await sessionStorageService.GetItemAsync<string>("emal");
 
                 if (DateTime.Now.Subtract(new TimeSpan(0, 5, 0)) < client.OtpRequestedTime)
                 {
@@ -155,9 +157,8 @@
             }
             else errmessage = "Введенный неправильный код";
         }
-        else errmessage = "Пользователя с таким email не существует";    
+        else errmessage = "Пользователя с таким email не существует";
     }
-
-    
+  
 }
 

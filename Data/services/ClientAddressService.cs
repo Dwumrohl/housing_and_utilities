@@ -27,7 +27,7 @@ namespace testBlazor.Data.services
         /// Удаляет запись из таблицы адрес клиента.
         /// </summary>
         /// <param name="id"> ID записи.</param>
-        public bool deleteClientAddress(long id)
+        public bool deleteClientAddress(Guid id)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace testBlazor.Data.services
         /// </summary>
         /// <param name="id"> ID клиента.</param>
         /// <returns> Лист адресов клиента.</returns>
-        public List<ClientAddress> GetClientAddress(long id)
+        public List<ClientAddress> GetClientAddress(Guid id)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace testBlazor.Data.services
         /// </summary>
         /// <param name="id"> ID клиента.</param>
         /// <param name="address"> Адрес.</param>
-        public bool updateClientAddress(long id, ClientAddress address)
+        public bool updateClientAddress(Guid id, ClientAddress address)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace testBlazor.Data.services
         /// </summary>
         /// <param name="id"> ID записи.</param>
         /// <returns> Запись из таблицы Клиент - Адрес.</returns>
-        public ClientAddress getSingleClientAddressById(long id)
+        public ClientAddress getSingleClientAddressById(Guid id)
         {
             try
             {

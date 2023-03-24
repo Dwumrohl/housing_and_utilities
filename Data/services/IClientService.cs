@@ -6,9 +6,9 @@
 
         bool insertClient(Client client);
 
-        bool deleteClient(long id);
+        bool deleteClient(Guid id);
 
-        bool updateClient(long id, Client client);
+        bool updateClient(Guid id, Client client);
 
         bool updateClientByEmail(string email, Client client);
 

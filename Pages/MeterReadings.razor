@@ -99,8 +99,8 @@
 </div>
 @code {
 
-	Client? client = new Client();
-	public string email { get; set; } = "";
+    Client? client = new Client();
+    public string email { get; set; } = "";
 
 	public void changeData()
 	{
@@ -111,6 +111,18 @@
 	{
 		nav.NavigateTo("/Statement");
 	}
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await sessionStorageService.GetItemAsync<string>("email");
+        if (result.Length!=0)
+        {
+            email = result;
+            client = ClientService.getSingleClientByEmail(email);
+            StateHasChanged();
+        }
+
+    }
 
 	public void logout()
 	{

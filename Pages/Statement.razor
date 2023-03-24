@@ -2,6 +2,7 @@
 
 @using Microsoft.EntityFrameworkCore
 @using testBlazor.Data;
+@using testBlazor.Data.Models;
 @using testBlazor.Data.services
 @using System.Text;
 @using testBlazor.Data.security;
@@ -40,7 +41,7 @@
             </div>
         </div>
         <div id="form_background">
-            <form>
+            <EditForm Model="@statementModel">
                 <div id="nameForm">Заявка №(число)</div>
                 <div id="address">
                     <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
@@ -57,15 +58,17 @@
                     <div id="loadFile"><label for="file">Файл</label><br><img id="ico"><input type="file" name="file" value="выбрать файл"></div>
                 </div>
                 <input class="Submission" type="submit" name="send" value="Отправить" required>
-            </form>
+            </EditForm>
             <div id="obligatory_field">* Обязательное поле</div>
         </div>
     </div>
 </div>
 @code {
 
-	Client? client = new Client();
-	public string email { get; set; } = "";
+    Client? client = new Client();
+
+    StatementModel statementModel = new();
+    public string email { get; set; } = "";
 
 	public void changeData()
 	{
@@ -76,6 +79,18 @@
 	{
 		nav.NavigateTo("/MeterReadings");
 	}
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await sessionStorageService.GetItemAsync<string>("email");
+        if (result.Length != 0)
+        {
+            email = result;
+            client = ClientService.getSingleClientByEmail(email);
+            StateHasChanged();
+        }
+
+    }
 
 	public void logout()
 	{

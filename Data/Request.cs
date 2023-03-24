@@ -13,12 +13,12 @@ public partial class Request
     /// <summary>
     /// ID заявки.
     /// </summary>
-    public long RequestId { get; set; }
+    public Guid RequestId { get; set; }
 
     /// <summary>
     /// Тип заявки.
     /// </summary>
-    public int? Type { get; set; }
+    public int? RequestNumber { get; set; }
 
     /// <summary>
     /// Название заявки.
@@ -48,7 +48,9 @@ public partial class Request
     /// <summary>
     /// Колекция записей таблицы Клиент - Заявка.
     /// </summary>
-    public virtual ICollection<RequestClient> RequestClients { get; } = new List<RequestClient>();
+    public Guid? ClientId { get; set; }
+
+    public virtual Client? Client { get; set; }
 
     #endregion
 }

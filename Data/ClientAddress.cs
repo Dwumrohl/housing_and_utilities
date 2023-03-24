@@ -13,12 +13,12 @@ public partial class ClientAddress
     /// <summary>
     /// ID записи в таблице.
     /// </summary>
-    public long ClientAddressId { get; set; }
+    public Guid ClientAddressId { get; set; }
 
     /// <summary>
     /// ID клиента.
     /// </summary>
-    public long? ClientId { get; set; }
+    public Guid? ClientId { get; set; }
 
     /// <summary>
     /// Город.
