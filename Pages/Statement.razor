@@ -30,28 +30,24 @@
                     <div class="Column" name="right_line"><div class="Value_table">Тема</div></div>
                     <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
                     <div class="Column"><div class="Value_table">Адрес</div></div>
-                </div>
-                <div class="Row">
-                    <div class="Column" name="right_line"><div class="Value_table"></div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Новая</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
-                    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
-                </div>
-                <div class="Row">
-                    <div class="Column" name="right_line"><div class="Value_table"></div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Принята</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
-                    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
-                </div>
+                </div>                
+                    @foreach (var rq in requests)
+                    {
+                        <div class="Row">
+                        <div class="Column" name="right_line"><div class="Value_table">@rq.Date.Value.ToShortDateString()</div></div>
+                        <div class="Column" name="right_line"><div class="Value_table">@rq.Status</div></div>
+                        <div class="Column" name="right_line"><div class="Value_table">@rq.Name</div></div>
+                        <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
+                        <div class="Column"><div class="Value_table">@rq.Address</div></div>
+                        </div>
+                    }           
             </div>
         </div>
     </div>
     <div id="position_form_menu">
         <div id="form_background">
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
-                <div id="nameForm">Заявка №@highestRequestNumber</div>
+                <div id="nameForm">Новая заявка</div>
                 <div id="address">
                     <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.street"></div>
                     <div><label for="">Дом *</label><br><input class="AddressThirdWidth" name="" type="text" required @bind-value="statementModel.building"></div>
@@ -78,8 +74,14 @@
     Request? request = new Request();
 
     StatementModel statementModel = new();
+
     public string email { get; set; } = "";
-    public int? highestRequestNumber { get; set; } = 0;
+
+    List<Request> requests = new();
+
+    //Пока не нужно, но может пригодится 
+    //public int? highestRequestNumber { get; set; } = 0;
+    //highestRequestNumber = requestService.getHighestRequestNumber() + 1;
 
     public void changeData()
     {
@@ -99,9 +101,9 @@
                 statementModel.name = client.Name;
                 statementModel.surname = client.Surname;
                 statementModel.patronymic = client.Patronymic;
-                statementModel.phoneNumber = client.PhoneNumber;
-                highestRequestNumber = requestService.getHighestRequestNumber() + 1;
+                statementModel.phoneNumber = client.PhoneNumber;          
                 StateHasChanged();
+                requests = requestService.getRequestsByClientId(client.ClientId);
             }
             catch (Exception ex)
             {
