@@ -4,12 +4,12 @@
 @using testBlazor.Data;
 @using testBlazor.Data.services
 @using System.Text;
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
-@inject ProtectedSessionStorage ProtectedSessionStore
 @inject IClientService ClientService
 @inject IClientAddressService AddressService
 @inject NavigationManager nav;
+
+@attribute [Authorize]
 
 <html>
 
@@ -127,38 +127,9 @@
 @code {
     public string email { get; set; } = "";
     public bool hidden { get; set; } = true;
-
-    //public string city { get; set; } = "";
-    //public string street { get; set; } = "";
-    //public string house { get; set; } = "";
-    //public string building { get; set; } = "";
-    //public string apartment { get; set; } = "";
-
-
     Client? client = new Client();
     ClientAddress? address = new ClientAddress();
     List<ClientAddress> addresses = new List<ClientAddress>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        var result = await ProtectedSessionStore.GetAsync<string>("email");
-        if (result.Success)
-        {
-            hidden = true;
-            email = result.Value;
-            client = ClientService.getSingleClientByEmail(email);
-            if (client != null)
-            {
-                addresses = AddressService.GetClientAddress(client.ClientId);
-
-                if (addresses.GetEnumerator().MoveNext())
-                    hidden = false;
-                //addresses = client.ClientAddresses;
-            }
-            StateHasChanged();
-        }
-
-    }
 
     public void updateUser()
     {
@@ -169,8 +140,6 @@
     {
         address.ClientId = client.ClientId;
         address.Client = client;
-        //address.City = city;
-        //address.City = s;
         AddressService.insertClientAddress(address);
         hidden = false;
         nav.NavigateTo(nav.Uri, forceLoad: true);

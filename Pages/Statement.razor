@@ -4,11 +4,14 @@
 @using testBlazor.Data;
 @using testBlazor.Data.services
 @using System.Text;
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using testBlazor.Data.security;
 
-@inject ProtectedSessionStorage ProtectedSessionStore
 @inject IClientService ClientService
 @inject NavigationManager nav;
+@inject AuthenticationStateProvider authenticationStateProvider;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
+
+@attribute [Authorize]
 
 <div id="main_div">
     <div id="sidebar">
@@ -64,18 +67,6 @@
 	Client? client = new Client();
 	public string email { get; set; } = "";
 
-	protected override async Task OnInitializedAsync()
-	{
-		var result = await ProtectedSessionStore.GetAsync<string>("email");
-		if (result.Success)
-		{
-			email = result.Value;
-			client = ClientService.getSingleClientByEmail(email);
-			StateHasChanged();
-		}
-
-	}
-
 	public void changeData()
 	{
 		nav.NavigateTo("/UserData");
@@ -88,7 +79,8 @@
 
 	public void logout()
 	{
-		ProtectedSessionStore.SetAsync("email", "");
+        ((CustomAuthenticationStateProvider)authenticationStateProvider).userNotAuthorized();
+
 		nav.NavigateTo("/");
 	}
 }

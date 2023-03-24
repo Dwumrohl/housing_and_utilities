@@ -138,8 +138,8 @@ namespace testBlazor.Data.services
 
 				if (local != null)
 				{
-                    client.ClientId = local.ClientId;
-                    local = null;
+                    local.OtpRequestedTime = client.OtpRequestedTime;
+                    local.Password = client.Password;
                 }
                 _context.SaveChanges();
                 return true;
