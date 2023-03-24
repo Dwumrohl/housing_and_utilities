@@ -8,7 +8,7 @@ public partial class MeterReading
 {
     public Guid MeterReadingsId { get; set; }
 
-    public char? Name { get; set; }
+    public string? Name { get; set; }
 
     public long? Data { get; set; }
 

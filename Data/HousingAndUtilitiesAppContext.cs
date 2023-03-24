@@ -52,9 +52,7 @@ public partial class HousingAndUtilitiesAppContext : DbContext
                 .HasColumnName("otp_requested_time");
             entity.Property(e => e.Password).HasColumnName("password");
             entity.Property(e => e.Patronymic).HasColumnName("patronymic");
-            entity.Property(e => e.PhoneNumber)
-                .HasColumnType("char")
-                .HasColumnName("phone_number");
+            entity.Property(e => e.PhoneNumber).HasColumnName("phone_number");
             entity.Property(e => e.Surname).HasColumnName("surname");
         });
 
@@ -95,10 +93,7 @@ public partial class HousingAndUtilitiesAppContext : DbContext
             entity.Property(e => e.Date)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("date");
-            entity.Property(e => e.Name)
-                .HasColumnType("char")
-                .HasColumnName("name");
-
+            entity.Property(e => e.Name);
             entity.HasOne(d => d.Client).WithMany(p => p.MeterReadings)
                 .HasForeignKey(d => d.ClientId)
                 .HasConstraintName("client_id");
@@ -116,7 +111,9 @@ public partial class HousingAndUtilitiesAppContext : DbContext
             entity.Property(e => e.Address).HasColumnName("address");
             entity.Property(e => e.ClientId).HasColumnName("client_id");
             entity.Property(e => e.Comment).HasColumnName("comment");
-            entity.Property(e => e.Date).HasColumnName("date");
+            entity.Property(e => e.Date).
+            HasColumnType("timestamp without time zone")
+                .HasColumnName("date");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.RequestNumber)
                 .HasDefaultValueSql("nextval('app_shema.\"REQUEST_REQUEST_ID_seq\"'::regclass)")

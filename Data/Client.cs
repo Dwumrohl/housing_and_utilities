@@ -17,7 +17,7 @@ public partial class Client
     /// <summary>
     /// Номер телефона клиента.
     /// </summary>
-    public char? PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
 
     /// <summary>
     /// Электронная почта клиента.

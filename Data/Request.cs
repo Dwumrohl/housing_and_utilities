@@ -28,7 +28,7 @@ public partial class Request
     /// <summary>
     /// Дата заявки.
     /// </summary>
-    public DateOnly? Date { get; set; }
+    public DateTime? Date { get; set; }
 
     /// <summary>
     /// Адрес.
