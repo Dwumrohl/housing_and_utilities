@@ -16,22 +16,22 @@
 
 
 <h1>@error</h1>
-<div id="form-entry">
+<div id="form_Entry">
     <div id="logo">
     </div>
-    <label for="entr-button" id="entry-label">Вход в личный кабинет</label>
-    <form name="sending-email">
-        <div class="contact">
+    <label for="entryButton" id="entryLabel">Вход в личный кабинет</label>
+    <form name="sendingEmail">
+        <div class="Contact">
             <label for="email">Электронная почта</label>
             <input type="email" name="email" required @bind="myemail">
         </div>
-        <div class="contact">
+        <div class="Contact">
             <label for="pswd">Одноразовый пароль</label>
             <input type="password" name="pswd" @bind="userpassword" required>
         </div>
-        <div id="buttons-row">
-            <input type="button" name="next" value="Получить пароль" @onclick="sendEmail">
-            <input type="button" name="entry-button" value="Войти" @onclick="tempAuthenticate">
+        <div id="buttons_row">
+            <input class="ButtonInput" type="button" name="next" value="Получить пароль" @onclick="sendEmail">
+            <input class="ButtonInput" type="button" name="entryButton" value="Войти" @onclick="tempAuthenticate">
         </div>
 
         <div id="consent">
@@ -43,7 +43,7 @@
         <label>@errmessage</label>
 
     </form>
-    <a id="support-on-login" href="">Служба поддержки</a>
+    <a id="support_on_login" href="">Служба поддержки</a>
 </div>
 
 @code {
