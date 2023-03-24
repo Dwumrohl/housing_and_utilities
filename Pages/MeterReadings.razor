@@ -10,85 +10,85 @@
 @inject IClientService ClientService
 @inject NavigationManager nav;
 
-<div id="main_div">
+<div id="main-div">
     <div id="sidebar">
-        <div id="sidebar_name">История</div>
-        <div class="sidebar_obj">
-            <div class="sidebar_month">Март</div>
-            <div class="sidebar_year">2023</div>
+        <div id="sidebar-name">История</div>
+        <div class="sidebar-obj">
+            <div class="sidebar-month">Март</div>
+            <div class="sidebar-year">2023</div>
         </div>
-        <div class="sidebar_obj">
-            <div class="sidebar_month">Февраль</div>
-            <div class="sidebar_year">2023</div>
+        <div class="sidebar-obj">
+            <div class="sidebar-month">Февраль</div>
+            <div class="sidebar-year">2023</div>
         </div>
     </div>
-    <div id="position_form_menu">
-        <div id="higher_menu">
-            <div class="Tabs" name="this_page">Показания</div>
-            <div class="Tabs" @onclick="goToStatement">Заявки</div>
-            <div class="Tabs">Услуги</div>
-            <div class="Tabs"><a href='mailto:gptevcat@gmail.com'>Служба поддержки</a></div>
+    <div id="position-form-menu">
+        <div id="higher-menu">
+            <div class="tabs" name="this-page">Показания</div>
+            <div class="tabs" @onclick="goToStatement">Заявки</div>
+            <div class="tabs">Услуги</div>
+            <div class="tabs"><a href='mailto:gptevcat@gmail.com'>Служба поддержки</a></div>
             <div id="profile">
-                <div id="name_profile">@email</div>
-                <div id="menu_profile">
+                <div id="name-profile">@email</div>
+                <div id="menu-profile">
                     <div @onclick="changeData">Изменить данные</div>
                     <div @onclick="logout">Выйти</div>
                 </div>
             </div>
         </div>
-        <div id="form_background">
+        <div id="form-background">
             <form>
-                <div id="nameForm">Показания</div>
+                <div id="name-form">Показания</div>
                 <div id="address">
-                    <div><label for="">Улица *</label><br><input name="" class="AddressFirstWidth" type="text" required></div>
-                    <div><label for="">Дом *</label><br><input name="" class="AddressThirdWidth" type="text" required></div>
-                    <div><label for="">Корпус</label><br><input name="" class="AddressThirdWidth" type="text" required></div>
-                    <div><label for="">Квартира *</label><br><input name="" class="AddressThirdWidth" type="text" required></div>
+                    <div><label for="">Улица *</label><br><input name="" class="address-first-width" type="text" required></div>
+                    <div><label for="">Дом *</label><br><input name="" class="address-third-width" type="text" required></div>
+                    <div><label for="">Корпус</label><br><input name="" class="address-third-width" type="text" required></div>
+                    <div><label for="">Квартира *</label><br><input name="" class="address-third-width" type="text" required></div>
                 </div>
 
                 <div id="table">
-                    <div id="name_column">
-                        <div class="Column" name="right_line"><div class="Value_table">Счетчик</div></div>
-                        <div class="Column" name="right_line"><div class="Value_table">Предыдущее значение</div></div>
-                        <div class="Column"><div class="Value_table">Текущее значение</div></div>
+                    <div id="name-column">
+                        <div class="column" name="right-line"><div class="value-table">Счетчик</div></div>
+                        <div class="column" name="right-line"><div class="value-table">Предыдущее значение</div></div>
+                        <div class="column"><div class="value-table">Текущее значение</div></div>
                     </div>
-                    <div class="Row">
-                        <div class="Column" name="right_line"><div class="Value_table">Горячая вода</div></div>
-                        <div class="Column" name="right_line"><div class="Value_table">36 м. куб.</div></div>
-                        <div class="Column"><div class="Value_table">58 м. куб.</div></div>
+                    <div class="table-row">
+                        <div class="column" name="right-line"><div class="value-table">Горячая вода</div></div>
+                        <div class="column" name="right-line"><div class="value-table">36 м. куб.</div></div>
+                        <div class="column"><div class="value-table">58 м. куб.</div></div>
                     </div>
-                    <div class="Row">
-                        <div class="Column" name="right_line"><div class="Value_table">Газ</div></div>
-                        <div class="Column" name="right_line"><div class="Value_table">27 м. куб.</div></div>
-                        <div class="Column"><div class="Value_table">61 м. куб.</div></div>
+                    <div class="table-row">
+                        <div class="column" name="right-line"><div class="value-table">Газ</div></div>
+                        <div class="column" name="right-line"><div class="value-table">27 м. куб.</div></div>
+                        <div class="column"><div class="value-table">61 м. куб.</div></div>
                     </div>
                 </div>
-                <div class="Row" name="meter_row">
-                    <div class="Column" name="right_line">
-                        <div class="Value_table">
-                            <label for="meter_type">Тип счетчика</label>
-                            <select name="meter_type">
+                <div class="table-row" name="meter-row">
+                    <div class="column" name="right-line">
+                        <div class="value-table">
+                            <label for="meter-type">Тип счетчика</label>
+                            <select name="meter-type">
                                 <option>Горячая вода</option>
                                 <option>Холодная вода</option>
                                 <option>Газ</option>
                             </select>
                         </div>
                     </div>
-                    <div class="Column" name="right_line">
-                        <div class="Value_table">
-                            <label for="meter_past_value">Предыдущее значение</label>
-                            <input name="meter_past_value" type="text">
+                    <div class="column" name="right-line">
+                        <div class="value-table">
+                            <label for="meter-past-value">Предыдущее значение</label>
+                            <input name="meter-past-value" type="text">
                         </div>
                     </div>
-                    <div class="Column">
-                        <div class="Value_table">
-                            <label for="meter_present_value">Текущее значение</label>
-                            <input name="meter_present_value" type="text">
+                    <div class="column">
+                        <div class="value-table">
+                            <label for="meter-present-value">Текущее значение</label>
+                            <input name="meter-present-value" type="text">
                         </div>
                     </div>
                 </div>
-                <input class="Submission" type="button" name="add_meter" value="Добавить счетчик" required>
-                <input class="Submission" type="submit" name="send" value="Отправить" required>
+                <input type="button" name="add-meter" value="Добавить счетчик" required>
+                <input type="button" name="send" value="Отправить" required>
                 <div id="obligatory_field">* Обязательное поле</div>
             </form>
         </div>

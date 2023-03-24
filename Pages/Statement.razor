@@ -10,52 +10,52 @@
 @inject IClientService ClientService
 @inject NavigationManager nav;
 
-<div id="main_div">
+<div id="main-div">
     <div id="sidebar">
-        <div id="sidebar_name">История</div>
-        <div class="sidebar_obj">
-            <div class="sidebar_month">Март</div>
-            <div class="sidebar_year">2023</div>
+        <div id="sidebar-name">История</div>
+        <div class="sidebar-obj">
+            <div class="sidebar-month">Март</div>
+            <div class="sidebar-year">2023</div>
         </div>
-        <div class="sidebar_obj">
-            <div class="sidebar_month">Февраль</div>
-            <div class="sidebar_year">2023</div>
+        <div class="sidebar-obj">
+            <div class="sidebar-month">Февраль</div>
+            <div class="sidebar-year">2023</div>
         </div>
     </div>
-    <div id="position_form_menu">
-        <div id="higher_menu">
-            <div class="Tabs" @onclick="goToMeterReadings">Показания</div>
-            <div class="Tabs" name="this_page">Заявки</div>
-            <div class="Tabs">Услуги</div>
-            <div class="Tabs"><a href='mailto:gptevcat@gmail.com'>Служба поддержки</a></div>
+    <div id="position-form-menu">
+        <div id="higher-menu">
+            <div class="tabs" @onclick="goToMeterReadings">Показания</div>
+            <div class="tabs" name="this-page">Заявки</div>
+            <div class="tabs">Услуги</div>
+            <div class="tabs"><a href='mailto:gptevcat@gmail.com'>Служба поддержки</a></div>
             <div id="profile">
-                <div id="name_profile">@email</div>
-                <div id="menu_profile">
+                <div id="name-profile">@email</div>
+                <div id="menu-profile">
                     <div @onclick="changeData">Изменить данные</div>
                     <div @onclick="logout">Выйти</div>
                 </div>
             </div>
         </div>
-        <div id="form_background">
+        <div id="form-background">
             <form>
-                <div id="nameForm">Заявка №(число)</div>
+                <div id="name-form">Заявка №(число)</div>
                 <div id="address">
-                    <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
-                    <div><label for="">Дом *</label><br><input class="AddressThirdWidth" name="" type="text" required></div>
-                    <div><label for="">Корпус</label><br><input class="AddressThirdWidth" name="" type="text" required></div>
-                    <div><label for="">Квартира *</label><br><input class="AddressThirdWidth" name="" type="text" required></div>
-                    <div><label for="">Фамилия *</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
-                    <div><label for="">Имя *</label><br><input class="AddressSecondWidth" name="" type="text" required></div>
-                    <div><label for="">Отчество *</label><br><input class="AddressSecondWidth" name="" type="text" required></div>
-                    <div><label for="">Телефон</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
-                    <div><label for="">Электронная почта *</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
-                    <div><label for="">Тема Обращения *</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
+                    <div><label for="">Улица *</label><br><input class="address-first-width" name="" type="text" required></div>
+                    <div><label for="">Дом *</label><br><input class="address-third-width" name="" type="text" required></div>
+                    <div><label for="">Корпус</label><br><input class="address-third-width" name="" type="text" required></div>
+                    <div><label for="">Квартира *</label><br><input class="address-third-width" name="" type="text" required></div>
+                    <div><label for="">Фамилия *</label><br><input class="address-first-width" name="" type="text" required></div>
+                    <div><label for="">Имя *</label><br><input class="address-second-width" name="" type="text" required></div>
+                    <div><label for="">Отчество *</label><br><input class="address-second-width" name="" type="text" required></div>
+                    <div><label for="">Телефон</label><br><input class="address-first-width" name="" type="text" required></div>
+                    <div><label for="">Электронная почта *</label><br><input class="address-first-width" name="" type="text" required></div>
+                    <div><label for="">Тема Обращения *</label><br><input class="address-first-width" name="" type="text" required></div>
                     <div><label for="comment">Ваше Сообщение *</label><br><textarea id="comment" name="comment"></textarea></div>
-                    <div id="loadFile"><label for="file">Файл</label><br><img id="ico"><input type="file" name="file" value="выбрать файл"></div>
+                    <div id="load-file"><label for="file">Файл</label><br><img id="ico"><input type="file" name="file" value="выбрать файл"></div>
                 </div>
-                <input class="Submission" type="submit" name="send" value="Отправить" required>
+                <input type="button" name="send" value="Отправить" required>
             </form>
-            <div id="obligatory_field">* Обязательное поле</div>
+            <div id="obligatory-field">* Обязательное поле</div>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@ body {
 	display: flex;
 }
 
-#main_div {
+#main-div {
 	display: flex;
 }
 
@@ -13,26 +13,26 @@ body {
 	border-width: 2px;
 }
 
-#position_form_menu {
+#position-form-menu {
 	display: flex;
 	flex-direction: column;
 	width: 96vw;
 }
 
-#higher_menu {
+#higher-menu {
 	position: relative;
 	display: flex;
 	border-style: solid;
 	border-width: 2px;
 }
 
-.Tabs {
+.tabs {
 	margin: auto 50px auto 1%;
 	width: fit-content;
 	padding: 20px 0;
 }
 
-	.Tabs[name=this_page] {
+	.tabs[name=this-page] {
 		border-bottom-color: blue;
 		border-bottom-width: 3px;
 		border-bottom-style: solid;
@@ -44,14 +44,14 @@ form {
 	flex-direction: column;
 }
 
-#form_background {
+#form-background {
 	position: relative;
 	height: 91vh; /*важный момент*/
 	padding: 3% 0em 0em 6%;
 	background: #EDEAEA;
 }
 
-#nameForm {
+#name-form {
 	font-weight: 500;
 	font-size: 32px;
 	line-height: 38px;
@@ -82,15 +82,15 @@ form {
 		border: 0px;
 	}
 
-.AddressThirdWidth {
+.address-third-width {
 	width: 130px;
 }
 
-.AddressSecondWidth {
+.address-second-width {
 	width: 215px;
 }
 
-.AddressFirstWidth {
+.address-first-width {
 	width: 350px;
 }
 
@@ -101,46 +101,31 @@ form {
 	border-radius: 5px;
 }
 
-#loadFile input {
+#load-file input {
 	background-color: #EDEAEA;
 }
 
-	#loadFile input[value="выбрать файл"] {
+	#load-file input[value="выбрать файл"] {
 		font-weight: 500;
 		font-size: 18px;
 		text-align: center;
 		color: #000000;
 	}
 
-.Submission[name=send] {
+input[name=send] {
 	margin-top: 10px;
 	margin-left: auto;
 	margin-right: 35px;
-	width: 115px;
+	width: fit-content;
+	background: #8FC93A;
 }
 
-.Submission[name=add_meter] {
+input[name=add-meter] {
 	margin-top: 10px;
 	margin-left: 0px;
 	margin-right: auto;
-}
-
-.Submission[name=plus] {
-	margin-top: 10px;
-	margin-left: 0px;
-	font-size: 30px;
-	width: 40px;
-}
-
-.Submission {
-	height: 40px;
-	background: #41464E;
-	box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.5);
-	border-radius: 5px;
-	border: 0px;
-	font-weight: 500;
-	font-size: 18px;
-	color: #FFFFFF;
+	width: fit-content;
+	background: #1E91D6;
 }
 
 #table {
@@ -149,7 +134,7 @@ form {
 	margin-top: 2%;
 }
 
-#name_column {
+#name-column {
 	display: flex;
 	flex-direction: row;
 	font-weight: 500;
@@ -161,24 +146,24 @@ form {
 	background-color: #C4C4C4;
 }
 
-.Column {
+.column {
 	display: flex;
 	width: 40%;
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
 
-.Value_table {
+.value-table {
 	margin: auto;
 }
 
-.Column[name=right_line] {
+.column[name=right-line] {
 	border-right: #858EA0;
 	border-right-width: 1px;
 	border-right-style: solid;
 }
 
-.Row {
+.table-row {
 	display: flex;
 	flex-direction: row;
 	margin-top: 7px;
@@ -188,20 +173,20 @@ form {
 	background-color: #FFFFFF;
 }
 
-	.Row[name=meter_row] {
+	.table-row[name=meter-row] {
 		word-wrap: break-word;
 	}
 
-		.Row[name=meter_row] div.Column div.Value_table {
+		.table-row[name=meter-row] div.Column div.Value_table {
 			display: inline-block;
 			margin: auto;
 		}
 
-		.Row[name=meter_row] label {
+		.table-row[name=meter-row] label {
 			margin-left: 3px;
 		}
 
-		.Row[name=meter_row] input {
+		.table-row[name=meter-row] input {
 			display: block;
 			font-weight: 500;
 			font-size: 18px;
@@ -210,7 +195,7 @@ form {
 			background-color: #eaeaea;
 		}
 
-		.Row[name=meter_row] select {
+		.table-row[name=meter-row] select {
 			display: block;
 			font-weight: 500;
 			font-size: 18px;
@@ -218,26 +203,6 @@ form {
 			border: 0px;
 			background-color: #eaeaea;
 		}
-
-#add_meter_button {
-	display: flex;
-	margin: 10px;
-	color: #757A83;
-}
-
-#add_meter_plus {
-	padding: 0px 8px 0px 8px;
-	border: 4px solid #858EA0;
-	border-radius: 3px;
-	font-weight: 600;
-	font-size: 18px;
-}
-
-#add_meter_text {
-	margin: auto 5px;
-	font-weight: 500;
-	font-size: 18px;
-}
 
 #profile{
 	margin-left: auto;
@@ -245,7 +210,7 @@ form {
 }
 
 /*логин - пароль*/
-#form_Entry {
+#form-entry {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -261,7 +226,7 @@ form {
 	border-color: #aeaeae;
 }
 
-	#form_Entry form{
+	#form-entry form{
 		width:fit-content;
 	}
 
@@ -275,7 +240,7 @@ form {
 	border: none;
 }
 
-#entryLabel {
+#entry-label {
 	margin: 0 auto;
 	margin-top: 20px;
 	font-weight: 400;
@@ -284,7 +249,7 @@ form {
 	color: #000000;
 }
 
-#buttons_row {
+#buttons-row {
 	margin: 0 auto;
 	margin-top: 10px;
 	display: flex;
@@ -292,14 +257,14 @@ form {
 	width: 443px;
 }
 
-.Contact {
+.contact {
 	margin: 0 auto;
 	margin-top: 20px;
 	display: block;
 	width: min-content;
 }
 
-	.Contact label {
+	.contact label {
 		margin-left: 6px;
 		font-weight: 500;
 		font-size: 17px;
@@ -307,7 +272,7 @@ form {
 		color: #000000;
 	}
 
-	.Contact input {
+	.contact input {
 		width: 443px;
 		height: 40px;
 		font-size: 30px;
@@ -318,8 +283,7 @@ form {
 		border-color: #aeaeae;
 	}
 
-.ButtonInput {
-	margin: 0 auto;
+input[type=button] {
 	margin-top: 20px;
 	height: 45px;
 	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
@@ -331,14 +295,14 @@ form {
 	color: #FFFFFF;
 }
 
-	.ButtonInput[name=next] {
+	input[name=next] {
 		margin-left: 0px;
 		margin-right: auto;
 		background: #1E91D6;
 		width: fit-content;
 	}
 
-	.ButtonInput[name=entryButton] {
+	input[name=entry-button] {
 		margin-left: auto;
 		margin-right: 0px;
 		background: #8FC93A;
@@ -356,7 +320,7 @@ form {
 	color: #F0F1F3;
 }
 
-#support_on_login {
+#support-on-login {
 	margin: 0 auto;
 	margin-top: 20px;
 	margin-bottom: 15px;
