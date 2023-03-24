@@ -22,71 +22,63 @@
 
 <body>
     <div id="mainDiv">
-        <div class="dataContainer">
-            <h3>Личные данные</h3>
-            <div class="innerDiv">
-                <div class="inputDiv">
-                    <p>Фамилия</p>
-                    <input type="text" @bind="client.Surname" />
+        <div id="forms-personal">
+            <div class="dataContainer">
+                <h3>Личные данные</h3>
+                <div class="innerDiv">
+                    <div class="inputDiv">
+                        <label>Фамилия</label>
+                        <input type="text" @bind="client.Surname" />
+                    </div>
+                    <div class="inputDiv">
+                        <label>Имя</label>
+                        <input type="text" @bind="client.Name" />
+                    </div>
+                    <div class="inputDiv">
+                        <label>Отчество</label>
+                        <input type="text" @bind="client.Patronymic" />
+                    </div>
                 </div>
-                <div class="inputDiv">
-                    <p>Имя</p>
-                    <input type="text" @bind="client.Name" />
-                </div>
-                <div class="inputDiv">
-                    <p>Отчество</p>
-                    <input type="text" @bind="client.Patronymic" />
-                </div>
-            </div>
-            <div class="innerDiv">
-                <div class="inputDiv">
-                    <p>Номер телефона</p>
-                    <input type="text" @bind="client.PhoneNumber" />
-                </div>
-                <div class="inputDiv">
-                    <p>Электронная почта</p>
-                    <input type="text" @bind="client.Email" />
-                </div>
-                <div class="inputDiv">
-                    <br />
-                    <br />
-                    <br />
-                    <button class="saveButton" @onclick="updateUser">Сохранить</button>
+                <div class="innerDiv">
+                    <div class="inputDiv">
+                        <label>Номер телефона</label>
+                        <input type="text" @bind="client.PhoneNumber" />
+                    </div>
+                    <div class="inputDiv">
+                        <label>Электронная почта</label>
+                        <input type="text" @bind="client.Email" />
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="dataContainer">
-            <h3>Адрес</h3>
-            <div class="innerDiv">
-                <div class="inputDiv">
-                    <p>Город</p>
-                    <input type="text" @bind="address.City" />
+            <input type="button" name="save-personal-data" value="Сохранить" @onclick="updateUser"></input>
+            <div class="dataContainer">
+                <h3>Адрес</h3>
+                <div class="innerDiv">
+                    <div class="inputDiv">
+                        <label>Город</label>
+                        <input type="text" @bind="address.City" />
+                    </div>
+                    <div class="inputDiv">
+                        <label>Улица</label>
+                        <input type="text" @bind="address.Street" />
+                    </div>
+                    <div class="inputDiv">
+                        <label>Дом</label>
+                        <input type="text" @bind="address.Building" />
+                    </div>
                 </div>
-                <div class="inputDiv">
-                    <p>Улица</p>
-                    <input type="text" @bind="address.Street" />
-                </div>
-                <div class="inputDiv">
-                    <p>Дом</p>
-                    <input type="text" @bind="address.Building" />
-                </div>
-            </div>
-            <div class="innerDiv">
-                <div class="inputDiv">
-                    <p>Подъезд</p>
-                    <input type="text" @bind="address.House" />
-                </div>
-                <div class="inputDiv">
-                    <p>Квартира</p>
-                    <input type="text" @bind="address.Apartment" />
-                </div>
-                <div class="inputDiv">
-                    <br />
-                    <br />
-                    <br />
-                    <button class="saveButton" @onclick="addAddress">Добавить</button>
+                <div class="innerDiv">
+                    <div class="inputDiv">
+                        <label>Подъезд</label>
+                        <input type="text" @bind="address.House" />
+                    </div>
+                    <div class="inputDiv">
+                        <label>Квартира</label>
+                        <input type="text" @bind="address.Apartment" />
+                    </div>
                 </div>
             </div>
+            <input type="button" name="save-personal-data" value="Добавить" @onclick="addAddress"></input>
         </div>
         <div class="dataContainer" hidden="@hidden">
             <div class="addressList">
