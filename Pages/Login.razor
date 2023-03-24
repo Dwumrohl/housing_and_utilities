@@ -1,4 +1,4 @@
-﻿@page "/"
+﻿@page "/login"
 
 @using MailKit.Net.Smtp;
 @using MailKit;
@@ -93,18 +93,18 @@
                 mail.Subject = "ЖКХ. Одноразовый пароль для входа на сайт";
                 mail.Body = new TextPart("plain")
                     {
-                        Text = @"Ваш одноразовый пароль для входа в приложение " + password +
+                        Text =  @"Ваш одноразовый пароль для входа в приложение " + password +
                         "\nХорошего вам дня"
 
                     };
 
-                using (SmtpClient smtp = new SmtpClient())
-                {
-                    smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.Auto);
-                    smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
-                    smtp.Send(mail);
-                    smtp.Disconnect(true);
-                }
+                //using (SmtpClient smtp = new SmtpClient())
+                //{
+                //    smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.Auto);
+                //    smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
+                //    smtp.Send(mail);
+                //    smtp.Disconnect(true);
+                //}
             }
         }
         catch (Exception e)
@@ -140,6 +140,7 @@
 
                 await sessionStorageService.SetItemAsync("email", client.Email);
 
+                //client.Email = await sessionStorageService.GetItemAsync<string>("emal");
 
                 if (DateTime.Now.Subtract(new TimeSpan(0, 5, 0)) < client.OtpRequestedTime)
                 {
@@ -149,7 +150,7 @@
                     }
                     else
                     {
-                        nav.NavigateTo("/Statement");
+                        nav.NavigateTo("/");
                     }
                 }
                 else errmessage = "Время действия кода истекло";

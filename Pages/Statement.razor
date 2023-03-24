@@ -1,4 +1,4 @@
-﻿@page "/Statement"
+﻿@page "/statement"
 
 @using Microsoft.EntityFrameworkCore
 @using testBlazor.Data;
@@ -28,19 +28,6 @@
         </div>
     </div>
     <div id="position_form_menu">
-        <div id="higher_menu">
-            <div class="Tabs" @onclick="goToMeterReadings">Показания</div>
-            <div class="Tabs" name="this_page">Заявки</div>
-            <div class="Tabs">Услуги</div>
-            <div class="Tabs"><a href='mailto:gptevcat@gmail.com'>Служба поддержки</a></div>
-            <div id="profile">
-                <div id="name_profile">@email</div>
-                <div id="menu_profile">
-                    <div @onclick="changeData">Изменить данные</div>
-                    <div @onclick="logout">Выйти</div>
-                </div>
-            </div>
-        </div>
         <div id="form_background">
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
                 <div id="nameForm">Заявка №(число)</div>
@@ -71,10 +58,10 @@
     StatementModel statementModel = new();
     public string email { get; set; } = "";
 
-    public void changeData()
-    {
-        nav.NavigateTo("/UserData");
-    }
+	public void changeData()
+	{
+		nav.NavigateTo("/user");
+	}
 
     private void handleStatementForm()
     {
@@ -83,7 +70,7 @@
 
 	public void goToMeterReadings()
 	{
-		nav.NavigateTo("/MeterReadings");
+		nav.NavigateTo("/meter_readings");
 	}
 
     protected override async Task OnInitializedAsync()
@@ -103,5 +90,5 @@
         ((CustomAuthenticationStateProvider)authenticationStateProvider).userNotAuthorized();
 
 		nav.NavigateTo("/");
-	}
+	}*/
 }
