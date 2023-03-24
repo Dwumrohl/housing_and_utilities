@@ -28,7 +28,6 @@
                     <div class="Column" name="right_line"><div class="Value_table">Дата</div></div>
                     <div class="Column" name="right_line"><div class="Value_table">Статус</div></div>
                     <div class="Column" name="right_line"><div class="Value_table">Тема</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
                     <div class="Column"><div class="Value_table">Адрес</div></div>
                 </div>                
                     @foreach (var rq in requests)
@@ -37,7 +36,6 @@
                         <div class="Column" name="right_line"><div class="Value_table">@rq.Date.Value.ToShortDateString()</div></div>
                         <div class="Column" name="right_line"><div class="Value_table">@rq.Status</div></div>
                         <div class="Column" name="right_line"><div class="Value_table">@rq.Name</div></div>
-                        <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
                         <div class="Column"><div class="Value_table">@rq.Address</div></div>
                         </div>
                     }           
