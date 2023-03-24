@@ -8,11 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\Index.razor.css" />
+    <None Remove="Pages\Login.razor.css" />
     <None Remove="Pages\PreregistrationPageSkip.razor.css" />
     <None Remove="Pages\UserData.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Pages\Index.razor.css" />
+    <Content Include="Pages\Login.razor.css" />
     <Content Include="Pages\PreregistrationPageSkip.razor.css" />
     <Content Include="Pages\UserData.razor.css" />
   </ItemGroup>
@@ -23,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.SessionStorage" Version="2.3.0" />
     <PackageReference Include="EntityFramework6.Npgsql" Version="6.4.3" />
     <PackageReference Include="MailKit" Version="3.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.4" />

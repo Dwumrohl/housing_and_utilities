@@ -1,15 +1,16 @@
-﻿@page "/UserData"
+﻿@page "/user"
 
 @using Microsoft.EntityFrameworkCore
 @using testBlazor.Data;
 @using testBlazor.Data.services
 @using System.Text;
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
-@inject ProtectedSessionStorage ProtectedSessionStore
 @inject IClientService ClientService
 @inject IClientAddressService AddressService
 @inject NavigationManager nav;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
+
+@attribute [Authorize]
 
 <html>
 
@@ -127,25 +128,22 @@
 @code {
     public string email { get; set; } = "";
     public bool hidden { get; set; } = true;
-
-    //public string city { get; set; } = "";
-    //public string street { get; set; } = "";
-    //public string house { get; set; } = "";
-    //public string building { get; set; } = "";
-    //public string apartment { get; set; } = "";
-
-
     Client? client = new Client();
     ClientAddress? address = new ClientAddress();
     List<ClientAddress> addresses = new List<ClientAddress>();
 
+    public void updateUser()
+    {
+        ClientService.updateClientByEmail(email, client);
+    }
+
     protected override async Task OnInitializedAsync()
     {
-        var result = await ProtectedSessionStore.GetAsync<string>("email");
-        if (result.Success)
+        var result = await sessionStorageService.GetItemAsync<string>("email");
+        if (result.Length != 0)
         {
             hidden = true;
-            email = result.Value;
+            email = result;
             client = ClientService.getSingleClientByEmail(email);
             if (client != null)
             {
@@ -153,24 +151,16 @@
 
                 if (addresses.GetEnumerator().MoveNext())
                     hidden = false;
-                //addresses = client.ClientAddresses;
             }
             StateHasChanged();
         }
 
     }
 
-    public void updateUser()
-    {
-        ClientService.updateClientByEmail(email, client);
-    }
-
     public void addAddress()
     {
         address.ClientId = client.ClientId;
         address.Client = client;
-        //address.City = city;
-        //address.City = s;
         AddressService.insertClientAddress(address);
         hidden = false;
         nav.NavigateTo(nav.Uri, forceLoad: true);

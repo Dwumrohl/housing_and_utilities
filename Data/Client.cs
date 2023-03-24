@@ -12,12 +12,12 @@ public partial class Client
     /// ID клиента.
     /// </summary>
     [Key]
-    public long ClientId { get; set; }
+    public Guid ClientId { get; set; }
 
     /// <summary>
     /// Номер телефона клиента.
     /// </summary>
-    public char? PhoneNumber { get; set; }
+    public string? PhoneNumber { get; set; }
 
     /// <summary>
     /// Электронная почта клиента.
@@ -50,8 +50,6 @@ public partial class Client
     /// </summary>
     public string? Password { get; set; }
 
-    #warning Может удалить эту хуйню? Это же обрубок спринга
-    public string? Role { get; set; }
 
     /// <summary>
     /// Дата последнего запроса пароля.
@@ -61,11 +59,9 @@ public partial class Client
 
     public virtual ICollection<ClientAddress> ClientAddresses { get; } = new List<ClientAddress>();
 
-    public virtual ICollection<ClientMeterReading> ClientMeterReadings { get; } = new List<ClientMeterReading>();
+    public virtual ICollection<MeterReading> MeterReadings { get; } = new List<MeterReading>();
 
-    public virtual ICollection<HaClient> HaClients { get; } = new List<HaClient>();
-
-    public virtual ICollection<RequestClient> RequestClients { get; } = new List<RequestClient>();
+    public virtual ICollection<Request> Requests { get; } = new List<Request>();
 
     #region Методы
 

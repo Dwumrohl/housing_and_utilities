@@ -1,14 +1,19 @@
-﻿@page "/Statement"
+﻿@page "/statement"
 
 @using Microsoft.EntityFrameworkCore
 @using testBlazor.Data;
+@using testBlazor.Data.Models;
 @using testBlazor.Data.services
 @using System.Text;
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using testBlazor.Data.security;
 
-@inject ProtectedSessionStorage ProtectedSessionStore
 @inject IClientService ClientService
 @inject NavigationManager nav;
+@inject AuthenticationStateProvider authenticationStateProvider;
+@*@inject IRequestService requestService;*@
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
+
+@attribute [Authorize]
 
 <div id="main_div">
     <div id="sidebar">
@@ -23,72 +28,67 @@
         </div>
     </div>
     <div id="position_form_menu">
-        <div id="higher_menu">
-            <div class="Tabs" @onclick="goToMeterReadings">Показания</div>
-            <div class="Tabs" name="this_page">Заявки</div>
-            <div class="Tabs">Услуги</div>
-            <div class="Tabs"><a href='mailto:gptevcat@gmail.com'>Служба поддержки</a></div>
-            <div id="profile">
-                <div id="name_profile">@email</div>
-                <div id="menu_profile">
-                    <div @onclick="changeData">Изменить данные</div>
-                    <div @onclick="logout">Выйти</div>
-                </div>
-            </div>
-        </div>
         <div id="form_background">
-            <form>
+            <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
                 <div id="nameForm">Заявка №(число)</div>
                 <div id="address">
-                    <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
-                    <div><label for="">Дом *</label><br><input class="AddressThirdWidth" name="" type="text" required></div>
-                    <div><label for="">Корпус</label><br><input class="AddressThirdWidth" name="" type="text" required></div>
-                    <div><label for="">Квартира *</label><br><input class="AddressThirdWidth" name="" type="text" required></div>
-                    <div><label for="">Фамилия *</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
-                    <div><label for="">Имя *</label><br><input class="AddressSecondWidth" name="" type="text" required></div>
-                    <div><label for="">Отчество *</label><br><input class="AddressSecondWidth" name="" type="text" required></div>
-                    <div><label for="">Телефон</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
-                    <div><label for="">Электронная почта *</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
-                    <div><label for="">Тема Обращения *</label><br><input class="AddressFirstWidth" name="" type="text" required></div>
-                    <div><label for="comment">Ваше Сообщение *</label><br><textarea id="comment" name="comment"></textarea></div>
-                    <div id="loadFile"><label for="file">Файл</label><br><img id="ico"><input type="file" name="file" value="выбрать файл"></div>
+                    <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.name"></div>
+                    <div><label for="">Дом *</label><br><input class="AddressThirdWidth" name="" type="text" required @bind-value="statementModel.building"></div>
+                    <div><label for="">Корпус</label><br><input class="AddressThirdWidth" name="" type="text" required @bind-value="statementModel.house"></div>
+                    <div><label for="">Квартира *</label><br><input class="AddressThirdWidth" name="" type="text" required @bind-value="statementModel.apartment"></div>
+                    <div><label for="">Фамилия *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.surname"></div>
+                    <div><label for="">Имя *</label><br><input class="AddressSecondWidth" name="" type="text" required @bind-value="statementModel.name"></div>
+                    <div><label for="">Отчество *</label><br><input class="AddressSecondWidth" name="" type="text" required @bind-value="statementModel.patronymic"></div>
+                    <div><label for="">Телефон</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.phoneNumber"></div>
+                    <div><label for="">Электронная почта *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.email"></div>
+                    <div><label for="">Тема Обращения *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.subject"></div>
+                    <div><label for="comment">Ваше Сообщение *</label><br><textarea id="comment" name="comment" @bind="statementModel.comment"></textarea></div>
+@*                    <div id="loadFile"><label for="file">Файл</label><br><img id="ico"><input type="file" name="file" value="выбрать файл"></div>*@
                 </div>
                 <input class="Submission" type="submit" name="send" value="Отправить" required>
-            </form>
+            </EditForm>
             <div id="obligatory_field">* Обязательное поле</div>
         </div>
     </div>
 </div>
 @code {
 
-	Client? client = new Client();
-	public string email { get; set; } = "";
+    Client? client = new Client();
 
-	protected override async Task OnInitializedAsync()
-	{
-		var result = await ProtectedSessionStore.GetAsync<string>("email");
-		if (result.Success)
-		{
-			email = result.Value;
-			client = ClientService.getSingleClientByEmail(email);
-			StateHasChanged();
-		}
-
-	}
+    StatementModel statementModel = new();
+    public string email { get; set; } = "";
 
 	public void changeData()
 	{
-		nav.NavigateTo("/UserData");
+		nav.NavigateTo("/user");
 	}
 
-	public void goToMeterReadings()
+    private void handleStatementForm()
+    {
+        
+    }
+
+	/*public void goToMeterReadings()
 	{
-		nav.NavigateTo("/MeterReadings");
+		nav.NavigateTo("/meter_readings");
 	}
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await sessionStorageService.GetItemAsync<string>("email");
+        if (result.Length != 0)
+        {
+            email = result;
+            client = ClientService.getSingleClientByEmail(email);
+            StateHasChanged();
+        }
+
+    }
 
 	public void logout()
 	{
-		ProtectedSessionStore.SetAsync("email", "");
+        ((CustomAuthenticationStateProvider)authenticationStateProvider).userNotAuthorized();
+
 		nav.NavigateTo("/");
-	}
+	}*/
 }

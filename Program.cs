@@ -10,6 +10,7 @@ using testBlazor.Data;
 using System.Data.SqlClient;
 using testBlazor.Data.services;
 using testBlazor.Data.security;
+using Blazored.SessionStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IClientAddressService, ClientAddressService>();
+builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<AuthenticationStateProvider,CustomAuthenticationStateProvider>();
 
 var app = builder.Build();

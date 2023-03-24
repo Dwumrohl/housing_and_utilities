@@ -1,59 +1,61 @@
-﻿@page "/zalupa"
+﻿@page "/"
 
-@using MailKit.Net.Smtp;
-@using MailKit;
-@using MimeKit;
+@using testBlazor.Data.security;
 
-<PageTitle>Index</PageTitle>
+@inject NavigationManager nav;
+@inject AuthenticationStateProvider authenticationStateProvider;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
+@inherits LayoutComponentBase
 
-<button @onclick="sendEmail">Отправить сообщение</button>
+<AuthorizeView>
+    <Authorized>
+    <div id="position_form_menu" @onload="onLoad">
+        <div id="higher_menu">
+            <div class="Tabs" >
+                Показания
+            </div>
+            <div class="Tabs" name="this_page">
+                Заявки
+            </div>
+            <div class="Tabs">
+                Услуги
+            </div>
+            <div class="Tabs">
+                <a href='mailto:gptevcat@gmail.com'>Служба поддержки</a>
+            </div>
+            <div id="user-profile">
+                <a href="" @onclick="changeData">@email</a>
+            </div>
+            <div id="logout" class="down">
+                <a href="" @onclick="logout">Выйти</a>
+            </div>
+        </div>
+    </div>
+    <Statement />
+    </Authorized>
+   <NotAuthorized>
+        <Login />
+   </NotAuthorized>
+</AuthorizeView>
 
-<br />
-
-<h1>@message</h1>
-
-<h1>@error</h1>
-<SurveyPrompt Title="How is Blazor working for you?" />
-<Counter IncrementAmount="10" />
 
 @code {
-    private string message { get; set; } = "";
-
-    private string error { get; set; } = "";
-
-    private string password = "sdicbsduhvbclsaudcnlz";
-
-    private void sendEmail()
-    {
-        try
-        {
-            using (MimeMessage mail = new MimeMessage())
-            {
-                mail.From.Add(new MailboxAddress("ЖКХ", "gptevcat@gmail.com"));
-                mail.To.Add(new MailboxAddress("Павлик из 3 подъезда", "pasha228ploshkin@gmail.com"));
-                mail.Subject = "ЖКХ. Одноразовый пароль для входа на сайт";
-                mail.Body = new TextPart("plain")
-                {
-                    Text = @"
-
-                    Ваш одноразовый пароль для входа в приложение @" + password + 
-                    "Хорошего вам дня"
-
-                };
-
-                using (SmtpClient smtp = new SmtpClient())
-                {
-                    smtp.Connect("smtp.gmail.com", 587, false);
-                    smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
-                    smtp.Send(mail);
-                    message = "Отправлено";
-                    smtp.Disconnect(true);
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            error = e.Message.ToString();
-        }
+    private string email { get; set; } = "";
+    
+    public async void onLoad(){
+        email = await sessionStorageService.GetItemAsync<string>("email");
     }
+     
+
+    public void changeData()
+	{
+		nav.NavigateTo("/user");
+	}
+
+	public void logout()
+	{
+        ((CustomAuthenticationStateProvider)authenticationStateProvider).userNotAuthorized();
+
+		nav.NavigateTo("/");
+	}
 }
