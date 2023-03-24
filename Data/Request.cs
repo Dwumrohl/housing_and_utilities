@@ -43,7 +43,7 @@ public partial class Request
     /// <summary>
     /// Статус.
     /// </summary>
-    public int? Status { get; set; }
+    public string? Status { get; set; }
 
     /// <summary>
     /// Колекция записей таблицы Клиент - Заявка.

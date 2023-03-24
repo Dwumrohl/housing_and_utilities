@@ -7,7 +7,8 @@
 @using System.Text;
 @using testBlazor.Data.security;
 
-@inject IClientService ClientService
+@inject IClientService clientService;
+@inject IRequestService requestService;
 @inject NavigationManager nav;
 @inject AuthenticationStateProvider authenticationStateProvider;
 @*@inject IRequestService requestService;*@
@@ -32,14 +33,14 @@
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
                 <div id="nameForm">Заявка №(число)</div>
                 <div id="address">
-                    <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.name"></div>
+                    <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.street"></div>
                     <div><label for="">Дом *</label><br><input class="AddressThirdWidth" name="" type="text" required @bind-value="statementModel.building"></div>
-                    <div><label for="">Корпус</label><br><input class="AddressThirdWidth" name="" type="text" required @bind-value="statementModel.house"></div>
+                    <div><label for="">Корпус</label><br><input class="AddressThirdWidth" name="" type="text" @bind-value="statementModel.house"></div>
                     <div><label for="">Квартира *</label><br><input class="AddressThirdWidth" name="" type="text" required @bind-value="statementModel.apartment"></div>
                     <div><label for="">Фамилия *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.surname"></div>
                     <div><label for="">Имя *</label><br><input class="AddressSecondWidth" name="" type="text" required @bind-value="statementModel.name"></div>
                     <div><label for="">Отчество *</label><br><input class="AddressSecondWidth" name="" type="text" required @bind-value="statementModel.patronymic"></div>
-                    <div><label for="">Телефон</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.phoneNumber"></div>
+                    <div><label for="">Телефон</label><br><input class="AddressFirstWidth" name="" type="text" @bind-value="statementModel.phoneNumber"></div>
                     <div><label for="">Электронная почта *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.email"></div>
                     <div><label for="">Тема Обращения *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.subject"></div>
                     <div><label for="comment">Ваше Сообщение *</label><br><textarea id="comment" name="comment" @bind="statementModel.comment"></textarea></div>
@@ -55,17 +56,50 @@
 
     Client? client = new Client();
 
+    Request? request = new Request();
+
     StatementModel statementModel = new();
     public string email { get; set; } = "";
 
-	public void changeData()
-	{
-		nav.NavigateTo("/user");
-	}
-
-    private void handleStatementForm()
+    public void changeData()
     {
-        
+        nav.NavigateTo("/user");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await sessionStorageService.GetItemAsync<string>("email");
+        if (result!= null)
+        {
+            try
+            {
+                email = result;
+                client = clientService.getSingleClientByEmail(email);
+                statementModel.email = email;
+                statementModel.name = client.Name;
+                statementModel.surname = client.Surname;
+                statementModel.patronymic = client.Patronymic;
+                statementModel.phoneNumber = client.PhoneNumber;
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
+        }
+
+    }
+
+    private async void handleStatementForm()
+    {
+        request.Date = DateTime.Now;
+        request.Status = "Принята";
+        request.Client = client;
+        request.ClientId = client.ClientId;
+        request.Address = statementModel.street + ", " + statementModel.building + ", " + statementModel.house + ", " + statementModel.apartment;
+        request.Name = statementModel.subject;
+        request.Comment = statementModel.comment;
+        requestService.insertRequest(request);
     }
 
 	/*public void goToMeterReadings()

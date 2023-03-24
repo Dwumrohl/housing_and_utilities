@@ -98,13 +98,13 @@
 
                     };
 
-                //using (SmtpClient smtp = new SmtpClient())
-                //{
-                //    smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.Auto);
-                //    smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
-                //    smtp.Send(mail);
-                //    smtp.Disconnect(true);
-                //}
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.Auto);
+                    smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
+                    smtp.Send(mail);
+                    smtp.Disconnect(true);
+                }
             }
         }
         catch (Exception e)
@@ -150,7 +150,7 @@
                     }
                     else
                     {
-                        nav.NavigateTo("/");
+                        nav.NavigateTo("/statement");
                     }
                 }
                 else errmessage = "Время действия кода истекло";

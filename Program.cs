@@ -27,6 +27,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IClientAddressService, ClientAddressService>();
+builder.Services.AddScoped<IRequestService, RequestService>();
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<AuthenticationStateProvider,CustomAuthenticationStateProvider>();
 
