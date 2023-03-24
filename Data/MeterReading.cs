@@ -6,11 +6,15 @@ namespace testBlazor.Data;
     #warning нахуя существует?
 public partial class MeterReading
 {
-    public long MeterReadingsId { get; set; }
+    public Guid MeterReadingsId { get; set; }
 
-    public char? Name { get; set; }
+    public string? Name { get; set; }
 
     public long? Data { get; set; }
 
-    public virtual ICollection<ClientMeterReading> ClientMeterReadings { get; } = new List<ClientMeterReading>();
+    public DateTime? Date { get; set; }
+
+    public Guid? ClientId { get; set; }
+
+    public virtual Client? Client { get; set; }
 }

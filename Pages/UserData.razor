@@ -8,6 +8,7 @@
 @inject IClientService ClientService
 @inject IClientAddressService AddressService
 @inject NavigationManager nav;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
 
 @attribute [Authorize]
 
@@ -134,6 +135,26 @@
     public void updateUser()
     {
         ClientService.updateClientByEmail(email, client);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await sessionStorageService.GetItemAsync<string>("email");
+        if (result.Length != 0)
+        {
+            hidden = true;
+            email = result;
+            client = ClientService.getSingleClientByEmail(email);
+            if (client != null)
+            {
+                addresses = AddressService.GetClientAddress(client.ClientId);
+
+                if (addresses.GetEnumerator().MoveNext())
+                    hidden = false;
+            }
+            StateHasChanged();
+        }
+
     }
 
     public void addAddress()
