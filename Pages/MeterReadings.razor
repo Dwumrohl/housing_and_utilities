@@ -119,7 +119,7 @@
     protected override async Task OnInitializedAsync()
     {
         var result = await sessionStorageService.GetItemAsync<string>("email");
-        if (result.Length!=0)
+        if (result!= null)
         {
             email = result;
             client = ClientService.getSingleClientByEmail(email);

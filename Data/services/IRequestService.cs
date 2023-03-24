@@ -7,7 +7,7 @@
     {
         List<Request> getRequestsByClientId(Guid id);
 
-        bool insertClientAddress(Request request);
+        bool insertRequest(Request request);
 
         bool deleteRequestById(Guid id);
 
