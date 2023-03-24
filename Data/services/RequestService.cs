@@ -53,5 +53,15 @@
         {
             throw new NotImplementedException();
         }
+
+        public int? getHighestRequestNumber()
+        {
+            int? highestNumber = 0;
+            try
+            {
+                highestNumber = _context.Requests.Max(r => r.RequestNumber);
+            }catch (Exception ex) { Console.WriteLine($"{ex.Message}"); }
+            return highestNumber;
+        }
     }
 }

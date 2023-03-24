@@ -51,7 +51,7 @@
     <div id="position_form_menu">
         <div id="form_background">
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
-                <div id="nameForm">Заявка №(число)</div>
+                <div id="nameForm">Заявка №@highestRequestNumber</div>
                 <div id="address">
                     <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.street"></div>
                     <div><label for="">Дом *</label><br><input class="AddressThirdWidth" name="" type="text" required @bind-value="statementModel.building"></div>
@@ -79,6 +79,7 @@
 
     StatementModel statementModel = new();
     public string email { get; set; } = "";
+    public int? highestRequestNumber { get; set; } = 0;
 
     public void changeData()
     {
@@ -99,6 +100,7 @@
                 statementModel.surname = client.Surname;
                 statementModel.patronymic = client.Patronymic;
                 statementModel.phoneNumber = client.PhoneNumber;
+                highestRequestNumber = requestService.getHighestRequestNumber() + 1;
                 StateHasChanged();
             }
             catch (Exception ex)
@@ -106,6 +108,8 @@
                 Console.WriteLine($"{ex.Message}");
             }
         }
+
+ 
 
     }
 
