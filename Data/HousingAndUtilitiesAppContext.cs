@@ -34,10 +34,6 @@ public partial class HousingAndUtilitiesAppContext : DbContext
 
     public virtual DbSet<RequestClient> RequestClients { get; set; }
 
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-
-       // => optionsBuilder.UseNpgsql();
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Client>(entity =>
