@@ -18,17 +18,37 @@
 
 <div id="main_div">
     <div id="sidebar">
-        <div id="sidebar_name">История</div>
-        <div class="sidebar_obj">
-            <div class="sidebar_month">Март</div>
-            <div class="sidebar_year">2023</div>
-        </div>
-        <div class="sidebar_obj">
-            <div class="sidebar_month">Февраль</div>
-            <div class="sidebar_year">2023</div>
+        <div class="sidebar-name">Создание заявки</div>
+        <div class="sidebar-name">История</div>
+    </div>
+    <div class="position-form-menu">
+        <div class="form-background">
+            <div id="table">
+                <div id="name_column">
+                    <div class="Column" name="right_line"><div class="Value_table">Дата</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">Статус</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">Тема</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
+                    <div class="Column"><div class="Value_table">Адрес</div></div>
+                </div>
+                <div class="Row">
+                    <div class="Column" name="right_line"><div class="Value_table"></div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">Новая</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
+                    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
+                </div>
+                <div class="Row">
+                    <div class="Column" name="right_line"><div class="Value_table"></div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">Принята</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
+                    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
+                </div>
+            </div>
         </div>
     </div>
-    <div id="position_form_menu">
+    <!--<div id="position_form_menu">
         <div id="form_background">
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
                 <div id="nameForm">Заявка №(число)</div>
@@ -50,7 +70,7 @@
             </EditForm>
             <div id="obligatory_field">* Обязательное поле</div>
         </div>
-    </div>
+        </div>-->
 </div>
 @code {
 
@@ -102,7 +122,7 @@
         requestService.insertRequest(request);
     }
 
-	/*public void goToMeterReadings()
+	public void goToMeterReadings()
 	{
 		nav.NavigateTo("/meter_readings");
 	}
@@ -124,5 +144,5 @@
         ((CustomAuthenticationStateProvider)authenticationStateProvider).userNotAuthorized();
 
 		nav.NavigateTo("/");
-	}*/
+	}
 }

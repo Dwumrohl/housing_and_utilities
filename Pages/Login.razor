@@ -31,9 +31,10 @@
             <label for="pswd">Одноразовый пароль</label>
             <input type="password" name="pswd" @bind="userpassword" required>
         </div>
+        <div id="error-password">* Неверный пароль</div>
         <div id="buttons_row">
-            <input class="ButtonInput" type="button" name="next" value="Получить пароль" @onclick="sendEmail">
-            <input class="ButtonInput" type="submit" name="entryButton" value="Войти">
+            <input type="button" name="next" value="Получить пароль" @onclick="sendEmail">
+            <input type="button" name="entryButton" value="Войти">
         </div>
 
         <div id="consent">
