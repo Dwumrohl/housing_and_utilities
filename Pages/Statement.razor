@@ -9,6 +9,7 @@
 
 @inject IClientService clientService;
 @inject IRequestService requestService;
+@inject IClientAddressService addressService;
 @inject NavigationManager nav;
 @inject AuthenticationStateProvider authenticationStateProvider;
 @inject IRequestService requestService;
@@ -28,40 +29,44 @@
                     <div class="Column" name="right_line"><div class="Value_table">Дата</div></div>
                     <div class="Column" name="right_line"><div class="Value_table">Статус</div></div>
                     <div class="Column" name="right_line"><div class="Value_table">Тема</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
                     <div class="Column"><div class="Value_table">Адрес</div></div>
                 </div>
-                <div class="Row">
-                    <div class="Column" name="right_line"><div class="Value_table"></div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Новая</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
-                    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
-                </div>
-                <div class="Row">
-                    <div class="Column" name="right_line"><div class="Value_table"></div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Принята</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">ФИО</div></div>
-                    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
-                </div>
+                @foreach (var rq in requests)
+                {
+                    <div class="Row">
+                        <div class="Column" name="right_line"><div class="Value_table">@rq.Date.Value.ToShortDateString()</div></div>
+                        <div class="Column" name="right_line"><div class="Value_table">@rq.Status</div></div>
+                        <div class="Column" name="right_line"><div class="Value_table">@rq.Name</div></div>
+                        <div class="Column"><div class="Value_table">@rq.Address</div></div>
+                    </div>
+                }
             </div>
         </div>
     </div>
     <div id="position_form_menu">
         <div id="form_background">
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
-                <div id="nameForm">Заявка №(число)</div>
+                <div id="nameForm">Новая заявка</div>
                 <div id="address">
+                    <div id="selectAddress" hidden = "@isAddressSelectHidden">
+                        <label>Заполнить адрес</label>
+                        <select @onchange="onAddressSelectChange">
+                            <option value="" selected disabled hidden>Выбрать адрес...</option>
+                            @foreach (var address in clientAddresses)
+                            {
+                                <option>@address.Street, @address.Building, @address.House, @address.Apartment</option>
+                            }
+                        </select>
+                    </div>
                     <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.street"></div>
                     <div><label for="">Дом *</label><br><input class="AddressThirdWidth" name="" type="text" required @bind-value="statementModel.building"></div>
                     <div><label for="">Корпус</label><br><input class="AddressThirdWidth" name="" type="text" @bind-value="statementModel.house"></div>
                     <div><label for="">Квартира *</label><br><input class="AddressThirdWidth" name="" type="text" required @bind-value="statementModel.apartment"></div>
-                    <div><label for="">Фамилия *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.surname"></div>
-                    <div><label for="">Имя *</label><br><input class="AddressSecondWidth" name="" type="text" required @bind-value="statementModel.name"></div>
-                    <div><label for="">Отчество *</label><br><input class="AddressSecondWidth" name="" type="text" required @bind-value="statementModel.patronymic"></div>
-                    <div><label for="">Телефон</label><br><input class="AddressFirstWidth" name="" type="text" @bind-value="statementModel.phoneNumber"></div>
-                    <div><label for="">Электронная почта *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.email"></div>
+                    <div><label for="">Фамилия *</label><br><input class="AddressFirstWidth" name="" type="text" disabled="@isSurnameDisabled" required @bind-value="statementModel.surname"></div>
+                    <div><label for="">Имя *</label><br><input class="AddressSecondWidth" name="" type="text" disabled="@isNameDisabled" required @bind-value="statementModel.name"></div>
+                    <div><label for="">Отчество *</label><br><input class="AddressSecondWidth" name="" type="text" disabled="@isPatronymicDisabled" required @bind-value="statementModel.patronymic"></div>
+                    <div><label for="">Телефон</label><br><input class="AddressFirstWidth" name="" type="text" disabled="@isPhoneDisabled" @bind-value="statementModel.phoneNumber"></div>
+                    <div><label for="">Электронная почта *</label><br><input class="AddressFirstWidth" name="" type="text" disabled required @bind-value="statementModel.email"></div>
                     <div><label for="">Тема Обращения *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.subject"></div>
                     <div><label for="comment">Ваше Сообщение *</label><br><textarea id="comment" name="comment" @bind="statementModel.comment"></textarea></div>
                 </div>
@@ -69,7 +74,7 @@
             </EditForm>
             <div id="obligatory_field">* Обязательное поле</div>
         </div>
-        </div>
+    </div>
 </div>
 @code {
 
@@ -77,8 +82,23 @@
 
     Request? request = new Request();
 
+    List<ClientAddress> clientAddresses = new();
+
     StatementModel statementModel = new();
+
     public string email { get; set; } = "";
+
+    public bool isSurnameDisabled { get; set; } = true;
+    public bool isNameDisabled { get; set; } = true;
+    public bool isPatronymicDisabled { get; set; } = true;
+    public bool isPhoneDisabled { get; set; } = true;
+    public bool isAddressSelectHidden { get; set; } = true;
+
+    List<Request> requests = new();
+
+    //Пока не нужно, но может пригодится
+    //public int? highestRequestNumber { get; set; } = 0;
+    //highestRequestNumber = requestService.getHighestRequestNumber() + 1;
 
     public void changeData()
     {
@@ -88,7 +108,7 @@
     protected override async Task OnInitializedAsync()
     {
         var result = await sessionStorageService.GetItemAsync<string>("email");
-        if (result!= null)
+        if (result != null)
         {
             try
             {
@@ -99,7 +119,14 @@
                 statementModel.surname = client.Surname;
                 statementModel.patronymic = client.Patronymic;
                 statementModel.phoneNumber = client.PhoneNumber;
+                if (statementModel.name == null) isNameDisabled = false;
+                if (statementModel.surname == null) isSurnameDisabled = false;
+                if (statementModel.patronymic == null) isPatronymicDisabled = false;
+                if (statementModel.phoneNumber == null) isPhoneDisabled = false;
                 StateHasChanged();
+                requests = requestService.getRequestsByClientId(client.ClientId);
+                clientAddresses = addressService.GetClientAddress(client.ClientId);
+                if (clientAddresses.Any()) isAddressSelectHidden = false;
             }
             catch (Exception ex)
             {
@@ -107,17 +134,49 @@
             }
         }
 
+
+
     }
 
-    private async void handleStatementForm()
+    private void onAddressSelectChange(ChangeEventArgs e)
+    {
+        try
+        {
+            string temp = e.Value.ToString();
+            string[] temp2 = temp.Split(',');
+            statementModel.street = temp2[0].Trim();
+            statementModel.building = temp2[1].Trim();
+            statementModel.house = temp2[2].Trim();
+            statementModel.apartment = temp2[3].Trim();
+        }catch (Exception ex){}
+        StateHasChanged();
+    }
+
+    private void handleStatementForm()
     {
         request.Date = DateTime.Now;
-        request.Status = "Принята";
+        request.Status = "Подана";
         request.Client = client;
         request.ClientId = client.ClientId;
         request.Address = statementModel.street + ", " + statementModel.building + ", " + statementModel.house + ", " + statementModel.apartment;
         request.Name = statementModel.subject;
         request.Comment = statementModel.comment;
         requestService.insertRequest(request);
+        if (!isNameDisabled || !isSurnameDisabled || !isPatronymicDisabled || !isPhoneDisabled)
+        {
+            try
+            {
+                client.Name = statementModel.name;
+                client.Surname = statementModel.surname;
+                client.Patronymic = statementModel.patronymic;
+                client.PhoneNumber = statementModel.phoneNumber;
+                clientService.updateClientByEmail(email, client);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
+        }
+        nav.NavigateTo(nav.Uri, forceLoad: true);
     }
 }

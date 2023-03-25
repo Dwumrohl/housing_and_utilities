@@ -11,9 +11,10 @@
 
         bool deleteRequestById(Guid id);
 
-        bool updateRequestById(Guid id, ClientAddress request);
+        bool updateRequestById(Guid id, Request request);
 
         public Request getSingleRequestById(Guid id);
 
+        public int? getHighestRequestNumber();
     }
 }
