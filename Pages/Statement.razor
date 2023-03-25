@@ -1,4 +1,4 @@
-﻿@page "/statement"
+﻿@page "/statement_create"
 
 @using Microsoft.EntityFrameworkCore
 @using testBlazor.Data;
@@ -18,11 +18,12 @@
 @attribute [Authorize]
 
 <div id="main_div">
-    <div id="sidebar">
+    <StatementMenuBar />
+    @*<div id="sidebar">
         <div class="sidebar-name">Создание заявки</div>
         <div class="sidebar-name">История</div>
-    </div>
-    <div class="position-form-menu">
+    </div>*@
+@*    <div class="position-form-menu">
         <div class="form-background">
             <div id="table">
                 <div id="name_column">
@@ -42,7 +43,7 @@
                 }
             </div>
         </div>
-    </div>
+    </div>*@
     <div id="position_form_menu">
         <div id="form_background">
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
@@ -94,7 +95,7 @@
     public bool isPhoneDisabled { get; set; } = true;
     public bool isAddressSelectHidden { get; set; } = true;
 
-    List<Request> requests = new();
+    //List<Request> requests = new();
 
     //Пока не нужно, но может пригодится
     //public int? highestRequestNumber { get; set; } = 0;
@@ -124,7 +125,7 @@
                 if (statementModel.patronymic == null) isPatronymicDisabled = false;
                 if (statementModel.phoneNumber == null) isPhoneDisabled = false;
                 StateHasChanged();
-                requests = requestService.getRequestsByClientId(client.ClientId);
+                //requests = requestService.getRequestsByClientId(client.ClientId);
                 clientAddresses = addressService.GetClientAddress(client.ClientId);
                 if (clientAddresses.Any()) isAddressSelectHidden = false;
             }
@@ -133,9 +134,6 @@
                 Console.WriteLine($"{ex.Message}");
             }
         }
-
-
-
     }
 
     private void onAddressSelectChange(ChangeEventArgs e)

@@ -1,0 +1,23 @@
+﻿@page "/meter_readings_navbar"
+
+@inject NavigationManager nav;
+@inject AuthenticationStateProvider authenticationStateProvider;
+
+@attribute [Authorize]
+
+<div id="sidebar">
+    <div class="sidebar-name" @onclick="onReadingsClick">Показания</div>
+    <div class="sidebar-name" @onclick="onReadHistoryClick">История</div>
+</div>
+
+@code {
+    public void onReadingsClick()
+    {
+        nav.NavigateTo("/meter_readings");
+    }
+
+    public void onReadHistoryClick()
+    {
+        nav.NavigateTo("/readings_history");
+    }
+}

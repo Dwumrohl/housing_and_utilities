@@ -1,0 +1,23 @@
+﻿@page "/statement_navbar"
+
+@inject NavigationManager nav;
+@inject AuthenticationStateProvider authenticationStateProvider;
+
+@attribute [Authorize]
+
+<div id="sidebar">
+    <div class="sidebar-name" @onclick="onCreateStClick">Создание заявки</div>
+    <div class="sidebar-name" @onclick="onStHistoryClick">История</div>
+</div>
+
+@code {
+    public void onCreateStClick()
+    {
+        nav.NavigateTo("/statement_create");
+    }
+
+    public void onStHistoryClick()
+    {
+        nav.NavigateTo("/statement_history");
+    }
+}

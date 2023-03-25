@@ -14,11 +14,11 @@
 @attribute [Authorize]
 
 <div id="main_div">
-    <div id="sidebar">
+@*    <div id="sidebar">
         <div class="sidebar-name">Показания</div>
         <div class="sidebar-name">История</div>
-    </div>
-    <div class="position-form-menu">
+    </div>*@
+    @*<div class="position-form-menu">
         <div class="form-background">
             <div id="table">
                 <div id="name_column">
@@ -41,8 +41,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!--<div class="position-form-menu">
+    </div>*@
+    <div class="position-form-menu">
         <div class="form-background">
             <form>
                 <div id="nameForm">Показания</div>
@@ -99,42 +99,23 @@
                 <div id="obligatory_field">* Обязательное поле</div>
             </form>
         </div>
-    </div>-->
+    </div>
 </div>
 @code {
 
-    Client? client = new Client();
-    public string email { get; set; } = "";
-
-	public void changeData()
-	{
-		nav.NavigateTo("/user");
-	}
-
-	public void goToStatement()
-	{
-		nav.NavigateTo("/statement");
-	}
-
-    protected override async Task OnInitializedAsync()
-    {
-        var result = await sessionStorageService.GetItemAsync<string>("email");
-        if (result!= null)
-        {
-            email = result;
-            client = ClientService.getSingleClientByEmail(email);
-            StateHasChanged();
-        }
-
-    }
-
-	public void logout()
-	{
-
-        ((CustomAuthenticationStateProvider)authenticationStateProvider).userNotAuthorized();
-
-		nav.NavigateTo("/");
-	}
+    //Client? client = new Client();
+    //public string email { get; set; } = "";
 
 
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    var result = await sessionStorageService.GetItemAsync<string>("email");
+    //    if (result!= null)
+    //    {
+    //        email = result;
+    //        client = ClientService.getSingleClientByEmail(email);
+    //        StateHasChanged();
+    //    }
+
+    //}
 }

@@ -1,0 +1,59 @@
+﻿@page "/statement_history"
+
+@using Microsoft.EntityFrameworkCore
+@using testBlazor.Data;
+@using testBlazor.Data.Models;
+@using testBlazor.Data.services
+@using System.Text;
+@using testBlazor.Data.security;
+
+@inject NavigationManager nav;
+@inject IRequestService requestService;
+@inject AuthenticationStateProvider authenticationStateProvider;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
+
+@attribute [Authorize]
+
+<StatementMenuBar/>
+<div class="position-form-menu">
+    <div class="form-background">
+        <div id="table">
+            <div id="name_column">
+                <div class="Column" name="right_line"><div class="Value_table">Дата</div></div>
+                <div class="Column" name="right_line"><div class="Value_table">Статус</div></div>
+                <div class="Column" name="right_line"><div class="Value_table">Тема</div></div>
+                <div class="Column"><div class="Value_table">Адрес</div></div>
+            </div>
+            @foreach (var rq in requests)
+            {
+                <div class="Row">
+                    <div class="Column" name="right_line"><div class="Value_table">@rq.Date.Value.ToShortDateString()</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">@rq.Status</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">@rq.Name</div></div>
+                    <div class="Column"><div class="Value_table">@rq.Address</div></div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+
+    List<Request> requests = new();
+
+    Guid clientId = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            clientId = await sessionStorageService.GetItemAsync<Guid>("clientId");          
+            requests = requestService.getRequestsByClientId(clientId);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Message}");
+        }
+    }
+}

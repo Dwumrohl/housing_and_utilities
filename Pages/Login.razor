@@ -136,6 +136,7 @@
                 ((CustomAuthenticationStateProvider)authenticationStateProvider).userAuthorized(myemail);
 
                 await sessionStorageService.SetItemAsync<string>("email", client.Email);
+                await sessionStorageService.SetItemAsync<Guid>("clientId", client.ClientId);
 
                 if (DateTime.Now.Subtract(new TimeSpan(0, 5, 0)) < client.OtpRequestedTime)
                 {
@@ -145,7 +146,7 @@
                     }
                     else
                     {
-                        nav.NavigateTo("/statement");
+                        nav.NavigateTo("/statement_create");
                     }
                 }
                 else errmessage = "Время действия кода истекло";
