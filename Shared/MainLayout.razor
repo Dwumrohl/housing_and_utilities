@@ -3,8 +3,14 @@
 
 
 <div >
-    <div>
-        <NavigationMenu />
+    <div><AuthorizeView>
+            <Authorized>
+                  <NavigationMenu />
+            </Authorized>
+            <NotAuthorized>
+            </NotAuthorized>
+        </AuthorizeView>
+      
     </div>
     <main>
             @Body
