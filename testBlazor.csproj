@@ -10,15 +10,19 @@
   <ItemGroup>
     <None Remove="Pages\Index.razor.css" />
     <None Remove="Pages\Login.razor.css" />
+    <None Remove="Pages\NavigationMenu.razor.css" />
     <None Remove="Pages\PreregistrationPageSkip.razor.css" />
     <None Remove="Pages\UserData.razor.css" />
+    <None Remove="Shared\MainLayout.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Pages\Index.razor.css" />
     <Content Include="Pages\Login.razor.css" />
+    <Content Include="Pages\NavigationMenu.razor.css" />
     <Content Include="Pages\PreregistrationPageSkip.razor.css" />
     <Content Include="Pages\UserData.razor.css" />
+    <Content Include="Shared\MainLayout.razor.css" />
   </ItemGroup>
 
   <ItemGroup>

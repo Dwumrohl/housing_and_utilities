@@ -9,28 +9,6 @@
 
 <AuthorizeView>
     <Authorized>
-    <div id="position_form_menu" @onload="onLoad">
-        <div id="higher_menu">
-            <div class="Tabs" >
-                Показания
-            </div>
-            <div class="Tabs" name="this_page">
-                Заявки
-            </div>
-            <div class="Tabs">
-                Услуги
-            </div>
-            <div class="Tabs">
-                <a href='mailto:gptevcat@gmail.com'>Служба поддержки</a>
-            </div>
-            <div id="user-profile">
-                <a href="" @onclick="changeData">@email</a>
-            </div>
-            <div id="logout" class="down">
-                <a href="" @onclick="logout">Выйти</a>
-            </div>
-        </div>
-    </div>
     <Statement />
     </Authorized>
    <NotAuthorized>

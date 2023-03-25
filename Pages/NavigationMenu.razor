@@ -1,0 +1,77 @@
+﻿@using testBlazor.Data.security;
+
+@inject NavigationManager nav;
+@inject AuthenticationStateProvider authenticationStateProvider;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
+
+@attribute [Authorize]
+
+<div id="position_form_menu" @onload="onLoad">
+    <div id="higher_menu">
+        <div class="Tabs" @onclick="toMeterReadings">
+            Показания
+        </div>
+        <div class="Tabs" @onclick="toStatement">
+            Заявки
+        </div>
+        <div class="Tabs">
+            Услуги
+        </div>
+        <div class="Tabs">
+            <a href='mailto:gptevcat@gmail.com'>Служба поддержки</a>
+        </div>
+        <div id="user-profile">
+            <a href="" @onclick="changeData">@email</a>
+        </div>
+        <AuthorizeView>
+            <Authorized>
+                <div id="logout" class="down">
+                    <a href="" @onclick="logout">Выйти</a>
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                <div id="logout" class="down">
+                    <a href="" @onclick="login">Войти</a>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+</div>
+
+@code {
+    private string email { get; set; } = "";
+
+    public async void onLoad()
+    {
+        email = await sessionStorageService.GetItemAsync<string>("email");
+    }
+
+
+    public void changeData()
+    {
+        nav.NavigateTo("/user");
+    }
+
+    public void logout()
+    {
+        ((CustomAuthenticationStateProvider)authenticationStateProvider).userNotAuthorized();
+
+        nav.NavigateTo("/");
+    }
+
+    public void login()
+    {
+        nav.NavigateTo("/login");
+    }
+
+    public void toStatement()
+    {
+        nav.NavigateTo("/statement");
+    }
+
+    public void toMeterReadings()
+    {
+        nav.NavigateTo("/meter_readings");
+    }
+
+}

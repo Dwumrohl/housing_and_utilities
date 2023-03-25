@@ -39,7 +39,6 @@ public partial class Client
     /// </summary>
     public string? Patronymic { get; set; }
 
-    #warning Что это за залупа? Нахуй она нужна, если у клиента может быть несколько адресов?
     /// <summary>
     /// Id адреса клиента.
     /// </summary>
