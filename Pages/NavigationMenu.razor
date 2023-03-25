@@ -6,7 +6,7 @@
 
 @attribute [Authorize]
 
-<div id="position_form_menu" @onload="onLoad">
+<div id="position_form_menu">
     <div id="higher_menu">
         <div class="Tabs" @onclick="toMeterReadings">
             Показания
@@ -41,9 +41,19 @@
 @code {
     private string email { get; set; } = "";
 
-    public async void onLoad()
+    //public async void onLoad()
+    //{
+    //    email = await sessionStorageService.GetItemAsync<string>("email");
+    //    StateHasChanged();
+    //}
+
+    protected async override Task OnInitializedAsync()
     {
-        email = await sessionStorageService.GetItemAsync<string>("email");
+        try
+        {
+            email = await sessionStorageService.GetItemAsync<string>("email");
+            StateHasChanged();
+        }catch (Exception ex){}
     }
 
 
