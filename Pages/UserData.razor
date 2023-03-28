@@ -20,7 +20,7 @@
 </head>
 <div id="mainDiv">
     <div id="forms-personal">
-        <form @onsubmit="updateUser">
+        <form class="user-data-forms" @onsubmit="updateUser">
             <div class="dataContainer">
                 <h3>Личные данные</h3>
                 <div class="innerDiv">
@@ -50,7 +50,7 @@
             </div>
             <input type="submit" name="save-personal-data" value="Сохранить"/>
         </form>
-        <form @onsubmit="addAddress">
+        <form class="user-data-forms" @onsubmit="addAddress">
             <div class="dataContainer">
                 <h3>Адрес</h3>
                 <div class="innerDiv">
