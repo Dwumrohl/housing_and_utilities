@@ -62,10 +62,10 @@
                 </div>
 
                 <div id="address">
-                    <div><label for="">Улица *</label><br><input name="" class="AddressFirstWidth" type="text" required @bind="address.Street"></div>
-                    <div><label for="">Дом *</label><br><input name="" class="AddressThirdWidth" type="text" required @bind="address.House"></div>
-                    <div><label for="">Корпус</label><br><input name="" class="AddressThirdWidth" type="text" required @bind="address.Building"></div>
-                    <div><label for="">Квартира *</label><br><input name="" class="AddressThirdWidth" type="text" required @bind="address.Apartment"></div>
+                    <div><label for="">Улица *</label><br><input name="" class="AddressFirstWidth" type="text" required pattern="^[-,.А-Яа-яЁё\s]+$" @bind="address.Street"></div>
+                    <div><label for="">Корпус</label><br><input name="" class="AddressThirdWidth" type="text" @bind="address.House"></div>
+                    <div><label for="">Дом *</label><br><input name="" class="AddressThirdWidth" type="number" required @bind="address.Building"></div>
+                    <div><label for="">Квартира *</label><br><input name="" class="AddressThirdWidth" type="number" required @bind="address.Apartment"></div>
                 </div>
 
                 <div id="table">
@@ -89,6 +89,7 @@
                         <div class="Value_table">
                             <label for="meter_type">Тип счетчика</label>
                             <select name="meter_type" @onchange="onTypeSelectChange">
+                                <option value="" selected disabled hidden>Выбрать счетчик...</option>
                                 <option>Горячая вода</option>
                                 <option>Холодная вода</option>
                                 <option>Газ</option>
@@ -98,17 +99,21 @@
                     <div class="Column" name="right_line">
                         <div class="Value_table">
                             <label for="meter_past_value">Предыдущее значение</label>
-                            <input name="meter_past_value" type="text" @bind="reading.BeforeData">
+                            <input name="meter_past_value" type="text" pattern="^[-,0-9]+$" @bind="reading.BeforeData">
                         </div>
                     </div>
                     <div class="Column">
                         <div class="Value_table">
                             <label for="meter_present_value">Текущее значение</label>
-                            <input name="meter_present_value" type="text" @bind="reading.Data">
+                            <input name="meter_present_value" type="number" @bind="reading.Data">
                         </div>
                     </div>
                 </div>
                 <input class="Submission" type="button" name="add_meter" value="Добавить счетчик" required @onclick="addMeter">
+                @if (!isMessageHidden)
+                {
+                    <label>Заполните все данные о счетчике!</label>
+                }
                 <input class="Submission" type="submit" name="send" value="Отправить" required>
                 <div id="obligatory_field">* Обязательное поле</div>
             </form>
@@ -118,7 +123,7 @@
 @code {
 
     public List<MeterReading> meterReadings = new();
-    public List<ClientAddress> clientAddresses = new(); 
+    public List<ClientAddress> clientAddresses = new();
 
     Client? client = new Client();
 
@@ -134,6 +139,7 @@
 
     public bool isAddressSelectHidden { get; set; } = true;
     public bool isAddressNew { get; set; } = true;
+    public bool isMessageHidden { get; set; } = true;
 
 
     protected override async Task OnInitializedAsync()
@@ -176,13 +182,14 @@
             }
             meterService.insertMeters(meterReadings);
             nav.NavigateTo("/readings_history");
-        }catch (Exception ex){}
+        }
+        catch (Exception ex) { }
     }
 
     private void onAddressSelectChange(ChangeEventArgs e)
     {
         try
-        {           
+        {
             string temp = e.Value.ToString();
             string[] temp2 = temp.Split(',');
             if (temp2.Length > 1) isAddressNew = false;
@@ -206,18 +213,25 @@
                 reading.BeforeData = "-";
             }
             else reading.BeforeData = prevMeter.Data.ToString();
-        }catch (Exception ex){}
+        }
+        catch (Exception ex) { }
         StateHasChanged();
     }
 
     private void addMeter()
     {
         try
-        {                     
-            meterReadings.Add(new MeterReading(reading.Name, reading.Data, reading.Date, reading.ClientId, reading.ClientAddress,reading.BeforeData, reading.Client));
+        {
+            if (reading.BeforeData != null && reading.Data != null && reading.Name != null)
+            {
+                isMessageHidden = true;
+                meterReadings.Add(new MeterReading(reading.Name, reading.Data, reading.Date, reading.ClientId, reading.ClientAddress, reading.BeforeData, reading.Client));
+            }
+            else isMessageHidden = false;
 
-        }catch (Exception ex){}
-    StateHasChanged();
+        }
+        catch (Exception ex) { }
+        StateHasChanged();
     }
 
     //Client? client = new Client();

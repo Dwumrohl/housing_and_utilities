@@ -10,6 +10,7 @@
 @using testBlazor.Data.services
 @using System.Text;
 @using MailKit.Security;
+@using System.Net.Mail;
 
 @inject IClientService ClientService
 @inject NavigationManager nav;
@@ -79,34 +80,49 @@
 
     private void sendEmail()
     {
+        errmessage = "";
         try
-        {           
-            password = CreatePassword(10);
-            saveOrUpdateUser();
-            using (MimeMessage mail = new MimeMessage())
+        {
+            string address = myemail;
+            address = new MailAddress(address).Address;
+            if (address != myemail || !myemail.Contains('.')) errmessage = "Неверный формат адреса эл. почты";
+        }
+        catch (Exception ex)
+        {
+            errmessage = "Неверный формат адреса эл. почты";
+        }
+        StateHasChanged();
+        if (errmessage == "")
+        {
+            try
             {
-                mail.From.Add(new MailboxAddress("ЖКХ", "gptevcat@gmail.com"));
-                mail.To.Add(new MailboxAddress("Павлик из 3 подъезда", myemail));
-                mail.Subject = "ЖКХ. Одноразовый пароль для входа на сайт";
-                mail.Body = new TextPart("plain")
-                    {
-                        Text =  @"Ваш одноразовый пароль для входа в приложение " + password +
-                        "\nХорошего вам дня"
-
-                    };
-
-                using (SmtpClient smtp = new SmtpClient())
+                password = CreatePassword(10);
+                saveOrUpdateUser();
+                using (MimeMessage mail = new MimeMessage())
                 {
-                    smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.Auto);
-                    smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
-                    smtp.Send(mail);
-                    smtp.Disconnect(true);
+                    mail.From.Add(new MailboxAddress("ЖКХ", "gptevcat@gmail.com"));
+                    mail.To.Add(new MailboxAddress("Павлик из 3 подъезда", myemail));
+                    mail.Subject = "ЖКХ. Одноразовый пароль для входа на сайт";
+                    mail.Body = new TextPart("plain")
+                        {
+                            Text = @"Ваш одноразовый пароль для входа в приложение " + password +
+                                "\nХорошего вам дня"
+
+                        };
+
+                    using (MailKit.Net.Smtp.SmtpClient smtp = new MailKit.Net.Smtp.SmtpClient())
+                    {
+                        smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.Auto);
+                        smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
+                        smtp.Send(mail);
+                        smtp.Disconnect(true);
+                    }
                 }
             }
-        }
-        catch (Exception e)
-        {
-            errmessage = e.Message.ToString();
+            catch (Exception e)
+            {
+                errmessage = e.Message.ToString();
+            }
         }
     }
 

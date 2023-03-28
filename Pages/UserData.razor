@@ -9,6 +9,7 @@
 @inject IClientAddressService AddressService
 @inject NavigationManager nav;
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
+@inject IJSRuntime JsRuntime
 
 @attribute [Authorize]
 
@@ -17,102 +18,104 @@
     <link rel="stylesheet" href="UserData.razor.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&amp;subset=cyrillic" rel="stylesheet">
 </head>
-    <div id="mainDiv">
-        <div id="forms-personal">
+<div id="mainDiv">
+    <div id="forms-personal">
+        <form @onsubmit="updateUser">
             <div class="dataContainer">
                 <h3>Личные данные</h3>
                 <div class="innerDiv">
                     <div class="inputDiv">
-                        <label>Фамилия</label>
-                        <input type="text" @bind="client.Surname" />
+                        <label>Фамилия *</label>
+                        <input type="text" pattern="^[А-Яа-яЁё\s]+$" @bind="client.Surname" required />
                     </div>
                     <div class="inputDiv">
-                        <label>Имя</label>
-                        <input type="text" @bind="client.Name" />
+                        <label>Имя *</label>
+                        <input type="text" pattern="^[А-Яа-яЁё\s]+$" @bind="client.Name" required/>
                     </div>
                     <div class="inputDiv">
                         <label>Отчество</label>
-                        <input type="text" @bind="client.Patronymic" />
+                        <input type="text" pattern="^[А-Яа-яЁё\s]+$"  @bind="client.Patronymic" />
                     </div>
                 </div>
                 <div class="innerDiv">
                     <div class="inputDiv">
                         <label>Номер телефона</label>
-                        <input type="text" @bind="client.PhoneNumber" />
+                        <input type="text" pattern="[\+]\d{11}" @bind="client.PhoneNumber" placeholder="+79271234567" />
                     </div>
                     <div class="inputDiv">
-                        <label>Электронная почта</label>
-                        <input type="text" @bind="client.Email" />
+                        <label>Электронная почта *</label>
+                        <input type="email" @bind="client.Email" required disabled/>
                     </div>
                 </div>
             </div>
-            <input type="button" name="save-personal-data" value="Сохранить" @onclick="updateUser"></input>
-            <form @onsubmit="addAddress">
-                <div class="dataContainer">
-                    <h3>Адрес</h3>
-                    <div class="innerDiv">
-                        <div class="inputDiv">
-                            <label>Город</label>
-                            <input type="text" @bind="address.City" required />
-                        </div>
-                        <div class="inputDiv">
-                            <label>Улица</label>
-                            <input type="text" @bind="address.Street" required />
-                        </div>
-                        <div class="inputDiv">
-                            <label>Дом</label>
-                            <input type="text" @bind="address.Building" required />
-                        </div>
+            <input type="submit" name="save-personal-data" value="Сохранить"/>
+        </form>
+        <form @onsubmit="addAddress">
+            <div class="dataContainer">
+                <h3>Адрес</h3>
+                <div class="innerDiv">
+                    <div class="inputDiv">
+                        <label>Город *</label>
+                        <input type="text" pattern="^[-А-Яа-яЁё\s]+$" @bind="address.City" required />
                     </div>
-                    <div class="innerDiv">
-                        <div class="inputDiv">
-                            <label>Подъезд</label>
-                            <input type="text" @bind="address.House" required />
-                        </div>
-                        <div class="inputDiv">
-                            <label>Квартира</label>
-                            <input type="text" @bind="address.Apartment" required />
-                        </div>
+                    <div class="inputDiv">
+                        <label>Улица *</label>
+                        <input type="text" pattern="^[-.,А-Яа-яЁё\s]+$"  @bind="address.Street" required />
                     </div>
-
+                    <div class="inputDiv">
+                        <label>Дом *</label>
+                        <input type="number" @bind="address.Building" required />
+                    </div>
                 </div>
-                <input type="submit" name="save-personal-data" value="Добавить" />
-            </form>
+                <div class="innerDiv">
+                    <div class="inputDiv">
+                        <label>Корпус</label>
+                        <input type="text" @bind="address.House" />
+                    </div>
+                    <div class="inputDiv">
+                        <label>Квартира *</label>
+                        <input type="number" @bind="address.Apartment" required />
+                    </div>
+                </div>
 
-        </div>
-        <div class="dataContainer" hidden="@hidden">
-            <div class="addressList">
-                <h3>Список адресов:</h3>
-                <ul>
-                    @if (!hidden) @foreach (var adrs in addresses)
-                        {
-                            <li>
-                                <label>
-                                    @adrs.City
-                                    ,
-                                </label>
-                                <label>
-                                    @adrs.Street
-                                    ,
-                                </label>
-                                <label>
-                                    @adrs.Building
-                                    ,
-                                </label>
-                                <label>
-                                    @adrs.House
-                                    ,
-                                </label>
-                                <label>
-                                    @adrs.Apartment
-                                    ,
-                                </label>
-                            </li>
-                        }
-                </ul>
             </div>
+            <input type="submit" name="save-personal-data" value="Добавить" />
+        </form>
+
+    </div>
+    <div class="dataContainer" hidden="@hidden">
+        <div class="addressList">
+            <h3>Список адресов:</h3>
+            <ul>
+                @if (!hidden) @foreach (var adrs in addresses)
+                    {
+                        <li>
+                            <label>
+                                @adrs.City
+                                ,
+                            </label>
+                            <label>
+                                @adrs.Street
+                                ,
+                            </label>
+                            <label>
+                                @adrs.Building
+                                ,
+                            </label>
+                            <label>
+                                @adrs.House
+                                ,
+                            </label>
+                            <label>
+                                @adrs.Apartment
+                                ,
+                            </label>
+                        </li>
+                    }
+            </ul>
         </div>
     </div>
+</div>
 
 @code {
     public string email { get; set; } = "";
@@ -121,7 +124,7 @@
     ClientAddress? address = new ClientAddress();
     List<ClientAddress> addresses = new List<ClientAddress>();
 
-    public void updateUser()
+    public async void updateUser()
     {
         ClientService.updateClientByEmail(email, client);
     }
