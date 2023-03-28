@@ -3,50 +3,43 @@ body {
 	font-style: normal;
 	display: flex;
 }
+	body div {
+		width: 100%;
+		
+	}
 
 #main_div {
 	display: flex;
 	flex-direction: column;
+
 }
 
 #sidebar {
 	display: flex;
 	flex-direction: row;
 	border-style: solid;
-	border-width: 2px;
+	border-width: 0px 0px 1px 0px;
+	border-color: #cfcfcf;
+	padding: 14px 0px 0px 5.3%;
 }
 
 .sidebar-name {
-	margin-left: 6%;
+	width: fit-content;
 	font-weight: 500;
 	font-size: 22px;
 	line-height: 38px;
+	margin: 10px;
 }
 
 .position-form-menu {
 	display: flex;
 	flex-direction: column;
-	width: 96vw;
+	/*
+		background: #EDEAEA;
+		height: 83.8vh;
+	*/
 }
 
-#higher_menu {
-	position: relative;
-	display: flex;
-	border-style: solid;
-	border-width: 2px;
-}
-
-.Tabs {
-	margin: auto 50px auto 1%;
-	width: fit-content;
-	padding: 20px 0;
-}
-
-	.Tabs[name=this_page] {
-		border-bottom-color: blue;
-		border-bottom-width: 3px;
-		border-bottom-style: solid;
-	}
 
 form {
 	width: 900px;
@@ -56,9 +49,7 @@ form {
 
 .form-background {
 	position: relative;
-	height: 91vh; /*важный момент*/
-	padding: 3% 0em 0em 6%;
-	background: #EDEAEA;
+	padding: 3vh 0 0 6vw;
 }
 
 #nameForm {
@@ -70,12 +61,14 @@ form {
 #address {
 	word-wrap: break-word;
 	margin-top: 20px;
+	
 }
 
 	#address div {
 		display: inline-block;
-		margin-right: 32px;
+		margin-right: 36px;
 		margin-left: auto;
+		width: fit-content;
 	}
 
 	#address label {
@@ -87,7 +80,7 @@ form {
 
 	#address input {
 		height: 30px;
-		background: #C4C4C4;
+		background: #68cacd;
 		border-radius: 5px;
 		border: 0px;
 	}
@@ -126,7 +119,6 @@ form {
 	margin-top: 10px;
 	margin-left: auto;
 	margin-right: 35px;
-	width: 115px;
 }
 
 .Submission[name=add_meter] {
@@ -135,21 +127,14 @@ form {
 	margin-right: auto;
 }
 
-.Submission[name=plus] {
-	margin-top: 10px;
-	margin-left: 0px;
-	font-size: 30px;
-	width: 40px;
-}
-
 .Submission {
 	height: 40px;
-	background: #41464E;
+	background: #005baa;
 	box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.5);
 	border-radius: 5px;
 	border: 0px;
 	font-weight: 500;
-	font-size: 18px;
+	font-size: 23px;
 	color: #FFFFFF;
 }
 
@@ -167,8 +152,8 @@ form {
 	line-height: 33px;
 	width: 96%;
 	border-radius: 5px;
-	color: #000000;
-	background-color: #C4C4C4;
+	color: #FFFFFF;
+	background-color: #005baa;
 }
 
 .Column {
@@ -180,6 +165,7 @@ form {
 
 .Value_table {
 	margin: auto;
+	width: fit-content;
 }
 
 .Column[name=right_line] {
@@ -195,7 +181,7 @@ form {
 	width: 96%;
 	border-radius: 5px;
 	color: #000000;
-	background-color: #FFFFFF;
+	background-color: #00adef;
 }
 
 	.Row[name=meter_row] {
@@ -217,7 +203,7 @@ form {
 			font-size: 18px;
 			border-radius: 5px;
 			border: 0px;
-			background-color: #eaeaea;
+			background-color: #c9f8fe;
 		}
 
 		.Row[name=meter_row] select {
@@ -226,7 +212,7 @@ form {
 			font-size: 18px;
 			border-radius: 5px;
 			border: 0px;
-			background-color: #eaeaea;
+			background-color: #c9f8fe;
 		}
 
 #add_meter_button {

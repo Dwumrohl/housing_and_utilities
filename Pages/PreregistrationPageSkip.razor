@@ -5,14 +5,15 @@
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&amp;subset=cyrillic" rel="stylesheet">
 
-<div id="label">Заполнение данной формы не являтся обязательным, вы можете пропустить этот этап нажав на специальную кнопку внизу экрана</div>
 <div id="userPage">
+    <div id="label">Заполнение данной формы не являтся обязательным, вы можете пропустить этот этап нажав на специальную кнопку внизу экрана</div>
     <UserData />
+    <div id="buttons-contain">
+        <button id="skipButton" @onclick="tempAuthenticate">Пропустить этап</button>
+    </div>
+    
 </div>
 
-<div id = "buttonContainer">
-    <button id="skipButton" @onclick="tempAuthenticate">Пропустить этап</button>
-</div>
 @code{
     private async void tempAuthenticate(){
         nav.NavigateTo("/");

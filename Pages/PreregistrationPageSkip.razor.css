@@ -1,20 +1,25 @@
-﻿#label{
-    width:100%;
-    text-align: center;
-    margin-top: 20vh;
+﻿#label {
+    margin: 20px auto auto auto;
+    font-family: 'Open Sans';
+    width:fit-content;
 }
-#userPage{
-     width:100%;
-     height:min-content;
+#userPage {
+    
 }
-#buttonContainer {
-    width: 100%;
-    margin-top: 10vh;
+#buttons-contain {
+    margin: auto;
+    width: fit-content;
 }
 #skipButton {
-    position: absolute;
-    left: 50%;
-    top:65%;
-    transform: translate(-50%, 0);
+    width: auto;
     font-family: 'Open Sans';
+    height: 45px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    border: 1px;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 35px;
+    color: #000000;
+    background-color: #dcdcdc;
 }

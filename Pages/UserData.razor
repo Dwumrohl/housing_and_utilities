@@ -12,15 +12,11 @@
 
 @attribute [Authorize]
 
-<html>
-
 <head>
     <title>Пользователь</title>
     <link rel="stylesheet" href="UserData.razor.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&amp;subset=cyrillic" rel="stylesheet">
 </head>
-
-<body>
     <div id="mainDiv">
         <div id="forms-personal">
             <div class="dataContainer">
@@ -113,9 +109,6 @@
             </div>
         </div>
     </div>
-</body>
-
-</html>
 
 @code {
     public string email { get; set; } = "";
