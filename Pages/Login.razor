@@ -112,49 +112,55 @@
 
     private void saveOrUpdateUser()
     {
-        client.Email = myemail;
-        client.Password = password;
-        client.OtpRequestedTime = DateTime.Now;
+        try
+        {
+            client.Email = myemail;
+            client.Password = password;
+            client.OtpRequestedTime = DateTime.Now;
 
-        if (ClientService.getSingleClientByEmail(myemail) != null)
-        {
-            ClientService.updateClientByEmail(myemail, client);
-        }
-        else
-        {
-            ClientService.insertClient(client);
-        } 
+            if (ClientService.getSingleClientByEmail(myemail) != null)
+            {
+                ClientService.updateClientByEmail(myemail, client);
+            }
+            else
+            {
+                ClientService.insertClient(client);
+            }
+        }catch (Exception ex){}
     }
 
     private async void handleUserAuthorization()
     {
-        client = ClientService.getSingleClientByEmail(myemail);
-        if (client != null)
+        try
         {
-            if (client.Password == userpassword)
+            client = ClientService.getSingleClientByEmail(myemail);
+            if (client != null)
             {
-                ((CustomAuthenticationStateProvider)authenticationStateProvider).userAuthorized(myemail);
-
-                await sessionStorageService.SetItemAsync<string>("email", client.Email);
-                await sessionStorageService.SetItemAsync<Guid>("clientId", client.ClientId);
-
-                if (DateTime.Now.Subtract(new TimeSpan(0, 5, 0)) < client.OtpRequestedTime)
+                if (client.Password == userpassword)
                 {
-                    if (client.isEmpty())
-                    {
-                        nav.NavigateTo("/prergistration");
-                    }
-                    else
-                    {
-                        nav.NavigateTo("/statement_create");
-                    }
-                }
-                else errmessage = "Время действия кода истекло";
 
+                    await sessionStorageService.SetItemAsync<string>("email", client.Email);
+                    await sessionStorageService.SetItemAsync<Guid>("clientId", client.ClientId);
+
+                    if (DateTime.Now.Subtract(new TimeSpan(0, 5, 0)) < client.OtpRequestedTime)
+                    {
+                        ((CustomAuthenticationStateProvider)authenticationStateProvider).userAuthorized(myemail);
+                        if (client.isEmpty())
+                        {
+                            nav.NavigateTo("/prergistration");
+                        }
+                        else
+                        {
+                            nav.NavigateTo("/statement_create");
+                        }
+                    }
+                    else errmessage = "Время действия кода истекло";
+
+                }
+                else errmessage = "Введенный неправильный код";
             }
-            else errmessage = "Введенный неправильный код";
-        }
-        else errmessage = "Пользователя с таким email не существует";
+            else errmessage = "Пользователя с таким email не существует";
+        }catch (Exception ex){}
     }
   
 }

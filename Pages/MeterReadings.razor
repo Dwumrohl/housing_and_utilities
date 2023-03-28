@@ -2,56 +2,70 @@
 
 @using Microsoft.EntityFrameworkCore
 @using testBlazor.Data;
+@using testBlazor.Data.Models;
 @using testBlazor.Data.services
 @using System.Text;
 @using testBlazor.Data.security;
 
-@inject IClientService ClientService
+@inject IClientService clientService
+@inject IClientAddressService addressService;
+@inject IMeterReadingsService meterService;
 @inject NavigationManager nav;
 @inject AuthenticationStateProvider authenticationStateProvider;
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
 
-@attribute [Authorize]
+@*@attribute [Authorize]*@
 
 <div id="main_div">
-    <MeterReadingsMenuBar/>
-@*    <div id="sidebar">
-        <div class="sidebar-name">Показания</div>
-        <div class="sidebar-name">История</div>
+    <MeterReadingsMenuBar />
+    @*    <div id="sidebar">
+    <div class="sidebar-name">Показания</div>
+    <div class="sidebar-name">История</div>
     </div>*@
     @*<div class="position-form-menu">
-        <div class="form-background">
-            <div id="table">
-                <div id="name_column">
-                    <div class="Column" name="right_line"><div class="Value_table">Дата</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Тип счётчика</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-                    <div class="Column"><div class="Value_table">Адрес</div></div>
-                </div>
-                <div class="Row">
-                    <div class="Column" name="right_line"><div class="Value_table"></div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Горячая вода</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-                    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
-                </div>
-                <div class="Row">
-                    <div class="Column" name="right_line"><div class="Value_table"></div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Газ</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-                    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
-                </div>
-            </div>
-        </div>
+    <div class="form-background">
+    <div id="table">
+    <div id="name_column">
+    <div class="Column" name="right_line"><div class="Value_table">Дата</div></div>
+    <div class="Column" name="right_line"><div class="Value_table">Тип счётчика</div></div>
+    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
+    <div class="Column"><div class="Value_table">Адрес</div></div>
+    </div>
+    <div class="Row">
+    <div class="Column" name="right_line"><div class="Value_table"></div></div>
+    <div class="Column" name="right_line"><div class="Value_table">Горячая вода</div></div>
+    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
+    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
+    </div>
+    <div class="Row">
+    <div class="Column" name="right_line"><div class="Value_table"></div></div>
+    <div class="Column" name="right_line"><div class="Value_table">Газ</div></div>
+    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
+    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
+    </div>
+    </div>
+    </div>
     </div>*@
     <div class="position-form-menu">
         <div class="form-background">
-            <form>
+            <form @onsubmit="handleMeterForm">
                 <div id="nameForm">Показания</div>
+                <div id="selectAddress" hidden="@isAddressSelectHidden">
+                    <label>Заполнить адрес</label>
+                    <select @onchange="onAddressSelectChange">
+                        <option value="" selected disabled hidden>Выбрать адрес...</option>
+                        @foreach (var address in clientAddresses)
+                        {
+                            <option>@address.Street, @address.Building, @address.House, @address.Apartment</option>
+                        }
+                    </select>
+                </div>
+
                 <div id="address">
-                    <div><label for="">Улица *</label><br><input name="" class="AddressFirstWidth" type="text" required></div>
-                    <div><label for="">Дом *</label><br><input name="" class="AddressThirdWidth" type="text" required></div>
-                    <div><label for="">Корпус</label><br><input name="" class="AddressThirdWidth" type="text" required></div>
-                    <div><label for="">Квартира *</label><br><input name="" class="AddressThirdWidth" type="text" required></div>
+                    <div><label for="">Улица *</label><br><input name="" class="AddressFirstWidth" type="text" required @bind="address.Street"></div>
+                    <div><label for="">Дом *</label><br><input name="" class="AddressThirdWidth" type="text" required @bind="address.House"></div>
+                    <div><label for="">Корпус</label><br><input name="" class="AddressThirdWidth" type="text" required @bind="address.Building"></div>
+                    <div><label for="">Квартира *</label><br><input name="" class="AddressThirdWidth" type="text" required @bind="address.Apartment"></div>
                 </div>
 
                 <div id="table">
@@ -60,22 +74,21 @@
                         <div class="Column" name="right_line"><div class="Value_table">Предыдущее значение</div></div>
                         <div class="Column"><div class="Value_table">Текущее значение</div></div>
                     </div>
-                    <div class="Row">
-                        <div class="Column" name="right_line"><div class="Value_table">Горячая вода</div></div>
-                        <div class="Column" name="right_line"><div class="Value_table">36 м. куб.</div></div>
-                        <div class="Column"><div class="Value_table">58 м. куб.</div></div>
-                    </div>
-                    <div class="Row">
-                        <div class="Column" name="right_line"><div class="Value_table">Газ</div></div>
-                        <div class="Column" name="right_line"><div class="Value_table">27 м. куб.</div></div>
-                        <div class="Column"><div class="Value_table">61 м. куб.</div></div>
-                    </div>
+
+                    @foreach (var meter in meterReadings)
+                    {
+                        <div class="Row">
+                            <div class="Column" name="right_line"><div class="Value_table">@meter.Name</div></div>
+                            <div class="Column" name="right_line"><div class="Value_table">@meter.BeforeData</div></div>
+                            <div class="Column"><div class="Value_table">@meter.Data</div></div>
+                        </div>
+                    }
                 </div>
                 <div class="Row" name="meter_row">
                     <div class="Column" name="right_line">
                         <div class="Value_table">
                             <label for="meter_type">Тип счетчика</label>
-                            <select name="meter_type">
+                            <select name="meter_type" @onchange="onTypeSelectChange">
                                 <option>Горячая вода</option>
                                 <option>Холодная вода</option>
                                 <option>Газ</option>
@@ -85,17 +98,17 @@
                     <div class="Column" name="right_line">
                         <div class="Value_table">
                             <label for="meter_past_value">Предыдущее значение</label>
-                            <input name="meter_past_value" type="text">
+                            <input name="meter_past_value" type="text" @bind="reading.BeforeData">
                         </div>
                     </div>
                     <div class="Column">
                         <div class="Value_table">
                             <label for="meter_present_value">Текущее значение</label>
-                            <input name="meter_present_value" type="text">
+                            <input name="meter_present_value" type="text" @bind="reading.Data">
                         </div>
                     </div>
                 </div>
-                <input class="Submission" type="button" name="add_meter" value="Добавить счетчик" required>
+                <input class="Submission" type="button" name="add_meter" value="Добавить счетчик" required @onclick="addMeter">
                 <input class="Submission" type="submit" name="send" value="Отправить" required>
                 <div id="obligatory_field">* Обязательное поле</div>
             </form>
@@ -103,6 +116,109 @@
     </div>
 </div>
 @code {
+
+    public List<MeterReading> meterReadings = new();
+    public List<ClientAddress> clientAddresses = new(); 
+
+    Client? client = new Client();
+
+    ClientAddress address = new ClientAddress();
+
+    MeterReading reading = new MeterReading();
+
+    MeterReading prevMeter = new MeterReading();
+
+
+
+    public string email { get; set; } = "";
+
+    public bool isAddressSelectHidden { get; set; } = true;
+    public bool isAddressNew { get; set; } = true;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await sessionStorageService.GetItemAsync<string>("email");
+        if (result != null)
+        {
+            try
+            {
+                email = result;
+                client = clientService.getSingleClientByEmail(email);
+
+                clientAddresses = addressService.GetClientAddress(client.ClientId);
+                if (clientAddresses.Any()) isAddressSelectHidden = false;
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
+        }
+    }
+
+    private void handleMeterForm()
+    {
+        try
+        {
+            if (isAddressNew)
+            {
+                address.Client = client;
+                address.ClientId = client.ClientId;
+                addressService.insertClientAddress(address);
+            }
+            foreach (var mtr in meterReadings)
+            {
+                mtr.ClientAddress = address.Street + ", " + address.Building + ", " + address.House + ", " + address.Apartment;
+                mtr.Date = DateTime.Now;
+                mtr.Client = client;
+                mtr.ClientId = client.ClientId;
+            }
+            meterService.insertMeters(meterReadings);
+            nav.NavigateTo("/readings_history");
+        }catch (Exception ex){}
+    }
+
+    private void onAddressSelectChange(ChangeEventArgs e)
+    {
+        try
+        {           
+            string temp = e.Value.ToString();
+            string[] temp2 = temp.Split(',');
+            if (temp2.Length > 1) isAddressNew = false;
+            address.Street = temp2[0].Trim();
+            address.Building = Convert.ToInt32(temp2[1].Trim());
+            address.House = temp2[2].Trim();
+            address.Apartment = Convert.ToInt32(temp2[3].Trim());
+        }
+        catch (Exception ex) { }
+        StateHasChanged();
+    }
+
+    private void onTypeSelectChange(ChangeEventArgs e)
+    {
+        try
+        {
+            reading.Name = e.Value?.ToString()?.ToLower();
+            prevMeter = meterService.getMeterWithPreviousDataByClientIdAndMeterType(client?.ClientId, e.Value?.ToString()?.ToLower());
+            if (prevMeter == null)
+            {
+                reading.BeforeData = "-";
+            }
+            else reading.BeforeData = prevMeter.Data.ToString();
+        }catch (Exception ex){}
+        StateHasChanged();
+    }
+
+    private void addMeter()
+    {
+        try
+        {                     
+            meterReadings.Add(new MeterReading(reading.Name, reading.Data, reading.Date, reading.ClientId, reading.ClientAddress,reading.BeforeData, reading.Client));
+
+        }catch (Exception ex){}
+    StateHasChanged();
+    }
 
     //Client? client = new Client();
     //public string email { get; set; } = "";

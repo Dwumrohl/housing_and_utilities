@@ -28,6 +28,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuth
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IClientAddressService, ClientAddressService>();
 builder.Services.AddScoped<IRequestService, RequestService>();
+builder.Services.AddScoped<IMeterReadingsService, MeterReadingsService>();
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<AuthenticationStateProvider,CustomAuthenticationStateProvider>();
 

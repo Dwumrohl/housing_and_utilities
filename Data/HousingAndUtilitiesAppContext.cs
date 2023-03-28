@@ -89,11 +89,12 @@ public partial class HousingAndUtilitiesAppContext : DbContext
                 .HasDefaultValueSql("gen_random_uuid()")
                 .HasColumnName("meter_readings_id");
             entity.Property(e => e.ClientId).HasColumnName("client_id");
+            entity.Property(e => e.ClientAddress).HasColumnName("client_address_id");
             entity.Property(e => e.Data).HasColumnName("data");
             entity.Property(e => e.Date)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("date");
-            entity.Property(e => e.Name);
+            entity.Property(e => e.Name).HasColumnName("name");
             entity.HasOne(d => d.Client).WithMany(p => p.MeterReadings)
                 .HasForeignKey(d => d.ClientId)
                 .HasConstraintName("client_id");

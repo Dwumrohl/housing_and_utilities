@@ -1,5 +1,21 @@
 ﻿@page "/readings_history"
 
+@using Microsoft.EntityFrameworkCore
+@using testBlazor.Data;
+@using testBlazor.Data.Models;
+@using testBlazor.Data.services
+@using System.Text;
+@using testBlazor.Data.security;
+
+@inject IClientService clientService
+@inject IClientAddressService addressService;
+@inject IMeterReadingsService meterService;
+@inject NavigationManager nav;
+@inject AuthenticationStateProvider authenticationStateProvider;
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
+
+@*@attribute [Authorize]*@
+
 <MeterReadingsMenuBar />
 <div class="position-form-menu">
     <div class="form-background">
@@ -10,22 +26,49 @@
                 <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
                 <div class="Column"><div class="Value_table">Адрес</div></div>
             </div>
-            <div class="Row">
-                <div class="Column" name="right_line"><div class="Value_table"></div></div>
-                <div class="Column" name="right_line"><div class="Value_table">Горячая вода</div></div>
-                <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-                <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
-            </div>
-            <div class="Row">
-                <div class="Column" name="right_line"><div class="Value_table"></div></div>
-                <div class="Column" name="right_line"><div class="Value_table">Газ</div></div>
-                <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-                <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
-            </div>
+             @if (!isEmpty) @foreach (var meter in meters)
+            {
+                <div class="Row">
+                    <div class="Column" name="right_line"><div class="Value_table">@meter.Date</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">@meter.Name</div></div>
+                    <div class="Column" name="right_line"><div class="Value_table">@meter.Data</div></div>                   
+                    <div class="Column"><div class="Value_table">@meter.ClientAddress</div></div>
+                </div>
+            }
         </div>
     </div>
 </div>
 
 @code {
+    List<MeterReading> meters = new();
+
+    ClientAddress address = new();
+
+    Client client = new();
+
+    string email { get; set; } = "";
+
+    bool isEmpty { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await sessionStorageService.GetItemAsync<string>("email");
+        if (result != null)
+        {
+            try
+            {
+                email = result;
+                client = clientService.getSingleClientByEmail(email);
+                //requests = requestService.getRequestsByClientId(client.ClientId);
+                meters = meterService.getMeterReadingsByClientId(client.ClientId);
+                if (meters.Any()) isEmpty = false;
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+            }
+        }
+    }
 
 }

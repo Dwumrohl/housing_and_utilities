@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace testBlazor.Data;
 /// <summary>
@@ -7,6 +8,24 @@ namespace testBlazor.Data;
 /// </summary>
 public partial class MeterReading
 {
+    public MeterReading()
+    {
+
+    }
+
+    public MeterReading(string? name, long? data, DateTime? date, Guid? clientId, string? clientAddress, string? beforeData, Client? client)
+    {
+        Name = name;
+        Data = data;
+        Date = date;
+        ClientId = clientId;
+        ClientAddress = clientAddress;
+        BeforeData = beforeData;
+        Client = client;
+    }
+
+
+
     #region Поля
 
     /// <summary>
@@ -33,6 +52,11 @@ public partial class MeterReading
     /// внешний ключ id клиента
     /// </summary>
     public Guid? ClientId { get; set; }
+
+    public string? ClientAddress { get; set; }
+
+    [NotMapped]
+    public string? BeforeData { get; set; }
 
     public virtual Client? Client { get; set; }
 

@@ -51,64 +51,68 @@
                 </div>
             </div>
             <input type="button" name="save-personal-data" value="Сохранить" @onclick="updateUser"></input>
-            <div class="dataContainer">
-                <h3>Адрес</h3>
-                <div class="innerDiv">
-                    <div class="inputDiv">
-                        <label>Город</label>
-                        <input type="text" @bind="address.City" />
+            <form @onsubmit="addAddress">
+                <div class="dataContainer">
+                    <h3>Адрес</h3>
+                    <div class="innerDiv">
+                        <div class="inputDiv">
+                            <label>Город</label>
+                            <input type="text" @bind="address.City" required />
+                        </div>
+                        <div class="inputDiv">
+                            <label>Улица</label>
+                            <input type="text" @bind="address.Street" required />
+                        </div>
+                        <div class="inputDiv">
+                            <label>Дом</label>
+                            <input type="text" @bind="address.Building" required />
+                        </div>
                     </div>
-                    <div class="inputDiv">
-                        <label>Улица</label>
-                        <input type="text" @bind="address.Street" />
+                    <div class="innerDiv">
+                        <div class="inputDiv">
+                            <label>Подъезд</label>
+                            <input type="text" @bind="address.House" required />
+                        </div>
+                        <div class="inputDiv">
+                            <label>Квартира</label>
+                            <input type="text" @bind="address.Apartment" required />
+                        </div>
                     </div>
-                    <div class="inputDiv">
-                        <label>Дом</label>
-                        <input type="text" @bind="address.Building" />
-                    </div>
+
                 </div>
-                <div class="innerDiv">
-                    <div class="inputDiv">
-                        <label>Подъезд</label>
-                        <input type="text" @bind="address.House" />
-                    </div>
-                    <div class="inputDiv">
-                        <label>Квартира</label>
-                        <input type="text" @bind="address.Apartment" />
-                    </div>
-                </div>
-            </div>
-            <input type="button" name="save-personal-data" value="Добавить" @onclick="addAddress"></input>
+                <input type="submit" name="save-personal-data" value="Добавить" />
+            </form>
+
         </div>
         <div class="dataContainer" hidden="@hidden">
             <div class="addressList">
                 <h3>Список адресов:</h3>
                 <ul>
-                    @if(!hidden) @foreach (var adrs in addresses)
-                    {
-                        <li>
-                            <label>
-                                @adrs.City
-                                ,
-                            </label>
-                            <label>
-                                @adrs.Street
-                                ,
-                            </label>
-                            <label>
-                                @adrs.Building
-                                ,
-                            </label>
-                            <label>
-                                @adrs.House
-                                ,
-                            </label>
-                            <label>
-                                @adrs.Apartment
-                                ,
-                            </label>
-                        </li>
-                    }
+                    @if (!hidden) @foreach (var adrs in addresses)
+                        {
+                            <li>
+                                <label>
+                                    @adrs.City
+                                    ,
+                                </label>
+                                <label>
+                                    @adrs.Street
+                                    ,
+                                </label>
+                                <label>
+                                    @adrs.Building
+                                    ,
+                                </label>
+                                <label>
+                                    @adrs.House
+                                    ,
+                                </label>
+                                <label>
+                                    @adrs.Apartment
+                                    ,
+                                </label>
+                            </li>
+                        }
                 </ul>
             </div>
         </div>
@@ -131,31 +135,39 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await sessionStorageService.GetItemAsync<string>("email");
-        if (result != null)
+        try
         {
-            hidden = true;
-            email = result;
-            client = ClientService.getSingleClientByEmail(email);
-            if (client != null)
+            var result = await sessionStorageService.GetItemAsync<string>("email");
+            if (result != null)
             {
-                addresses = AddressService.GetClientAddress(client.ClientId);
+                hidden = true;
+                email = result;
+                client = ClientService.getSingleClientByEmail(email);
+                if (client != null)
+                {
+                    addresses = AddressService.GetClientAddress(client.ClientId);
 
-                if (addresses.GetEnumerator().MoveNext())
-                    hidden = false;
+                    if (addresses.GetEnumerator().MoveNext())
+                        hidden = false;
+                }
+                StateHasChanged();
             }
-            StateHasChanged();
         }
+        catch (Exception ex) { }
 
     }
 
     public void addAddress()
     {
-        address.ClientId = client.ClientId;
-        address.Client = client;
-        AddressService.insertClientAddress(address);
-        hidden = false;
-        nav.NavigateTo(nav.Uri, forceLoad: true);
+        try
+        {
+            address.ClientId = client.ClientId;
+            address.Client = client;
+            AddressService.insertClientAddress(address);
+            hidden = false;
+            nav.NavigateTo(nav.Uri, forceLoad: true);
+        }
+        catch (Exception ex) { }
     }
 
 }

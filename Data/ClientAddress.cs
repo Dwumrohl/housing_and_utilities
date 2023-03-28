@@ -38,7 +38,7 @@ public partial class ClientAddress
     /// <summary>
     /// Подъезд.
     /// </summary>
-    public int Building { get; set; }
+    public int? Building { get; set; }
 
     /// <summary>
     /// Квартира.

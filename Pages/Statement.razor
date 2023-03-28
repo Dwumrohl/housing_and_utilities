@@ -12,7 +12,6 @@
 @inject IClientAddressService addressService;
 @inject NavigationManager nav;
 @inject AuthenticationStateProvider authenticationStateProvider;
-@inject IRequestService requestService;
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
 
 @attribute [Authorize]
@@ -152,29 +151,32 @@
 
     private void handleStatementForm()
     {
-        request.Date = DateTime.Now;
-        request.Status = "Подана";
-        request.Client = client;
-        request.ClientId = client.ClientId;
-        request.Address = statementModel.street + ", " + statementModel.building + ", " + statementModel.house + ", " + statementModel.apartment;
-        request.Name = statementModel.subject;
-        request.Comment = statementModel.comment;
-        requestService.insertRequest(request);
-        if (!isNameDisabled || !isSurnameDisabled || !isPatronymicDisabled || !isPhoneDisabled)
+        try
         {
-            try
+            request.Date = DateTime.Now;
+            request.Status = "Подана";
+            request.Client = client;
+            request.ClientId = client.ClientId;
+            request.Address = statementModel.street + ", " + statementModel.building + ", " + statementModel.house + ", " + statementModel.apartment;
+            request.Name = statementModel.subject;
+            request.Comment = statementModel.comment;
+            requestService.insertRequest(request);
+            if (!isNameDisabled || !isSurnameDisabled || !isPatronymicDisabled || !isPhoneDisabled)
             {
-                client.Name = statementModel.name;
-                client.Surname = statementModel.surname;
-                client.Patronymic = statementModel.patronymic;
-                client.PhoneNumber = statementModel.phoneNumber;
-                clientService.updateClientByEmail(email, client);
+                try
+                {
+                    client.Name = statementModel.name;
+                    client.Surname = statementModel.surname;
+                    client.Patronymic = statementModel.patronymic;
+                    client.PhoneNumber = statementModel.phoneNumber;
+                    clientService.updateClientByEmail(email, client);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"{ex.Message}");
-            }
-        }
-        nav.NavigateTo(nav.Uri, forceLoad: true);
+            nav.NavigateTo(nav.Uri, forceLoad: true);
+        }catch (Exception ex){}
     }
 }
