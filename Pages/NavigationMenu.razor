@@ -6,31 +6,33 @@
 
 @attribute [Authorize]
 
-<div id="position_form_menu">
-    <div id="higher_menu">
-        <div class="Tabs" @onclick="toMeterReadings">
+<div id="position-form-menu">
+    <div id="higher-menu">
+        <div class="tabs" @onclick="toMeterReadings">
             Показания
         </div>
-        <div class="Tabs" @onclick="toStatement">
+        <div class="tabs" @onclick="toStatement">
             Заявки
         </div>
-        <div class="Tabs">
+        <div class="tabs">
             Услуги
         </div>
-        <div class="Tabs">
-            <a href='mailto:gptevcat@gmail.com'>Служба поддержки</a>
+        <div class="tabs">
+            <a href='mailto:gptevcat@gmail.com' name="support">Служба поддержки</a>
         </div>
-        <div id="user-profile">
+    </div>
+    <div id="user-menu">
+        <div class="tabs" id="user-profile">
             <a href="" @onclick="changeData">@email</a>
         </div>
         <AuthorizeView>
             <Authorized>
-                <div id="logout" class="down">
+                <div class="tabs" id="logout">
                     <a href="" @onclick="logout">Выйти</a>
                 </div>
             </Authorized>
             <NotAuthorized>
-                <div id="logout" class="down">
+                <div class="tabs" id="logout">
                     <a href="" @onclick="login">Войти</a>
                 </div>
             </NotAuthorized>
