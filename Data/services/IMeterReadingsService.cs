@@ -2,7 +2,7 @@
 {
     public interface IMeterReadingsService
     {
-        MeterReading getMeterWithPreviousDataByClientIdAndMeterType(Guid? clientId, string? meterType);
+        MeterReading getMeterWithPreviousDataByClientIdAndMeterType(Guid? clientId, string? meterType, string? address);
 
         public bool insertMeters(List<MeterReading> meters);
 

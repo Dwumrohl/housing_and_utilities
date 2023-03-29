@@ -5,9 +5,7 @@
 
 #mainDiv {
     margin: 20px auto;
-    width: 800px;
-    display: flex;
-    flex-direction: column;
+    width: fit-content;
     background: #f9f9f9;
     border-style: solid;
     border-width: 2px;
@@ -17,8 +15,10 @@
 
 #forms-personal {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin: 0 auto;
+    width: fit-content;
+    max-width: 1500px;
 }
 
 .innerDiv {
@@ -42,23 +42,31 @@
     .inputDiv input {
         height: 30px;
         width: 200px;
-        background: #C4C4C4;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
         border-radius: 5px;
-        border: 0px;
+        border: 1px;
     }
+
 input[value="Добавить"] {
     margin: 20px auto 40px auto;
-    background: #1E91D6;
+    background: #000000;
+    color: #FFFFFF;
     width: fit-content;
 }
 
 input[value="Сохранить"] {
     margin: 20px auto 40px auto;
-    background: #8FC93A;
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    color: #000000;
     width: fit-content;
 }
 
 .dataContainer {
     margin: auto;
     width: 600px;
+}
+
+.user-data-forms{
+    width: 700px;
 }

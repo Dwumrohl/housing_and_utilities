@@ -1,29 +1,4 @@
-﻿input[name=next] {
-    margin-left: 0px;
-    margin-right: auto;
-    background: #1E91D6;
-    width: fit-content;
-}
-input[name=entryButton] {
-    margin-left: auto;
-    margin-right: 0px;
-    background: #8FC93A;
-    width: fit-content;
-}
-#error-password{
+﻿#error-password{
     margin-left: 30px;
     color: red;
-}
-input[type=submit] {
-    margin-left: auto;
-    margin-right: 0px;
-    margin-top: 20px;
-    height: 45px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-    border: 0px;
-    font-weight: 500;
-    font-size: 23px;
-    line-height: 35px;
-    color: #FFFFFF;
 }

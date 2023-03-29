@@ -26,7 +26,7 @@ body {
 .sidebar-name {
 	width: fit-content;
 	font-weight: 500;
-	font-size: 22px;
+	font-size: 20px;
 	line-height: 38px;
 	margin: 10px;
 }
@@ -80,10 +80,14 @@ form {
 
 	#address input {
 		height: 30px;
-		background: #68cacd;
 		border-radius: 5px;
-		border: 0px;
+		border: 1px;
+		border-style: solid;
 	}
+
+#selectAddress{
+
+}
 
 .AddressThirdWidth {
 	width: 130px;
@@ -100,8 +104,9 @@ form {
 #comment {
 	width: 860px;
 	height: 174px;
-	background: #C4C4C4;
 	border-radius: 5px;
+	border: 1px;
+	border-style: solid;
 }
 
 #loadFile input {
@@ -114,29 +119,6 @@ form {
 		text-align: center;
 		color: #000000;
 	}
-
-.Submission[name=send] {
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: 35px;
-}
-
-.Submission[name=add_meter] {
-	margin-top: 10px;
-	margin-left: 0px;
-	margin-right: auto;
-}
-
-.Submission {
-	height: 40px;
-	background: #005baa;
-	box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.5);
-	border-radius: 5px;
-	border: 0px;
-	font-weight: 500;
-	font-size: 23px;
-	color: #FFFFFF;
-}
 
 #table {
 	display: flex;
@@ -153,7 +135,7 @@ form {
 	width: 96%;
 	border-radius: 5px;
 	color: #FFFFFF;
-	background-color: #005baa;
+	background-color: #272727;
 }
 
 .Column {
@@ -181,7 +163,9 @@ form {
 	width: 96%;
 	border-radius: 5px;
 	color: #000000;
-	background-color: #00adef;
+	border: 1px;
+	border-style: solid;
+	box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
 }
 
 	.Row[name=meter_row] {
@@ -202,8 +186,8 @@ form {
 			font-weight: 500;
 			font-size: 18px;
 			border-radius: 5px;
-			border: 0px;
-			background-color: #c9f8fe;
+			border: 1px;
+			border-style: solid;
 		}
 
 		.Row[name=meter_row] select {
@@ -211,8 +195,8 @@ form {
 			font-weight: 500;
 			font-size: 18px;
 			border-radius: 5px;
-			border: 0px;
-			background-color: #c9f8fe;
+			border: 1px;
+			border-style: solid;
 		}
 
 #add_meter_button {
@@ -311,35 +295,66 @@ form {
 		border-style: solid;
 		border-width: 2px;
 		border-radius: 10px;
-		border-color: #aeaeae;
+		border-color: #000000;
+
 	}
 
 input[type=button] {
 	margin: 0 auto;
 	margin-top: 20px;
 	height: 45px;
-	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+	box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
 	border-radius: 10px;
 	border: 0px;
 	font-weight: 500;
 	font-size: 23px;
 	line-height: 35px;
+}
+input[type=submit] {
+	margin: 0 auto;
+	margin-top: 20px;
+	height: 45px;
+	box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+	border-radius: 10px;
+	border: 0px;
+	font-weight: 500;
+	font-size: 23px;
+	line-height: 35px;
+}
+
+input[name=next] {
+	margin-left: 0px;
+	margin-right: auto;
+	width: fit-content;
+	background: #FFFFFF;
+	border: 2px solid #000000;
+	color: #000000;
+}
+
+input[name=entryButton] {
+	margin-left: auto;
+	margin-right: 0px;
+	width: fit-content;
+	background: #000000;
 	color: #FFFFFF;
 }
 
-	input[name=next] {
-		margin-left: 0px;
-		margin-right: auto;
-		background: #1E91D6;
-		width: fit-content;
-	}
+input[name=send] {
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: 35px;
+	background: #000000;
+	color: #FFFFFF;
+}
 
-	input[name=entryButton] {
-		margin-left: auto;
-		margin-right: 0px;
-		background: #8FC93A;
-		width: fit-content;
-	}
+input[name=add_meter] {
+	margin-top: 10px;
+	margin-left: 0px;
+	margin-right: auto;
+	background: #FFFFFF;
+	border: 2px solid #000000;
+	color: #000000;
+}
 
 
 /* Попробовать деморежим */
@@ -372,7 +387,7 @@ input[type=button] {
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 21px;
-		color: #666666;
+		color: #191919;
 	}
 
 	#consent input {

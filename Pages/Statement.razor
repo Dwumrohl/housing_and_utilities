@@ -47,17 +47,17 @@
         <div class="form-background">
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
                 <div id="nameForm">Новая заявка</div>
-                <div id="address">
-                    <div id="selectAddress" hidden = "@isAddressSelectHidden">
-                        <label>Заполнить адрес</label>
-                        <select @onchange="onAddressSelectChange">
-                            <option value="" selected disabled hidden>Выбрать адрес...</option>
-                            @foreach (var address in clientAddresses)
-                            {
-                                <option>@address.Street, @address.Building, @address.House, @address.Apartment</option>
-                            }
-                        </select>
-                    </div>
+                <div id="selectAddress" hidden="@isAddressSelectHidden">
+                    <label>Заполнить адрес</label>
+                    <select @onchange="onAddressSelectChange">
+                        <option value="" selected disabled hidden>Выбрать адрес...</option>
+                        @foreach (var address in clientAddresses)
+                        {
+                            <option>@address.Street, @address.Building, @address.House, @address.Apartment</option>
+                        }
+                    </select>
+                </div>
+                <div id="address"> 
                     <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required pattern="^[-,.А-Яа-яЁё\s]+$" @bind-value="statementModel.street"></div>
                     <div><label for="">Дом *</label><br><input class="AddressThirdWidth" name="" type="number" required @bind-value="statementModel.building"></div>
                     <div><label for="">Корпус</label><br><input class="AddressThirdWidth" name="" type="text" @bind-value="statementModel.house"></div>
