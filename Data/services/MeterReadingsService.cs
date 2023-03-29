@@ -10,11 +10,11 @@
             _context = context;
         }
 
-        public MeterReading getMeterWithPreviousDataByClientIdAndMeterType(Guid? clientId, string? meterType)
+        public MeterReading getMeterWithPreviousDataByClientIdAndMeterType(Guid? clientId, string? meterType, string? address)
         {
             try
             {
-                return _context.MeterReadings.Where(p => p.ClientId == clientId).Where(d => d.Name == meterType).OrderByDescending(k => k.Date).First();
+                return _context.MeterReadings.Where(p => p.ClientId == clientId).Where(d => d.Name == meterType).Where(a => a.ClientAddress == address).OrderByDescending(k => k.Date).First();
             }
             catch
             {

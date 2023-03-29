@@ -99,7 +99,7 @@
                     <div class="Column" name="right_line">
                         <div class="Value_table">
                             <label for="meter_past_value">Предыдущее значение</label>
-                            <input name="meter_past_value" type="text" pattern="^[-,0-9]+$" @bind="reading.BeforeData">
+                            <input name="meter_past_value" disabled type="text" pattern="^[-,0-9]+$" @bind="reading.BeforeData">
                         </div>
                     </div>
                     <div class="Column">
@@ -207,7 +207,7 @@
         try
         {
             reading.Name = e.Value?.ToString()?.ToLower();
-            prevMeter = meterService.getMeterWithPreviousDataByClientIdAndMeterType(client?.ClientId, e.Value?.ToString()?.ToLower());
+            prevMeter = meterService.getMeterWithPreviousDataByClientIdAndMeterType(client?.ClientId, e.Value?.ToString()?.ToLower(), address.Street + ", " + address.Building + ", " + address.House + ", " + address.Apartment);
             if (prevMeter == null)
             {
                 reading.BeforeData = "-";
