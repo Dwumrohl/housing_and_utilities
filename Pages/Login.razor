@@ -152,7 +152,11 @@
             client = ClientService.getSingleClientByEmail(myemail);
             if (client != null)
             {
-                if (client.Password == userpassword)
+                if (client.Password == null)
+                {
+                    errmessage = "Невозможно повторно использовать код";
+                }
+                else if (client.Password == userpassword)
                 {
 
                     await sessionStorageService.SetItemAsync<string>("email", client.Email);
