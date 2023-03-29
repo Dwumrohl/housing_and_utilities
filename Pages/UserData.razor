@@ -134,12 +134,11 @@
     {
         try
         {
-            await JsRuntime.InvokeVoidAsync("alert", "Warning!");
-            bool confirmed = await JsRuntime.InvokeAsync<bool>("Подтверждение", "Вы точно хотите удалить адрес?");
+            bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Вы точно хотите удалить адрес?");
             if (confirmed)
             {
                 AddressService.deleteClientAddress(addressId);
-                StateHasChanged();
+                nav.NavigateTo(nav.Uri, forceLoad: true);
             }
         }catch (Exception ex){}
     }
