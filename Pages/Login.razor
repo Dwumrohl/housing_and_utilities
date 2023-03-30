@@ -152,7 +152,11 @@
             client = ClientService.getSingleClientByEmail(myemail);
             if (client != null)
             {
-                if (client.Password == userpassword)
+                if (client.Password == null)
+                {
+                    errmessage = "Невозможно повторно использовать код";
+                }
+                else if (client.Password == userpassword)
                 {
 
                     await sessionStorageService.SetItemAsync<string>("email", client.Email);
@@ -161,6 +165,9 @@
                     if (DateTime.Now.Subtract(new TimeSpan(0, 5, 0)) < client.OtpRequestedTime)
                     {
                         ((CustomAuthenticationStateProvider)authenticationStateProvider).userAuthorized(myemail);
+                        client.Password = null;
+                        client.OtpRequestedTime = null;
+                        ClientService.updateClientByEmail(myemail, client);
                         if (client.isEmpty())
                         {
                             nav.NavigateTo("/prergistration");

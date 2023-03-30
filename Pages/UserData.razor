@@ -110,6 +110,7 @@
                                 @adrs.Apartment
                                 ,
                             </label>
+                            <input type="button" @onclick="() => deleteAddress(adrs.ClientAddressId)" value="Удалить адрес"/>
                         </li>
                     }
             </ul>
@@ -127,6 +128,19 @@
     public async void updateUser()
     {
         ClientService.updateClientByEmail(email, client);
+    }
+
+    public async void deleteAddress(Guid addressId)
+    {
+        try
+        {
+            bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Вы точно хотите удалить адрес?");
+            if (confirmed)
+            {
+                AddressService.deleteClientAddress(addressId);
+                nav.NavigateTo(nav.Uri, forceLoad: true);
+            }
+        }catch (Exception ex){}
     }
 
     protected override async Task OnInitializedAsync()
