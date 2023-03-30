@@ -299,7 +299,7 @@ form {
 
 	}
 
-input[type=button] {
+input[type=submit], input[type=button] {
 	margin: 0 auto;
 	margin-top: 20px;
 	height: 45px;
@@ -308,44 +308,52 @@ input[type=button] {
 	border: 0px;
 	font-weight: 500;
 	font-size: 23px;
-	line-height: 35px;
 }
-input[type=submit] {
-	margin: 0 auto;
-	margin-top: 20px;
-	height: 45px;
-	box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
-	border-radius: 10px;
-	border: 0px;
-	font-weight: 500;
-	font-size: 23px;
-	line-height: 35px;
-}
+	input[type=submit]:hover, input[type=button]:hover {
+		text-decoration: underline;
+		text-decoration-style: solid;
+	}
+
 
 input[name=next] {
 	margin-left: 0px;
 	margin-right: auto;
-	width: fit-content;
 	background: #FFFFFF;
 	border: 2px solid #000000;
 	color: #000000;
 }
+	input[name=next]:active {
+		border: 4px double #FFFFFF;
+		background: #000000;
+		color: #FFFFFF;
+	}
 
 input[name=entryButton] {
 	margin-left: auto;
 	margin-right: 0px;
-	width: fit-content;
+	border: 2px solid #000000;
 	background: #000000;
 	color: #FFFFFF;
 }
+	input[name=entryButton]:active {
+		border: 2px solid #000000;
+		background: #FFFFFF;
+		color: #000000;
+	}
 
 input[name=send] {
 	margin-top: 10px;
 	margin-left: auto;
 	margin-right: 35px;
+	border: 2px solid #000000;
 	background: #000000;
 	color: #FFFFFF;
 }
+	input[name=send]:active {
+		border: 2px solid #000000;
+		background: #FFFFFF;
+		color: #000000;
+	}
 
 input[name=add_meter] {
 	margin-top: 10px;
@@ -355,6 +363,11 @@ input[name=add_meter] {
 	border: 2px solid #000000;
 	color: #000000;
 }
+	input[name=add_meter]:active {
+		border: 4px double #FFFFFF;
+		background: #000000;
+		color: #FFFFFF;
+	}
 
 
 /* Попробовать деморежим */
