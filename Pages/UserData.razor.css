@@ -53,6 +53,11 @@ input[value="Добавить"] {
     color: #FFFFFF;
     width: fit-content;
 }
+    input[value="Добавить"]:active {
+        border: 2px solid #000000;
+        background: #FFFFFF;
+        color: #000000;
+    }
 
 input[value="Сохранить"] {
     margin: 20px auto 40px auto;
@@ -61,6 +66,11 @@ input[value="Сохранить"] {
     color: #000000;
     width: fit-content;
 }
+    input[value="Сохранить"]:active {
+        border: 4px double #FFFFFF;
+        background: #000000;
+        color: #FFFFFF;
+    }
 
 .dataContainer {
     margin: auto;
