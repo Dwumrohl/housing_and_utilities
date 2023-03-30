@@ -3,29 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace testBlazor.Data;
+
 /// <summary>
-/// Entity показания
+/// Показания счетчиков
 /// </summary>
 public partial class MeterReading
 {
-    public MeterReading()
-    {
-
-    }
-
-    public MeterReading(string? name, long? data, DateTime? date, Guid? clientId, string? clientAddress, string? beforeData, Client? client)
-    {
-        Name = name;
-        Data = data;
-        Date = date;
-        ClientId = clientId;
-        ClientAddress = clientAddress;
-        BeforeData = beforeData;
-        Client = client;
-    }
-
-
-
     #region Поля
 
     /// <summary>
@@ -59,6 +42,38 @@ public partial class MeterReading
     public string? BeforeData { get; set; }
 
     public virtual Client? Client { get; set; }
+
+    #endregion
+
+    #region Конструкторы
+    /// <summary>
+    /// Пучтой конструктор.
+    /// </summary>
+    public MeterReading()
+    {
+
+    }
+
+    /// <summary>
+    /// Полный конструктор.
+    /// </summary>
+    /// <param name="name">Название.</param>
+    /// <param name="data">Значение</param>
+    /// <param name="date">Дата</param>
+    /// <param name="clientId">ID клиента</param>
+    /// <param name="clientAddress">Адрес клиента</param>
+    /// <param name="beforeData">Предыдущее значение</param>
+    /// <param name="client">Клиент</param>
+    public MeterReading(string? name, long? data, DateTime? date, Guid? clientId, string? clientAddress, string? beforeData, Client? client)
+    {
+        Name = name;
+        Data = data;
+        Date = date;
+        ClientId = clientId;
+        ClientAddress = clientAddress;
+        BeforeData = beforeData;
+        Client = client;
+    }
 
     #endregion
 }

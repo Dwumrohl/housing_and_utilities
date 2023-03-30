@@ -18,31 +18,7 @@
 
 <div id="main_div">
     <StatementMenuBar />
-    @*<div id="sidebar">
-        <div class="sidebar-name">Создание заявки</div>
-        <div class="sidebar-name">История</div>
-    </div>*@
-@*    <div class="position-form-menu">
-        <div class="form-background">
-            <div id="table">
-                <div id="name_column">
-                    <div class="Column" name="right_line"><div class="Value_table">Дата</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Статус</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">Тема</div></div>
-                    <div class="Column"><div class="Value_table">Адрес</div></div>
-                </div>
-                @foreach (var rq in requests)
-                {
-                    <div class="Row">
-                        <div class="Column" name="right_line"><div class="Value_table">@rq.Date.Value.ToShortDateString()</div></div>
-                        <div class="Column" name="right_line"><div class="Value_table">@rq.Status</div></div>
-                        <div class="Column" name="right_line"><div class="Value_table">@rq.Name</div></div>
-                        <div class="Column"><div class="Value_table">@rq.Address</div></div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>*@
+
     <div class="position-form-menu">
         <div class="form-background">
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
@@ -57,18 +33,125 @@
                         }
                     </select>
                 </div>
-                <div id="address"> 
-                    <div><label for="">Улица *</label><br><input class="AddressFirstWidth" name="" type="text" required pattern="^[-,.А-Яа-яЁё\s]+$" @bind-value="statementModel.street"></div>
-                    <div><label for="">Дом *</label><br><input class="AddressThirdWidth" name="" type="number" required @bind-value="statementModel.building"></div>
-                    <div><label for="">Корпус</label><br><input class="AddressThirdWidth" name="" type="text" @bind-value="statementModel.house"></div>
-                    <div><label for="">Квартира *</label><br><input class="AddressThirdWidth" name="" type="number" required @bind-value="statementModel.apartment"></div>
-                    <div><label for="">Фамилия *</label><br><input class="AddressFirstWidth" name="" type="text" pattern="^[А-Яа-яЁё\s]+$" disabled="@isSurnameDisabled" required @bind-value="statementModel.surname"></div>
-                    <div><label for="">Имя *</label><br><input class="AddressSecondWidth" name="" type="text" pattern="^[А-Яа-яЁё\s]+$" disabled="@isNameDisabled" required @bind-value="statementModel.name"></div>
-                    <div><label for="">Отчество *</label><br><input class="AddressSecondWidth" name="" type="text" pattern="^[А-Яа-яЁё\s]+$" disabled="@isPatronymicDisabled" required @bind-value="statementModel.patronymic"></div>
-                    <div><label for="">Телефон</label><br><input class="AddressFirstWidth" name="" type="text" pattern="[\+]\d{11}" placeholder="+79271234567" disabled="@isPhoneDisabled" @bind-value="statementModel.phoneNumber"></div>
-                    <div><label for="">Электронная почта *</label><br><input class="AddressFirstWidth" name="" type="email" disabled required @bind-value="statementModel.email"></div>
-                    <div><label for="">Тема Обращения *</label><br><input class="AddressFirstWidth" name="" type="text" required @bind-value="statementModel.subject"></div>
-                    <div><label for="comment">Ваше Сообщение *</label><br><textarea id="comment" name="comment" @bind="statementModel.comment"></textarea></div>
+                <div id="address">
+                    <div>
+                        <label for="">Улица *</label>
+                        <br>
+                        <input class="AddressFirstWidth"
+                               name=""
+                               type="text"
+                               required 
+                               pattern="^[-,.А-Яа-яЁё\s]+$"
+                               @bind-value="statementModel.street">
+                    </div>
+
+                    <div>
+                        <label for="">Дом *</label>
+                        <br>
+                        <input class="AddressThirdWidth" 
+                               name="" 
+                               type="number"
+                               required 
+                               @bind-value="statementModel.building">
+                    </div>
+
+                    <div>
+                        <label for="">Корпус</label>
+                        <br>
+                        <input class="AddressThirdWidth" 
+                               name="" 
+                               type="text"
+                               @bind-value="statementModel.house">
+                    </div>
+
+                    <div>
+                        <label for="">Квартира *</label>
+                        <br>
+                        <input class="AddressThirdWidth"
+                               name="" 
+                               type="number" 
+                               required 
+                               @bind-value="statementModel.apartment">
+                    </div>
+
+                    <div>
+                        <label for="">Фамилия *</label>
+                        <br>
+                        <input class="AddressFirstWidth" 
+                               name="" 
+                               type="text"
+                               pattern="^[А-Яа-яЁё\s]+$" 
+                               disabled="@isSurnameDisabled" 
+                               required 
+                               @bind-value="statementModel.surname">
+                    </div>
+
+                    <div>
+                        <label for="">Имя *</label>
+                        <br>
+                        <input class="AddressSecondWidth" 
+                               name="" 
+                               type="text" 
+                               pattern="^[А-Яа-яЁё\s]+$"
+                               disabled="@isNameDisabled" 
+                               required 
+                               @bind-value="statementModel.name">
+                    </div>
+
+                    <div>
+                        <label for="">Отчество *</label>
+                        <br>
+                        <input class="AddressSecondWidth" 
+                               name="" 
+                               type="text" 
+                               pattern="^[А-Яа-яЁё\s]+$" 
+                               disabled="@isPatronymicDisabled" 
+                               required 
+                               @bind-value="statementModel.patronymic">
+                    </div>
+
+                    <div>
+                        <label for="">Телефон</label>
+                        <br>
+                        <input class="AddressFirstWidth" 
+                               name="" 
+                               type="text" 
+                               pattern="[\+]\d{11}" 
+                               placeholder="+7 000 000 00 00" 
+                               disabled="@isPhoneDisabled"
+                               @bind-value="statementModel.phoneNumber">
+                    </div>
+
+                    <div>
+                        <label for="">Электронная почта *</label>
+                        <br>
+                        <input class="AddressFirstWidth" 
+                               name="" 
+                               type="email" 
+                               disabled 
+                               required 
+                               @bind-value="statementModel.email">
+                    </div>
+
+                    <div>
+                        <label for="">Тема Обращения *</label>
+                        <br>
+                        <input class="AddressFirstWidth" 
+                               name="" 
+                               type="text" 
+                               required 
+                               @bind-value="statementModel.subject">
+                    </div>
+
+                    <div>
+                        <label for="comment">Ваше Сообщение *</label>
+                        <br>
+                        <textarea id="comment" 
+                                  name="comment" 
+                                  @bind="statementModel.comment">
+                              </textarea>
+                    </div>
+
                 </div>
                 <input class="Submission" type="submit" name="send" value="Отправить" required>
             </EditForm>
@@ -89,16 +172,14 @@
     public string email { get; set; } = "";
 
     public bool isSurnameDisabled { get; set; } = true;
+
     public bool isNameDisabled { get; set; } = true;
+
     public bool isPatronymicDisabled { get; set; } = true;
+
     public bool isPhoneDisabled { get; set; } = true;
+
     public bool isAddressSelectHidden { get; set; } = true;
-
-    //List<Request> requests = new();
-
-    //Пока не нужно, но может пригодится
-    //public int? highestRequestNumber { get; set; } = 0;
-    //highestRequestNumber = requestService.getHighestRequestNumber() + 1;
 
     public void changeData()
     {
@@ -124,7 +205,6 @@
                 if (statementModel.patronymic == null) isPatronymicDisabled = false;
                 if (statementModel.phoneNumber == null) isPhoneDisabled = false;
                 StateHasChanged();
-                //requests = requestService.getRequestsByClientId(client.ClientId);
                 clientAddresses = addressService.GetClientAddress(client.ClientId);
                 if (clientAddresses.Any()) isAddressSelectHidden = false;
             }
@@ -145,7 +225,8 @@
             statementModel.building = temp2[1].Trim();
             statementModel.house = temp2[2].Trim();
             statementModel.apartment = temp2[3].Trim();
-        }catch (Exception ex){}
+        }
+        catch (Exception ex) { }
         StateHasChanged();
     }
 
@@ -177,6 +258,7 @@
                 }
             }
             nav.NavigateTo(nav.Uri, forceLoad: true);
-        }catch (Exception ex){}
+        }
+        catch (Exception ex) { }
     }
 }

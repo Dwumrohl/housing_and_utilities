@@ -47,7 +47,6 @@
                 identity = new ClaimsIdentity();
             }
             
-
             var user = new ClaimsPrincipal(identity);
 
             return await Task.FromResult(new AuthenticationState(user));

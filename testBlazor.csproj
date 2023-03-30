@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="images\**" />
+    <Content Remove="images\**" />
+    <EmbeddedResource Remove="images\**" />
+    <None Remove="images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Pages\Login.razor.css" />
     <None Remove="Pages\NavigationMenu.razor.css" />
     <None Remove="Pages\PreregistrationPageSkip.razor.css" />
@@ -52,7 +59,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="images\" />
+    <Content Update="wwwroot\favicon.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
