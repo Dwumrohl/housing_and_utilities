@@ -15,13 +15,17 @@
 @inject IClientService ClientService
 @inject NavigationManager nav;
 @inject AuthenticationStateProvider authenticationStateProvider;
+@inject IConfiguration configuration;
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorageService;
 
 <div id="form_Entry">
-    <div id="logo">
-    </div>
+
+    <div id="logo"></div>
+
     <label for="entryButton" id="entryLabel">Вход в личный кабинет</label>
+
     <EditForm name="sendingEmail" Model="@loginModel" OnSubmit="@handleUserAuthorization">
+
         <div class="Contact">
             <label for="email">Электронная почта</label>
             <input type="email" name="email" required @bind="myemail">
@@ -31,9 +35,19 @@
             <label for="pswd">Одноразовый пароль</label>
             <input type="password" name="pswd" @bind="userpassword" required>
         </div>
+
         <div id="error-password">@errmessage</div>
+
         <div id="buttons_row">
-            <input type="button" name="next" value="Получить пароль" @onclick="sendEmail">
+            @if(messageHasSend){
+                <input type="button" name="next" value=@timer.ToString("mm':'ss") >
+            }
+            else
+            {
+                <input type="button" name="next" value="Получить пароль" @onclick="sendEmail" >
+            }
+            
+            
             <input type="submit" name="entryButton" value="Войти">
         </div>
 
@@ -45,11 +59,18 @@
         </div>
 
     </EditForm>
+
     <a id="support_on_login" href="">Служба поддержки</a>
 </div>
 
 @code {
     private string message { get; set; } = "";
+
+    private const int timerLenght = 1;
+
+    private TimeSpan timer = new TimeSpan(0, timerLenght, 0);
+
+    private bool messageHasSend { get; set; } = false;
 
     private string errmessage { get; set; } = "";
 
@@ -78,7 +99,7 @@
         return res.ToString();
     }
 
-    private void sendEmail()
+    private async void sendEmail()
     {
         errmessage = "";
         try
@@ -94,36 +115,63 @@
         StateHasChanged();
         if (errmessage == "")
         {
+
             try
             {
                 password = CreatePassword(10);
                 saveOrUpdateUser();
                 using (MimeMessage mail = new MimeMessage())
                 {
-                    mail.From.Add(new MailboxAddress("ЖКХ", "gptevcat@gmail.com"));
+                    mail.From.Add(new MailboxAddress("ТСЖ", "gptevcat@gmail.com"));
                     mail.To.Add(new MailboxAddress("Павлик из 3 подъезда", myemail));
-                    mail.Subject = "ЖКХ. Одноразовый пароль для входа на сайт";
-                    mail.Body = new TextPart("plain")
+                    mail.Subject = "ТСЖ. Одноразовый пароль для входа на сайт";
+                    mail.Body = new TextPart("html")
                         {
-                            Text = @"Ваш одноразовый пароль для входа в приложение " + password +
-                                "\nХорошего вам дня"
+                            Text = "Добрый день! <br> Мы рады приветствовать Вас на нашем сайте. " +
+                                    "Для безопасности Вашего аккаунта мы хотим предоставить Вам одноразовый пароль для входа в систему. Пожалуйста, не сообщайте этот пароль третьим лицам.<br>" +
+                                    "Ваш пароль:" +
+                                    "<h1>" + password + "</h1>" +
+                                    "С уважением, Команда ТСЖ."
 
                         };
 
                     using (MailKit.Net.Smtp.SmtpClient smtp = new MailKit.Net.Smtp.SmtpClient())
                     {
                         smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.Auto);
-                        smtp.Authenticate("gptevcat@gmail.com", "ayzomvmslxvclcpy");
+                        smtp.Authenticate("gptevcat@gmail.com", configuration["email_password"]);
                         smtp.Send(mail);
                         smtp.Disconnect(true);
                     }
                 }
+                messageHasSend = true;
+
+                await sessionStorageService.SetItemAsync<bool>("messageHasSend", messageHasSend);
+
+                StateHasChanged();
+
+                await Stopwatch();
             }
             catch (Exception e)
             {
                 errmessage = e.Message.ToString();
             }
+
         }
+    }
+
+    private async Task Stopwatch()
+    {
+        TimeSpan timeSpan = new TimeSpan(0, 0, 1);
+        while (timer > new TimeSpan())
+        {
+            await Task.Delay(1000);
+            timer = timer.Subtract(timeSpan);
+            await sessionStorageService.SetItemAsync<TimeSpan>("timer", timer);
+            StateHasChanged();
+        }
+        timer = new TimeSpan(0, timerLenght, 0);
+        messageHasSend = false;
+        StateHasChanged();
     }
 
     private void saveOrUpdateUser()
@@ -142,7 +190,20 @@
             {
                 ClientService.insertClient(client);
             }
-        }catch (Exception ex){}
+        }
+        catch (Exception ex) { }
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        try
+        {
+            timer = await sessionStorageService.GetItemAsync<TimeSpan>("timer");
+            messageHasSend = await sessionStorageService.GetItemAsync<bool>("messageHasSend");
+            StateHasChanged();
+            await Stopwatch();
+        }
+        catch (Exception ex) { }
     }
 
     private async void handleUserAuthorization()
@@ -174,7 +235,7 @@
                         }
                         else
                         {
-                            nav.NavigateTo("/statement_create");
+                            nav.NavigateTo("/meter_readings");
                         }
                     }
                     else errmessage = "Время действия кода истекло";
@@ -183,8 +244,9 @@
                 else errmessage = "Введенный неправильный код";
             }
             else errmessage = "Пользователя с таким email не существует";
-        }catch (Exception ex){}
+        }
+        catch (Exception ex) { }
     }
-  
+
 }
 

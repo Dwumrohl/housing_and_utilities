@@ -35,12 +35,6 @@
 @code {
     private string email { get; set; } = "";
 
-    //public async void onLoad()
-    //{
-    //    email = await sessionStorageService.GetItemAsync<string>("email");
-    //    StateHasChanged();
-    //}
-
     protected async override Task OnInitializedAsync()
     {
         try
@@ -49,7 +43,6 @@
             StateHasChanged();
         }catch (Exception ex){}
     }
-
 
     public void changeData()
     {

@@ -18,34 +18,7 @@
 
 <div id="main_div">
     <MeterReadingsMenuBar />
-    @*    <div id="sidebar">
-    <div class="sidebar-name">Показания</div>
-    <div class="sidebar-name">История</div>
-    </div>*@
-    @*<div class="position-form-menu">
-    <div class="form-background">
-    <div id="table">
-    <div id="name_column">
-    <div class="Column" name="right_line"><div class="Value_table">Дата</div></div>
-    <div class="Column" name="right_line"><div class="Value_table">Тип счётчика</div></div>
-    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-    <div class="Column"><div class="Value_table">Адрес</div></div>
-    </div>
-    <div class="Row">
-    <div class="Column" name="right_line"><div class="Value_table"></div></div>
-    <div class="Column" name="right_line"><div class="Value_table">Горячая вода</div></div>
-    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
-    </div>
-    <div class="Row">
-    <div class="Column" name="right_line"><div class="Value_table"></div></div>
-    <div class="Column" name="right_line"><div class="Value_table">Газ</div></div>
-    <div class="Column" name="right_line"><div class="Value_table">Показания</div></div>
-    <div class="Column"><div class="Value_table">улица Краснопролетская 200, корпус 2, квартира 234</div></div>
-    </div>
-    </div>
-    </div>
-    </div>*@
+
     <div class="position-form-menu">
         <div class="form-background">
             <form @onsubmit="handleMeterForm">
@@ -62,28 +35,79 @@
                 </div>
 
                 <div id="address">
-                    <div><label for="">Улица *</label><br><input name="" class="AddressFirstWidth" type="text" required pattern="^[-,.А-Яа-яЁё\s]+$" @bind="address.Street"></div>
-                    <div><label for="">Корпус</label><br><input name="" class="AddressThirdWidth" type="text" @bind="address.House"></div>
-                    <div><label for="">Дом *</label><br><input name="" class="AddressThirdWidth" type="number" required @bind="address.Building"></div>
-                    <div><label for="">Квартира *</label><br><input name="" class="AddressThirdWidth" type="number" required @bind="address.Apartment"></div>
+                    <div>
+                        <label for="">Улица *</label>
+                        <br>
+                        <input name="" class="AddressFirstWidth" 
+                                       type="text" 
+                                       required 
+                                       pattern="^[-,.А-Яа-яЁё\s]+$" 
+                                       @bind="address.Street">
+                    </div>
+
+                    <div>
+                        <label for="">Корпус</label>
+                        <br>
+                        <input name="" 
+                               class="AddressThirdWidth" 
+                               type="text" 
+                               @bind="address.House">
+                    </div>
+
+                    <div>
+                        <label for="">Дом *</label>
+                        <br>
+                        <input name=""
+                               class="AddressThirdWidth" 
+                               type="number" 
+                               required 
+                               @bind="address.Building">
+                    </div>
+
+                    <div>
+                        <label for="">Квартира *</label>
+                        <br>
+                        <input name="" 
+                               class="AddressThirdWidth" 
+                               type="number"
+                               required 
+                               @bind="address.Apartment">
+                    </div>
                 </div>
 
                 <div id="table">
                     <div id="name_column">
-                        <div class="Column" name="right_line"><div class="Value_table">Счетчик</div></div>
-                        <div class="Column" name="right_line"><div class="Value_table">Предыдущее значение</div></div>
-                        <div class="Column"><div class="Value_table">Текущее значение</div></div>
+                        <div class="Column" name="right_line">
+                            <div class="Value_table">Счетчик</div>
+                        </div>
+                        
+                        <div class="Column" name="right_line">
+                            <div class="Value_table">Предыдущее значение</div>
+                        </div>
+
+                        <div class="Column">
+                            <div class="Value_table">Текущее значение</div>
+                        </div>
                     </div>
 
                     @foreach (var meter in meterReadings)
                     {
                         <div class="Row">
-                            <div class="Column" name="right_line"><div class="Value_table">@meter.Name</div></div>
-                            <div class="Column" name="right_line"><div class="Value_table">@meter.BeforeData</div></div>
-                            <div class="Column"><div class="Value_table">@meter.Data</div></div>
+                            <div class="Column" name="right_line">
+                                <div class="Value_table">@meter.Name</div>
+                            </div>
+
+                            <div class="Column" name="right_line">
+                                <div class="Value_table">@meter.BeforeData</div>
+                            </div>
+
+                            <div class="Column">
+                                <div class="Value_table">@meter.Data</div>
+                            </div>
                         </div>
                     }
                 </div>
+
                 <div class="Row" name="meter_row">
                     <div class="Column" name="right_line">
                         <div class="Value_table">
@@ -120,6 +144,7 @@
         </div>
     </div>
 </div>
+
 @code {
 
     public List<MeterReading> meterReadings = new();
@@ -233,20 +258,4 @@
         catch (Exception ex) { }
         StateHasChanged();
     }
-
-    //Client? client = new Client();
-    //public string email { get; set; } = "";
-
-
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    var result = await sessionStorageService.GetItemAsync<string>("email");
-    //    if (result!= null)
-    //    {
-    //        email = result;
-    //        client = ClientService.getSingleClientByEmail(email);
-    //        StateHasChanged();
-    //    }
-
-    //}
 }
