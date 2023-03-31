@@ -40,11 +40,11 @@
 
         <div id="buttons_row">
             @if(messageHasSend){
-                <input type="button" name="next" value=@timer.ToString("mm':'ss") >
+                <input type="button" name="send-password" value=@timer.ToString("mm':'ss") >
             }
             else
             {
-                <input type="button" name="next" value="Получить пароль" @onclick="sendEmail" >
+                <input type="button" name="send-password" value="Получить пароль" @onclick="sendEmail" >
             }
             
             

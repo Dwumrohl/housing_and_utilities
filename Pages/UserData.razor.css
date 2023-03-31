@@ -121,10 +121,13 @@ input[value="X"] {
             border-right: 1px solid #aeaeae;
             text-align: center;
         }
+            .addressList ul li label:last-child {
+                border-right: none;
+            }
+
 .addresses {
     border-radius: 10px;
     display: flex;
-   
     background: #f9f9f9;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
 }

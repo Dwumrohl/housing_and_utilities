@@ -328,17 +328,18 @@ input[type=submit], input[type=button] {
 	}
 
 
-input[name=next] {
+input[name=send-password] {
 	margin-left: 0px;
 	margin-right: auto;
 	background: #FFFFFF;
 	border: 2px solid #000000;
 	color: #000000;
+	width: 207.9px;
 }
-input[name=next]:active {
-	background: #000000;
-	color: #FFFFFF;
-}
+	input[name=send-password]:active {
+		background: #000000;
+		color: #FFFFFF;
+	}
 
 input[name=entryButton] {
 	margin-left: auto;
