@@ -28,8 +28,13 @@ body {
 	font-weight: 500;
 	font-size: 20px;
 	line-height: 38px;
-	margin: 10px;
+	padding: 10px;
+	margin-right: 20px;
 }
+	.sidebar-name:hover {
+		box-shadow: 0px -2px 0 #000 inset;
+		cursor: pointer;
+	}
 
 .position-form-menu {
 	display: flex;
@@ -85,8 +90,11 @@ form {
 		border-style: solid;
 	}
 
-#selectAddress{
-
+#selectAddress {
+	margin-top: 1%;
+	font-size: 18px;
+	line-height: 21px;
+	color: #000000;
 }
 
 .AddressThirdWidth {
@@ -107,6 +115,7 @@ form {
 	border-radius: 5px;
 	border: 1px;
 	border-style: solid;
+	resize: none;
 }
 
 #loadFile input {
@@ -290,14 +299,18 @@ form {
 	.Contact input {
 		width: 443px;
 		height: 40px;
-		font-size: 30px;
+		font-size: 20px;
 		background: #FFFFFF;
 		border-style: solid;
 		border-width: 2px;
 		border-radius: 10px;
 		border-color: #000000;
-
+		padding-left: 7px;
+		outline: none;
 	}
+		.Contact input:focus {
+			box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+		}
 
 input[type=submit], input[type=button] {
 	margin: 0 auto;
@@ -310,8 +323,8 @@ input[type=submit], input[type=button] {
 	font-size: 23px;
 }
 	input[type=submit]:hover, input[type=button]:hover {
-		text-decoration: underline;
-		text-decoration-style: solid;
+		background: #8e8e8e;
+		color: #FFFFFF;
 	}
 
 
@@ -322,11 +335,10 @@ input[name=next] {
 	border: 2px solid #000000;
 	color: #000000;
 }
-	input[name=next]:active {
-		border: 4px double #FFFFFF;
-		background: #000000;
-		color: #FFFFFF;
-	}
+input[name=next]:active {
+	background: #000000;
+	color: #FFFFFF;
+}
 
 input[name=entryButton] {
 	margin-left: auto;
@@ -336,7 +348,6 @@ input[name=entryButton] {
 	color: #FFFFFF;
 }
 	input[name=entryButton]:active {
-		border: 2px solid #000000;
 		background: #FFFFFF;
 		color: #000000;
 	}
@@ -364,7 +375,6 @@ input[name=add_meter] {
 	color: #000000;
 }
 	input[name=add_meter]:active {
-		border: 4px double #FFFFFF;
 		background: #000000;
 		color: #FFFFFF;
 	}

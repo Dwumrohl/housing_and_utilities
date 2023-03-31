@@ -87,30 +87,44 @@
         <div class="addressList">
             <h3>Список адресов:</h3>
             <ul>
+                <li>
+                    <label>
+                        Город
+                    </label>
+                    <label>
+                        Улица
+                    </label>
+                    <label>
+                        Дом
+                    </label>
+                    <label>
+                        Корпус
+                    </label>
+                    <label>
+                        Квартира
+                    </label>
+                </li>
                 @if (!hidden) @foreach (var adrs in addresses)
                     {
                         <li>
-                            <label>
-                                @adrs.City
-                                ,
-                            </label>
-                            <label>
-                                @adrs.Street
-                                ,
-                            </label>
-                            <label>
-                                @adrs.Building
-                                ,
-                            </label>
-                            <label>
-                                @adrs.House
-                                ,
-                            </label>
-                            <label>
-                                @adrs.Apartment
-                                ,
-                            </label>
-                            <input type="button" @onclick="() => deleteAddress(adrs.ClientAddressId)" value="Удалить адрес"/>
+                            <div class="addresses">
+                                <label>
+                                    @adrs.City
+                                </label>
+                                <label>
+                                    @adrs.Street
+                                </label>
+                                <label>
+                                    @adrs.Building
+                                </label>
+                                <label>
+                                    @adrs.House
+                                </label>
+                                <label>
+                                    @adrs.Apartment
+                                </label>
+                            </div>
+                            <input type="button" @onclick="() => deleteAddress(adrs.ClientAddressId)" value="X"/>
                         </li>
                     }
             </ul>

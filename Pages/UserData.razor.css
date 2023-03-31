@@ -52,12 +52,17 @@ input[value="Добавить"] {
     background: #000000;
     color: #FFFFFF;
     width: fit-content;
+    border: 2px solid #000000;
 }
+    input[value="Добавить"]:hover {
+        background: #8e8e8e;
+        color: #FFFFFF;
+    }
     input[value="Добавить"]:active {
-        border: 2px solid #000000;
         background: #FFFFFF;
         color: #000000;
     }
+    
 
 input[value="Сохранить"] {
     margin: 20px auto 40px auto;
@@ -66,17 +71,60 @@ input[value="Сохранить"] {
     color: #000000;
     width: fit-content;
 }
+    input[value="Сохранить"]:hover {
+        background: #8e8e8e;
+        color: #FFFFFF;
+    }
     input[value="Сохранить"]:active {
-        border: 4px double #FFFFFF;
         background: #000000;
         color: #FFFFFF;
     }
 
+input[value="X"] {
+    margin: auto 10px auto 20px;
+    box-shadow: none;
+    height: 40px;
+    width: 40px;
+    font-size: 18px;
+    color: #000000;
+    border-radius: 20px;
+    background: #f9f9f9;
+}
+    input[value="X"]:hover {
+        background: #8e8e8e;
+    }
+
 .dataContainer {
     margin: auto;
-    width: 600px;
+    width: fit-content;
 }
 
 .user-data-forms{
     width: 700px;
+}
+
+    .addressList ul li {
+        display: flex;
+        list-style-type: none;
+        width: fit-content;
+        margin: 10px;
+        border-radius: 10px;
+    }
+        .addressList ul li:first-child {
+            background-color: #272727;
+            color: #FFFFFF;
+        }
+        .addressList ul li label{
+            margin: auto;
+            width: 200px;
+            padding: 10px 10px;
+            border-right: 1px solid #aeaeae;
+            text-align: center;
+        }
+.addresses {
+    border-radius: 10px;
+    display: flex;
+   
+    background: #f9f9f9;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
 }

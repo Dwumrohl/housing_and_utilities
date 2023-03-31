@@ -15,24 +15,19 @@
             Заявки
         </div>
         <div class="tabs">
-            <a href='mailto:gptevcat@gmail.com' name="support">Служба поддержки</a>
+            Служба поддержки
         </div>
     </div>
     <div id="user-menu">
-        <div class="tabs" id="user-profile">
-            <a href="" @onclick="changeData">@email</a>
+        <div class="tabs" id="user-profile" @onclick="changeData">
+            @email
         </div>
         <AuthorizeView>
             <Authorized>
-                <div class="tabs" id="logout">
-                    <a href="" @onclick="logout">Выйти</a>
+                <div class="tabs" id="logout" @onclick="logout">
+                    Выйти
                 </div>
             </Authorized>
-            <NotAuthorized>
-                <div class="tabs" id="logout">
-                    <a href="" @onclick="login">Войти</a>
-                </div>
-            </NotAuthorized>
         </AuthorizeView>
     </div>
 </div>

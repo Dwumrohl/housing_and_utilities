@@ -51,7 +51,7 @@
             <form @onsubmit="handleMeterForm">
                 <div id="nameForm">Показания</div>
                 <div id="selectAddress" hidden="@isAddressSelectHidden">
-                    <label>Заполнить адрес</label>
+                    <label>Заполнить адрес: </label>
                     <select @onchange="onAddressSelectChange">
                         <option value="" selected disabled hidden>Выбрать адрес...</option>
                         @foreach (var address in clientAddresses)
