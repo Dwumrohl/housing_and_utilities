@@ -16,6 +16,10 @@
 
 @attribute [Authorize]
 
+<head>
+    <title>Подача заявки</title>
+</head>
+
 <div id="main_div">
     <StatementMenuBar />
 
@@ -52,6 +56,7 @@
                                name="" 
                                type="number"
                                required 
+                               min="1"
                                @bind-value="statementModel.building">
                     </div>
 
@@ -71,6 +76,7 @@
                                name="" 
                                type="number" 
                                required 
+                               min="1"
                                @bind-value="statementModel.apartment">
                     </div>
 

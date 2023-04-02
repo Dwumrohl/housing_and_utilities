@@ -64,7 +64,7 @@
                     </div>
                     <div class="inputDiv">
                         <label>Дом *</label>
-                        <input type="number" @bind="address.Building" required />
+                        <input type="number" @bind="address.Building" required min="1"/>
                     </div>
                 </div>
                 <div class="innerDiv">
@@ -74,7 +74,7 @@
                     </div>
                     <div class="inputDiv">
                         <label>Квартира *</label>
-                        <input type="number" @bind="address.Apartment" required />
+                        <input type="number" @bind="address.Apartment" required min="1"/>
                     </div>
                 </div>
 

@@ -16,6 +16,9 @@
 
 @attribute [Authorize]
 
+<head>
+    <title>Подача показаний</title>
+</head>
 <div id="main_div">
     <MeterReadingsMenuBar />
 
@@ -61,6 +64,7 @@
                                class="AddressThirdWidth" 
                                type="number" 
                                required 
+                               min="1"
                                @bind="address.Building">
                     </div>
 
@@ -71,6 +75,7 @@
                                class="AddressThirdWidth" 
                                type="number"
                                required 
+                               min="1"
                                @bind="address.Apartment">
                     </div>
                 </div>
@@ -129,7 +134,7 @@
                     <div class="Column">
                         <div class="Value_table">
                             <label for="meter_present_value">Текущее значение</label>
-                            <input name="meter_present_value" type="number" @bind="reading.Data">
+                            <input name="meter_present_value" type="number" min="1" @bind="reading.Data">
                         </div>
                     </div>
                 </div>
