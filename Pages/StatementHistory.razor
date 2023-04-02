@@ -21,19 +21,19 @@
 <div class="position-form-menu">
     <div class="form-background">
         <div id="table">
-            <div id="name_column">
-                <div class="Column" name="right_line"><div class="Value_table">Дата</div></div>
-                <div class="Column" name="right_line"><div class="Value_table">Статус</div></div>
-                <div class="Column" name="right_line"><div class="Value_table">Тема</div></div>
-                <div class="Column"><div class="Value_table">Адрес</div></div>
+            <div id="name-column">
+                <div class="column" name="right-line"><div class="value-table">Дата</div></div>
+                <div class="column" name="right-line"><div class="value-table">Статус</div></div>
+                <div class="column" name="right-line"><div class="value-table">Тема</div></div>
+                <div class="column"><div class="value-table">Адрес</div></div>
             </div>
             @foreach (var rq in requests)
             {
-                <div class="Row">
-                    <div class="Column" name="right_line"><div class="Value_table">@rq.Date.Value.ToShortDateString()</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">@rq.Status</div></div>
-                    <div class="Column" name="right_line"><div class="Value_table">@rq.Name</div></div>
-                    <div class="Column"><div class="Value_table">@rq.Address</div></div>
+                <div class="table-row">
+                    <div class="column" name="right-line"><div class="value-table">@rq.Date.Value.ToShortDateString()</div></div>
+                    <div class="column" name="right-line"><div class="value-table">@rq.Status</div></div>
+                    <div class="column" name="right-line"><div class="value-table">@rq.Name</div></div>
+                    <div class="column"><div class="value-table">@rq.Address</div></div>
                 </div>
             }
         </div>

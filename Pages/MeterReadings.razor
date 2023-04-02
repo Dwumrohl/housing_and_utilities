@@ -19,14 +19,14 @@
 <head>
     <title>Подача показаний</title>
 </head>
-<div id="main_div">
+<div id="main-div">
     <MeterReadingsMenuBar />
 
     <div class="position-form-menu">
         <div class="form-background">
             <form @onsubmit="handleMeterForm">
-                <div id="nameForm">Показания</div>
-                <div id="selectAddress" hidden="@isAddressSelectHidden">
+                <div id="name-form">Показания</div>
+                <div id="select-address" hidden="@isAddressSelectHidden">
                     <label>Заполнить адрес: </label>
                     <select @onchange="onAddressSelectChange">
                         <option value="" selected disabled hidden>Выбрать адрес...</option>
@@ -41,7 +41,7 @@
                     <div>
                         <label for="">Улица *</label>
                         <br>
-                        <input name="" class="AddressFirstWidth" 
+                        <input name="" class="address-first-width" 
                                        type="text" 
                                        required 
                                        pattern="^[-,.А-Яа-яЁё\s]+$" 
@@ -52,7 +52,7 @@
                         <label for="">Корпус</label>
                         <br>
                         <input name="" 
-                               class="AddressThirdWidth" 
+                               class="address-third-width" 
                                type="text" 
                                @bind="address.House">
                     </div>
@@ -61,7 +61,7 @@
                         <label for="">Дом *</label>
                         <br>
                         <input name=""
-                               class="AddressThirdWidth" 
+                               class="address-third-width" 
                                type="number" 
                                required 
                                min="1"
@@ -72,7 +72,7 @@
                         <label for="">Квартира *</label>
                         <br>
                         <input name="" 
-                               class="AddressThirdWidth" 
+                               class="address-third-width" 
                                type="number"
                                required 
                                min="1"
@@ -81,41 +81,41 @@
                 </div>
 
                 <div id="table">
-                    <div id="name_column">
-                        <div class="Column" name="right_line">
-                            <div class="Value_table">Счетчик</div>
+                    <div id="name-column">
+                        <div class="column" name="right-line">
+                            <div class="value-table">Счетчик</div>
                         </div>
                         
-                        <div class="Column" name="right_line">
-                            <div class="Value_table">Предыдущее значение</div>
+                        <div class="column" name="right-line">
+                            <div class="value-table">Предыдущее значение</div>
                         </div>
 
-                        <div class="Column">
-                            <div class="Value_table">Текущее значение</div>
+                        <div class="column">
+                            <div class="value-table">Текущее значение</div>
                         </div>
                     </div>
 
                     @foreach (var meter in meterReadings)
                     {
-                        <div class="Row">
-                            <div class="Column" name="right_line">
-                                <div class="Value_table">@meter.Name</div>
+                        <div class="table-row">
+                            <div class="column" name="right-line">
+                                <div class="value-table">@meter.Name</div>
                             </div>
 
-                            <div class="Column" name="right_line">
-                                <div class="Value_table">@meter.BeforeData</div>
+                            <div class="column" name="right-line">
+                                <div class="value-table">@meter.BeforeData</div>
                             </div>
 
-                            <div class="Column">
-                                <div class="Value_table">@meter.Data</div>
+                            <div class="column">
+                                <div class="value-table">@meter.Data</div>
                             </div>
                         </div>
                     }
                 </div>
 
-                <div class="Row" name="meter_row">
-                    <div class="Column" name="right_line">
-                        <div class="Value_table">
+                <div class="table-row" name="meter_row">
+                    <div class="column" name="right-line">
+                        <div class="value-table">
                             <label for="meter_type">Тип счетчика</label>
                             <select name="meter_type" @onchange="onTypeSelectChange">
                                 <option value="" selected disabled hidden>Выбрать счетчик...</option>
@@ -125,20 +125,20 @@
                             </select>
                         </div>
                     </div>
-                    <div class="Column" name="right_line">
-                        <div class="Value_table">
+                    <div class="column" name="right-line">
+                        <div class="value-table">
                             <label for="meter_past_value">Предыдущее значение</label>
                             <input name="meter_past_value" disabled type="text" pattern="^[-,0-9]+$" @bind="reading.BeforeData">
                         </div>
                     </div>
-                    <div class="Column">
-                        <div class="Value_table">
+                    <div class="column">
+                        <div class="value-table">
                             <label for="meter_present_value">Текущее значение</label>
                             <input name="meter_present_value" type="number" min="1" @bind="reading.Data">
                         </div>
                     </div>
                 </div>
-                <input class="Submission" type="button" name="add_meter" value="Добавить счетчик" required @onclick="addMeter">
+                <input class="Submission" type="button" name="add-meter" value="Добавить счетчик" required @onclick="addMeter">
                 @if (!isMessageHidden)
                 {
                     <label>Заполните все данные о счетчике!</label>

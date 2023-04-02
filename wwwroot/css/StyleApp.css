@@ -8,7 +8,7 @@ body {
 		
 	}
 
-#main_div {
+#main-div {
 	display: flex;
 	flex-direction: column;
 
@@ -57,7 +57,7 @@ form {
 	padding: 3vh 0 0 6vw;
 }
 
-#nameForm {
+#name-form {
 	font-weight: 500;
 	font-size: 32px;
 	line-height: 38px;
@@ -90,22 +90,22 @@ form {
 		border-style: solid;
 	}
 
-#selectAddress {
+#select-address {
 	margin-top: 1%;
 	font-size: 18px;
 	line-height: 21px;
 	color: #000000;
 }
 
-.AddressThirdWidth {
+.address-third-width {
 	width: 130px;
 }
 
-.AddressSecondWidth {
+.address-second-width {
 	width: 215px;
 }
 
-.AddressFirstWidth {
+.address-first-width {
 	width: 350px;
 }
 
@@ -118,24 +118,13 @@ form {
 	resize: none;
 }
 
-#loadFile input {
-	background-color: #EDEAEA;
-}
-
-	#loadFile input[value="выбрать файл"] {
-		font-weight: 500;
-		font-size: 18px;
-		text-align: center;
-		color: #000000;
-	}
-
 #table {
 	display: flex;
 	flex-direction: column;
 	margin-top: 2%;
 }
 
-#name_column {
+#name-column {
 	display: flex;
 	flex-direction: row;
 	font-weight: 500;
@@ -147,25 +136,25 @@ form {
 	background-color: #272727;
 }
 
-.Column {
+.column {
 	display: flex;
 	width: 40%;
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
 
-.Value_table {
+.value-table {
 	margin: auto;
 	width: fit-content;
 }
 
-.Column[name=right_line] {
+.column[name=right-line] {
 	border-right: #858EA0;
 	border-right-width: 1px;
 	border-right-style: solid;
 }
 
-.Row {
+.table-row {
 	display: flex;
 	flex-direction: row;
 	margin-top: 7px;
@@ -177,20 +166,20 @@ form {
 	box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.4);
 }
 
-	.Row[name=meter_row] {
+	.table-row[name=meter_row] {
 		word-wrap: break-word;
 	}
 
-		.Row[name=meter_row] div.Column div.Value_table {
+		.table-row[name=meter_row] div.column div.value-table {
 			display: inline-block;
 			margin: auto;
 		}
 
-		.Row[name=meter_row] label {
+		.table-row[name=meter_row] label {
 			margin-left: 3px;
 		}
 
-		.Row[name=meter_row] input {
+		.table-row[name=meter_row] input {
 			display: block;
 			font-weight: 500;
 			font-size: 18px;
@@ -199,7 +188,7 @@ form {
 			border-style: solid;
 		}
 
-		.Row[name=meter_row] select {
+		.table-row[name=meter_row] select {
 			display: block;
 			font-weight: 500;
 			font-size: 18px;
@@ -207,26 +196,6 @@ form {
 			border: 1px;
 			border-style: solid;
 		}
-
-#add_meter_button {
-	display: flex;
-	margin: 10px;
-	color: #757A83;
-}
-
-#add_meter_plus {
-	padding: 0px 8px 0px 8px;
-	border: 4px solid #858EA0;
-	border-radius: 3px;
-	font-weight: 600;
-	font-size: 18px;
-}
-
-#add_meter_text {
-	margin: auto 5px;
-	font-weight: 500;
-	font-size: 18px;
-}
 
 #profile{
 	margin-left: auto;
@@ -234,7 +203,7 @@ form {
 }
 
 /*логин - пароль*/
-#form_Entry {
+#form-entry {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -250,7 +219,7 @@ form {
 	border-color: #aeaeae;
 }
 
-	#form_Entry form{
+	#form-entry form{
 		width:fit-content;
 	}
 
@@ -264,7 +233,7 @@ form {
 	border: none;
 }
 
-#entryLabel {
+#entry-label {
 	margin: 0 auto;
 	margin-top: 20px;
 	font-weight: 400;
@@ -273,7 +242,7 @@ form {
 	color: #000000;
 }
 
-#buttons_row {
+#buttons-row {
 	margin: 0 auto;
 	margin-top: 10px;
 	display: flex;
@@ -281,14 +250,14 @@ form {
 	width: 443px;
 }
 
-.Contact {
+.contact {
 	margin: 0 auto;
 	margin-top: 20px;
 	display: block;
 	width: min-content;
 }
 
-	.Contact label {
+	.contact label {
 		margin-left: 6px;
 		font-weight: 500;
 		font-size: 17px;
@@ -296,7 +265,7 @@ form {
 		color: #000000;
 	}
 
-	.Contact input {
+	.contact input {
 		width: 443px;
 		height: 40px;
 		font-size: 20px;
@@ -308,7 +277,7 @@ form {
 		padding-left: 7px;
 		outline: none;
 	}
-		.Contact input:focus {
+		.contact input:focus {
 			box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
 		}
 
@@ -341,14 +310,14 @@ input[name=send-password] {
 		color: #FFFFFF;
 	}
 
-input[name=entryButton] {
+input[name=entry-button] {
 	margin-left: auto;
 	margin-right: 0px;
 	border: 2px solid #000000;
 	background: #000000;
 	color: #FFFFFF;
 }
-	input[name=entryButton]:active {
+	input[name=entry-button]:active {
 		background: #FFFFFF;
 		color: #000000;
 	}
@@ -367,7 +336,7 @@ input[name=send] {
 		color: #000000;
 	}
 
-input[name=add_meter] {
+input[name=add-meter] {
 	margin-top: 10px;
 	margin-left: 0px;
 	margin-right: auto;
@@ -375,7 +344,7 @@ input[name=add_meter] {
 	border: 2px solid #000000;
 	color: #000000;
 }
-	input[name=add_meter]:active {
+	input[name=add-meter]:active {
 		background: #000000;
 		color: #FFFFFF;
 	}
@@ -391,7 +360,7 @@ input[name=add_meter] {
 	color: #F0F1F3;
 }
 
-#support_on_login {
+#support-on-login {
 	margin: 0 auto;
 	margin-top: 20px;
 	margin-bottom: 15px;

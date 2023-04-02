@@ -20,14 +20,14 @@
     <title>Подача заявки</title>
 </head>
 
-<div id="main_div">
+<div id="main-div">
     <StatementMenuBar />
 
     <div class="position-form-menu">
         <div class="form-background">
             <EditForm Model="@statementModel" OnSubmit="@handleStatementForm">
-                <div id="nameForm">Новая заявка</div>
-                <div id="selectAddress" hidden="@isAddressSelectHidden">
+                <div id="name-form">Новая заявка</div>
+                <div id="select-address" hidden="@isAddressSelectHidden">
                     <label>Заполнить адрес: </label>
                     <select @onchange="onAddressSelectChange">
                         <option value="" selected disabled hidden>Выбрать адрес...</option>
@@ -41,7 +41,7 @@
                     <div>
                         <label for="">Улица *</label>
                         <br>
-                        <input class="AddressFirstWidth"
+                        <input class="address-first-width"
                                name=""
                                type="text"
                                required 
@@ -52,7 +52,7 @@
                     <div>
                         <label for="">Дом *</label>
                         <br>
-                        <input class="AddressThirdWidth" 
+                        <input class="address-third-width" 
                                name="" 
                                type="number"
                                required 
@@ -63,7 +63,7 @@
                     <div>
                         <label for="">Корпус</label>
                         <br>
-                        <input class="AddressThirdWidth" 
+                        <input class="address-third-width" 
                                name="" 
                                type="text"
                                @bind-value="statementModel.house">
@@ -72,7 +72,7 @@
                     <div>
                         <label for="">Квартира *</label>
                         <br>
-                        <input class="AddressThirdWidth"
+                        <input class="address-third-width"
                                name="" 
                                type="number" 
                                required 
@@ -83,7 +83,7 @@
                     <div>
                         <label for="">Фамилия *</label>
                         <br>
-                        <input class="AddressFirstWidth" 
+                        <input class="address-first-width" 
                                name="" 
                                type="text"
                                pattern="^[А-Яа-яЁё\s]+$" 
@@ -95,7 +95,7 @@
                     <div>
                         <label for="">Имя *</label>
                         <br>
-                        <input class="AddressSecondWidth" 
+                        <input class="address-second-width" 
                                name="" 
                                type="text" 
                                pattern="^[А-Яа-яЁё\s]+$"
@@ -107,7 +107,7 @@
                     <div>
                         <label for="">Отчество *</label>
                         <br>
-                        <input class="AddressSecondWidth" 
+                        <input class="address-second-width" 
                                name="" 
                                type="text" 
                                pattern="^[А-Яа-яЁё\s]+$" 
@@ -119,7 +119,7 @@
                     <div>
                         <label for="">Телефон</label>
                         <br>
-                        <input class="AddressFirstWidth" 
+                        <input class="address-first-width" 
                                name="" 
                                type="text" 
                                pattern="[\+]\d{11}" 
@@ -131,7 +131,7 @@
                     <div>
                         <label for="">Электронная почта *</label>
                         <br>
-                        <input class="AddressFirstWidth" 
+                        <input class="address-first-width" 
                                name="" 
                                type="email" 
                                disabled 
@@ -142,7 +142,7 @@
                     <div>
                         <label for="">Тема Обращения *</label>
                         <br>
-                        <input class="AddressFirstWidth" 
+                        <input class="address-first-width" 
                                name="" 
                                type="text" 
                                required 

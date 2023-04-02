@@ -3,14 +3,11 @@
     font-family: 'Open Sans';
     width:fit-content;
 }
-#userPage {
-    
-}
 #buttons-contain {
     margin: auto;
     width: fit-content;
 }
-#skipButton {
+#skip-button {
     width: auto;
     height: 45px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);

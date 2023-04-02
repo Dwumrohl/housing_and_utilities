@@ -23,42 +23,42 @@
 <div class="position-form-menu">
     <div class="form-background">
         <div id="table">
-            <div id="name_column">
-                <div class="Column" name="right_line">
-                    <div class="Value_table">Дата</div>
+            <div id="name-column">
+                <div class="column" name="right-line">
+                    <div class="value-table">Дата</div>
                 </div>
 
-                <div class="Column" name="right_line">
-                    <div class="Value_table">Тип счётчика</div>
+                <div class="column" name="right-line">
+                    <div class="value-table">Тип счётчика</div>
                 </div>
 
-                <div class="Column" name="right_line">
-                    <div class="Value_table">Показания</div>
+                <div class="column" name="right-line">
+                    <div class="value-table">Показания</div>
                 </div>
 
-                <div class="Column">
-                    <div class="Value_table">Адрес</div>
+                <div class="column">
+                    <div class="value-table">Адрес</div>
                 </div>
 
             </div>
 
              @if (!isEmpty) @foreach (var meter in meters)
             {
-                <div class="Row">
-                    <div class="Column" name="right_line">
-                        <div class="Value_table">@meter.Date</div>
+                <div class="table-row">
+                    <div class="column" name="right-line">
+                        <div class="value-table">@meter.Date</div>
                     </div>
 
-                    <div class="Column" name="right_line">
-                        <div class="Value_table">@meter.Name</div>
+                    <div class="column" name="right-line">
+                        <div class="value-table">@meter.Name</div>
                     </div>
 
-                    <div class="Column" name="right_line">
-                        <div class="Value_table">@meter.Data</div>
+                    <div class="column" name="right-line">
+                        <div class="value-table">@meter.Data</div>
                     </div>
                     
-                    <div class="Column">
-                        <div class="Value_table">@meter.ClientAddress</div>
+                    <div class="column">
+                        <div class="value-table">@meter.ClientAddress</div>
                     </div>
                 </div>
             }
