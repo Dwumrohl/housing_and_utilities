@@ -105,14 +105,13 @@
                     </div>
 
                     <div>
-                        <label for="">Отчество *</label>
+                        <label for="">Отчество</label>
                         <br>
                         <input class="address-second-width" 
                                name="" 
                                type="text" 
                                pattern="^[А-Яа-яЁё\s]+$" 
-                               disabled="@isPatronymicDisabled" 
-                               required 
+                               disabled="@isPatronymicDisabled"                              
                                @bind-value="statementModel.patronymic">
                     </div>
 
@@ -263,7 +262,7 @@
                     Console.WriteLine($"{ex.Message}");
                 }
             }
-            nav.NavigateTo(nav.Uri, forceLoad: true);
+            nav.NavigateTo("/statement_history");
         }
         catch (Exception ex) { }
     }

@@ -141,7 +141,7 @@
                 <input class="Submission" type="button" name="add-meter" value="Добавить счетчик" required @onclick="addMeter">
                 @if (!isMessageHidden)
                 {
-                    <label>Заполните все данные о счетчике!</label>
+                    <label>@message</label>
                 }
                 <input class="Submission" type="submit" name="send" value="Отправить" required>
                 <div id="obligatory_field">* Обязательное поле</div>
@@ -166,6 +166,8 @@
 
 
     public string email { get; set; } = "";
+
+    public string message { get; set; } = "";
 
     public bool isAddressSelectHidden { get; set; } = true;
     public bool isAddressNew { get; set; } = true;
@@ -197,21 +199,29 @@
     {
         try
         {
-            if (isAddressNew)
+            if (!meterReadings.Any())
             {
-                address.Client = client;
-                address.ClientId = client.ClientId;
-                addressService.insertClientAddress(address);
+                message = "Добавьте хотя бы один счетчик!";
+                isMessageHidden = false;
             }
-            foreach (var mtr in meterReadings)
+            else
             {
-                mtr.ClientAddress = address.Street + ", " + address.Building + ", " + address.House + ", " + address.Apartment;
-                mtr.Date = DateTime.Now;
-                mtr.Client = client;
-                mtr.ClientId = client.ClientId;
+                if (isAddressNew)
+                {
+                    address.Client = client;
+                    address.ClientId = client.ClientId;
+                    addressService.insertClientAddress(address);
+                }
+                foreach (var mtr in meterReadings)
+                {
+                    mtr.ClientAddress = address.Street + ", " + address.Building + ", " + address.House + ", " + address.Apartment;
+                    mtr.Date = DateTime.Now;
+                    mtr.Client = client;
+                    mtr.ClientId = client.ClientId;
+                }
+                meterService.insertMeters(meterReadings);
+                nav.NavigateTo("/readings_history");
             }
-            meterService.insertMeters(meterReadings);
-            nav.NavigateTo("/readings_history");
         }
         catch (Exception ex) { }
     }
@@ -254,10 +264,13 @@
         {
             if (reading.BeforeData != null && reading.Data != null && reading.Name != null)
             {
-                isMessageHidden = true;
+                isMessageHidden = true;                
                 meterReadings.Add(new MeterReading(reading.Name, reading.Data, reading.Date, reading.ClientId, reading.ClientAddress, reading.BeforeData, reading.Client));
             }
-            else isMessageHidden = false;
+            else {
+                isMessageHidden = false;
+                message = "Заполните все данные о счетчике!";
+            }
 
         }
         catch (Exception ex) { }
